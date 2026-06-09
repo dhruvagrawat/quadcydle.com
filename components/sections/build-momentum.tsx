@@ -16,46 +16,46 @@ export const BuildMomentum = () => {
       <Features.Main
         title={
           <>
-            Build momentum
+            Grow Your Audience
             <br />
-            with Cycles
+            with Digital Marketing
           </>
         }
         image="/cycles.webp"
         imageSize="large"
-        text="Cycles focus your team on what work should happen next. A healthy routine to maintain velocity and make meaningful progress."
+        text="Strategic social media management, paid advertising, and content marketing that connects your brand with the right audience at exactly the right moment."
       />
       <Features.Grid
         features={[
           {
             icon: ParentSubIcon,
-            title: "Automatic tracking.",
-            text: "Any started issues are added to the current cycle.",
+            title: "Social Media Management",
+            text: "Consistent, engaging presence across all major platforms.",
           },
           {
             icon: AutomatedBacklogIcon,
-            title: "Scheduled.",
-            text: "Unfinished work rolls over to the next cycle automatically.",
+            title: "Paid Advertising",
+            text: "ROI-focused ad campaigns on Google, Meta, and beyond.",
           },
           {
             icon: WorkflowsIcon,
-            title: "Fully configurable.",
-            text: "Define start date, end date, duration, and more.",
+            title: "Content Strategy",
+            text: "Compelling content that builds authority, trust, and engagement.",
           },
           {
             icon: CustomViewsIcon,
-            title: "Predict delays.",
-            text: "Get warnings for at-risk cycles.",
+            title: "Email Campaigns",
+            text: "Nurture leads and retain customers with targeted email sequences.",
           },
           {
             icon: DiscussionIcon,
-            title: "Scope creep.",
-            text: "Understand which issues are added mid-cycle.",
+            title: "Influencer Outreach",
+            text: "Partner with voices that authentically amplify your brand.",
           },
           {
             icon: IssuesIcon,
-            title: "Be prepared.",
-            text: "Schedule work in advance with upcoming cycles.",
+            title: "Campaign Reporting",
+            text: "Clear, honest reports showing exactly what's working and what's next.",
           },
         ]}
       />

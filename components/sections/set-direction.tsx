@@ -16,46 +16,46 @@ export const SetDirection = () => {
       <Features.Main
         title={
           <>
-            Set direction
+            Scale Your Business
             <br />
-            with Roadmaps
+            with Expert Strategy
           </>
         }
         image="/roadmap.webp"
         imageSize="large"
-        text="Plan visually, collaborate in cross-team projects, and make better decisions with progress insights and project updates."
+        text="From go-to-market planning to partnership development, we help ambitious businesses build a clear path to sustainable, long-term growth."
       />
       <Features.Grid
         features={[
           {
             icon: ParentSubIcon,
-            title: "Multi-team projects.",
-            text: "Collaborate across teams and departments.",
+            title: "Market Research",
+            text: "Deep insights into your industry, competitors, and target audience.",
           },
           {
             icon: AutomatedBacklogIcon,
-            title: "Project documents.",
-            text: "Write project briefs and specs directly in Linear.",
+            title: "Growth Planning",
+            text: "Strategic roadmaps aligned tightly to your business goals.",
           },
           {
             icon: WorkflowsIcon,
-            title: "Custom roadmaps.",
-            text: "Organize projects across multiple roadmaps.",
+            title: "Brand Positioning",
+            text: "Define and communicate your unique value to the right market.",
           },
           {
             icon: CustomViewsIcon,
-            title: "Timeline view.",
-            text: "Visualize the product journey ahead.",
+            title: "Partnership Development",
+            text: "Identify and cultivate strategic business relationships.",
           },
           {
             icon: DiscussionIcon,
-            title: "Project insights.",
-            text: "Track scope, velocity, and progress over time.",
+            title: "Conversion Optimization",
+            text: "Turn more visitors into paying, loyal customers.",
           },
           {
             icon: IssuesIcon,
-            title: "Personal notifications.",
-            text: "Stay in the loop on project activity and updates.",
+            title: "Quarterly Reviews",
+            text: "Regular check-ins to refine strategy and measure real success.",
           },
         ]}
       />
@@ -64,14 +64,14 @@ export const SetDirection = () => {
           {
             image: "/card-updates.webp",
             imageClassName: "top-[55%] md:top-[40%] w-full left-[7%]",
-            title: "Project updates",
-            text: "Keep everyone up-to-date on the health and progress of projects.",
+            title: "Strategic Insights",
+            text: "Stay ahead with data-driven business intelligence and market analysis.",
           },
           {
             image: "/card-roadmaps.webp",
             imageClassName: "top-[55%] md:top-[40%] w-full left-[2%]",
-            title: "Focus on the big picture",
-            text: "Explore every company project in one view to easily identify what needs attention.",
+            title: "Growth Roadmaps",
+            text: "Visualize your path to success with clear milestones and accountability.",
           },
         ]}
       />

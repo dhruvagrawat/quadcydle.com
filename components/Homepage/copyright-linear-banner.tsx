@@ -2,42 +2,48 @@
 
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { Button } from "./button";
 
-const cookieBannerName = "copyright-banner-dismissed";
+const cookieBannerName = "cookie-consent-dismissed";
 
 export const CopyrightLinearBanner = () => {
-  const [isCookieBannerVisible, setIsCookieBannerVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const isCookieBannerDismissed = Cookies.get(cookieBannerName);
-    if (!isCookieBannerDismissed) {
-      setIsCookieBannerVisible(true);
+    const isDismissed = Cookies.get(cookieBannerName);
+    if (!isDismissed) {
+      setIsVisible(true);
     }
   });
 
-  const dismissCookie = () => {
-    setIsCookieBannerVisible(false);
+  const dismiss = () => {
+    setIsVisible(false);
     Cookies.set(cookieBannerName, "true", { expires: 365 });
   };
 
-  if (!isCookieBannerVisible) return null;
+  if (!isVisible) return null;
 
   return (
-    <div className="fixed right-[4rem] bottom-[4rem] flex w-[65rem] max-w-[95%] items-start rounded-md border border-transparent-white p-8 text-[2rem] backdrop-blur-[12px]">
-      <div className="space-y-3">
-        <p>
-          <strong> NOTE:</strong> Cookies section Pending
-        </p>
-        <p>
-          <Button href="https://quadcydle.com" size="large" target="_blank">
-            Visit Quadcydle website
-          </Button>
-        </p>
+    <div className="fixed bottom-6 left-1/2 z-50 w-[calc(100%-3rem)] max-w-2xl -translate-x-1/2 rounded-2xl border border-transparent-white p-5 backdrop-blur-[12px] bg-background/80 flex items-center justify-between gap-4 shadow-lg">
+      <p className="text-sm text-primary-text">
+        We use cookies to improve your experience and analyse site traffic.{" "}
+        <a href="#" className="text-white underline hover:no-underline">
+          Learn more
+        </a>
+      </p>
+      <div className="flex shrink-0 gap-3">
+        <button
+          onClick={dismiss}
+          className="rounded-lg bg-white px-4 py-2 text-xs font-semibold text-black transition-opacity hover:opacity-80"
+        >
+          Accept
+        </button>
+        <button
+          onClick={dismiss}
+          className="rounded-lg border border-transparent-white px-4 py-2 text-xs font-semibold text-white transition-opacity hover:opacity-70"
+        >
+          Decline
+        </button>
       </div>
-      <button className="ml-8" onClick={dismissCookie}>
-        ✕ <span className="sr-only">Hide</span>
-      </button>
     </div>
   );
 };

@@ -12,47 +12,48 @@ import {
 
 export const EnjoyIssueTracking = () => {
   return (
-    <Features color="194,97,254" colorDark="53,42,7 9">
+    <Features color="194,97,254" colorDark="53,42,79">
       <Features.Main
         title={
           <>
-            Effortless Project Management
+            Powerful Web Development
+            <br /> & SEO That Converts
           </>
         }
         image="/issues.webp"
-        text="Quickly set up tasks, monitor progress, and streamline your workflow with tools tailored to your business needs."
+        text="We build fast, beautiful websites optimized to rank on Google and turn visitors into loyal customers — with measurable results from day one."
       />
       <Features.Grid
         features={[
           {
             icon: ParentSubIcon,
-            title: "Task Organization",
-            text: "Break down complex projects into manageable components.",
+            title: "Custom Development",
+            text: "Tailored websites and apps built to your exact specifications and brand.",
           },
           {
             icon: AutomatedBacklogIcon,
-            title: "Automated Updates",
-            text: "Automatically track and archive project changes.",
+            title: "SEO Optimization",
+            text: "Rank higher, drive organic traffic, and stay ahead of competitors.",
           },
           {
             icon: WorkflowsIcon,
-            title: "Custom workflows",
-            text: "Define and optimize processes specific to your business.",
+            title: "CMS Integration",
+            text: "Manage your own content effortlessly with modern CMS platforms.",
           },
           {
             icon: CustomViewsIcon,
-            title: "Smart Filters",
-            text: "View only the most relevant information.",
+            title: "Performance Audits",
+            text: "Regular checks to keep your site blazing fast and fully secure.",
           },
           {
             icon: DiscussionIcon,
-            title: "Integrated Communication.",
-            text: "Collaborate effectively within the platform.",
+            title: "Analytics Setup",
+            text: "Data-driven insights to understand your audience and inform growth.",
           },
           {
             icon: IssuesIcon,
-            title: "Templates",
-            text: "Use predefined structures to standardize project tasks.",
+            title: "E-commerce Ready",
+            text: "Build and scale your online store with confidence and full support.",
           },
         ]}
       />
@@ -62,14 +63,14 @@ export const EnjoyIssueTracking = () => {
             image: "/card-board.webp",
             imageClassName: "top-[55%] md:top-[40%] w-[200%]",
             title: "Flexible Project Views",
-            text: "Toggle between board and list layouts to manage your tasks effectively.",
+            text: "Track every deliverable and milestone so your launch goes smoothly.",
           },
           {
             image: "/card-views.webp",
             imageClassName:
               "top-[45%] left-[12px] md:top-[34%] md:left-[24px] w-[110%]",
-            title: "Customize Your Workflow",
-            text: "Quickly customize views with filters to focus on what matters.",
+            title: "Custom Dashboards",
+            text: "See your site's performance at a glance — traffic, rankings, and conversions.",
           },
         ]}
       />

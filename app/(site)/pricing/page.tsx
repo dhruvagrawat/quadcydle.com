@@ -3,7 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, ArrowUpRight, Minus } from "lucide-react";
+import { CheckCircle2, ArrowUpRight } from "lucide-react";
+import { Reveal } from "../../../components/motion/reveal";
+import { PageHero } from "../../../components/page-hero";
 
 // ── Currency config ──────────────────────────────────────────────────────────
 const CURRENCIES = [
@@ -142,11 +144,6 @@ const TABS: PricingTab[] = [
 ];
 
 // ── Component ─────────────────────────────────────────────────────────────────
-const fadeUp = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] } },
-};
-
 export default function PricingPage() {
   const [activeTab, setActiveTab] = useState("plans");
   const [currency, setCurrency] = useState<CurrencyCode>("GBP");
@@ -190,204 +187,145 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="text-white min-h-screen">
-      {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section className="relative px-6 pb-10 pt-24 md:pt-32">
-        <div className="pointer-events-none absolute left-1/2 top-0 h-[40rem] w-[80rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.06] blur-[8rem]"
-          style={{ background: "#7877C6" }}
-        />
-        <motion.div
-          initial="hidden" animate="visible"
-          variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
-          className="relative mx-auto max-w-7xl"
-        >
-          <motion.span variants={fadeUp}
-            className="mb-5 inline-block rounded-md border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium uppercase tracking-widest text-white/40"
-          >
-            Pricing
-          </motion.span>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between md:gap-12">
-            <motion.h1 variants={fadeUp} className="text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
-              Simple, transparent pricing
-            </motion.h1>
-            <motion.p variants={fadeUp} className="mt-4 max-w-sm text-sm leading-relaxed text-white/45 md:mt-0 md:text-right">
-              No hidden fees. No lock-ins. All prices exclude VAT.{" "}
-              <Link href="/contact" className="underline decoration-white/20 hover:text-white/70">Need a custom quote?</Link>
-            </motion.p>
-          </div>
-        </motion.div>
-      </section>
+    <>
+      <PageHero
+        eyebrow="Pricing"
+        title={"Simple, *honest*\npricing."}
+        intro="No hidden fees and no lock-ins. Pick a monthly plan, or price any single service below — in your currency."
+      />
 
       {/* ── Sticky tab + currency bar ──────────────────────────────────────── */}
-      <div className="sticky top-[var(--navigation-height)] z-30 border-b border-white/[0.07]"
-        style={{ background: "rgba(0,2,18,0.96)", backdropFilter: "blur(16px)" }}
-      >
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="flex items-center justify-between gap-4">
-            {/* Tabs */}
-            <div className="flex overflow-x-auto scrollbar-none">
-              {TABS.map((t) => (
-                <button
-                  key={t.id}
-                  onClick={() => setActiveTab(t.id)}
-                  className={`relative shrink-0 px-4 py-4 text-sm font-medium transition-colors ${
-                    activeTab === t.id ? "text-white" : "text-white/40 hover:text-white/70"
-                  }`}
-                >
-                  {t.label}
-                  {activeTab === t.id && (
-                    <motion.div
-                      layoutId="tab-underline"
-                      className="absolute inset-x-0 bottom-0 h-px bg-white"
-                    />
-                  )}
-                </button>
-              ))}
-            </div>
+      <div className="relative z-30 px-6 md:px-10">
+        <div className="mx-auto flex max-w-site flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div className="flex overflow-x-auto rounded-full border border-line bg-ink/80 p-1.5 backdrop-blur-xl">
+            {TABS.map((t) => (
+              <button
+                key={t.id}
+                onClick={() => setActiveTab(t.id)}
+                className={`relative shrink-0 whitespace-nowrap rounded-full px-5 py-2.5 text-sm transition-colors ${
+                  activeTab === t.id ? "text-ink" : "text-bone/60 hover:text-bone"
+                }`}
+              >
+                {activeTab === t.id && (
+                  <motion.span
+                    layoutId="pricing-tab"
+                    className="absolute inset-0 rounded-full bg-bone"
+                    transition={{ type: "spring", stiffness: 400, damping: 35 }}
+                  />
+                )}
+                <span className="relative">{t.label}</span>
+              </button>
+            ))}
+          </div>
 
-            {/* Currency toggle */}
-            <div className="flex shrink-0 items-center gap-1 rounded-lg border border-white/[0.07] bg-white/[0.03] p-1">
-              {CURRENCIES.map((c) => (
-                <button
-                  key={c.code}
-                  onClick={() => setCurrency(c.code)}
-                  className={`rounded-md px-2.5 py-1 text-xs font-medium transition-all ${
-                    currency === c.code
-                      ? "bg-white/10 text-white"
-                      : "text-white/30 hover:text-white/60"
-                  }`}
-                >
-                  {c.code}
-                </button>
-              ))}
-            </div>
+          <div className="flex shrink-0 items-center gap-1 self-start rounded-full border border-line bg-ink/80 p-1.5 backdrop-blur-xl md:self-auto">
+            {CURRENCIES.map((c) => (
+              <button
+                key={c.code}
+                onClick={() => setCurrency(c.code)}
+                className={`rounded-full px-3 py-2 font-mono text-xs transition-colors ${
+                  currency === c.code ? "bg-ember text-ink" : "text-bone/50 hover:text-bone"
+                }`}
+              >
+                {c.code}
+              </button>
+            ))}
           </div>
         </div>
       </div>
 
       {/* ── Tab Content ───────────────────────────────────────────────────── */}
-      <div className="mx-auto max-w-7xl px-6 py-12 md:py-16">
+      <div className="mx-auto max-w-site px-6 py-20 md:px-10 md:py-28">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.25 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            {/* Monthly Plans — card layout */}
             {isPlansTab ? (
               <div>
-                <div className="mb-10">
-                  <p className="mb-2 text-xs font-medium uppercase tracking-widest text-white/30">Managed Retainers</p>
-                  <h2 className="text-3xl font-bold md:text-4xl">Monthly management plans</h2>
-                  <p className="mt-3 text-sm text-white/40">Ongoing digital management for your business. Includes website, SEO, and marketing — tailored to your growth stage.</p>
+                <div className="mb-12 grid gap-6 md:grid-cols-2 md:items-end">
+                  <div>
+                    <p className="eyebrow mb-4">Managed retainers</p>
+                    <h2 className="text-6xl font-medium tracking-[-0.045em] md:text-7xl">Monthly plans</h2>
+                  </div>
+                  <p className="max-w-[52rem] text-lg text-bone/55 md:justify-self-end">
+                    Ongoing management for your website, SEO and marketing — tailored to your growth stage.
+                  </p>
                 </div>
-
                 <PlansCards currency={currency} plans={plans} />
               </div>
             ) : (
-              /* All other tabs — table layout */
               <div>
-                <div className="mb-10">
-                  <h2 className="text-3xl font-bold md:text-4xl">{tab.label}</h2>
-                  <p className="mt-2 text-sm text-white/40">
-                    Prices shown in {CURRENCIES.find(c => c.code === currency)?.label}. Approximate conversion from GBP.
+                <div className="mb-12 grid gap-6 md:grid-cols-2 md:items-end">
+                  <h2 className="text-6xl font-medium tracking-[-0.045em] md:text-7xl">{tab.label}</h2>
+                  <p className="text-md text-bone/50 md:justify-self-end">
+                    Prices in {CURRENCIES.find((c) => c.code === currency)?.label}
+                    {currency !== "GBP" && " — approximate conversion from GBP"}.
                   </p>
                 </div>
 
-                <div className="overflow-x-auto rounded-xl border border-white/[0.07]">
-                  <table className="w-full min-w-[560px]">
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[64rem]">
                     <thead>
-                      <tr className="border-b border-white/[0.07]" style={{ background: "rgba(255,255,255,0.02)" }}>
-                        <th className="px-6 py-4 text-left text-xs font-medium text-white/30 w-[40%]">Service</th>
+                      <tr className="border-b border-line">
+                        <th className="eyebrow w-[40%] py-5 text-left font-normal">Service</th>
                         {tab.columns.map((col) => (
-                          <th key={col} className="px-6 py-4 text-center text-xs font-semibold text-white/70">{col}</th>
+                          <th key={col} className="eyebrow py-5 text-right font-normal">
+                            {col}
+                          </th>
                         ))}
-                        <th className="px-4 py-4 w-10" />
                       </tr>
                     </thead>
                     <tbody>
-                      {tab.rows.map((row, i) => (
-                        <tr
-                          key={row.name}
-                          className={`border-b border-white/[0.04] transition-colors hover:bg-white/[0.015] ${
-                            i === tab.rows.length - 1 ? "border-0" : ""
-                          }`}
-                        >
-                          <td className="px-6 py-4">
-                            <Link href={row.href} className="group flex items-center gap-1.5 text-sm font-medium text-white/70 hover:text-white transition-colors">
+                      {tab.rows.map((row) => (
+                        <tr key={row.name} className="group border-b border-line">
+                          <td className="py-6">
+                            <Link
+                              href={row.href}
+                              className="inline-flex items-center gap-3 text-2xl font-medium tracking-[-0.02em] transition-colors group-hover:text-ember"
+                            >
                               {row.name}
-                              <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                              <ArrowUpRight
+                                size={18}
+                                className="-translate-x-2 opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100"
+                              />
                             </Link>
                           </td>
                           {row.cells.map((cell, ci) => (
-                            <td key={ci} className="px-6 py-4 text-center">
+                            <td key={ci} className="py-6 text-right">
                               {cell.gbp === null ? (
-                                <span className="text-xs text-white/30">Contact us</span>
+                                <span className="text-md text-bone/40">Let&apos;s talk</span>
                               ) : (
                                 <div>
-                                  <span className="text-sm font-semibold text-white">
+                                  <span className="text-xl font-medium tabular-nums">
                                     {formatPrice(cell.gbp, currency, cell.period, cell.from)}
                                   </span>
-                                  {cell.note && (
-                                    <span className="ml-1.5 text-xs text-white/30">({cell.note})</span>
-                                  )}
+                                  {cell.note && <span className="block text-xs text-bone/40">{cell.note}</span>}
                                 </div>
                               )}
                             </td>
                           ))}
-                          <td className="px-4 py-4">
-                            <Link href={row.href}
-                              className="inline-flex items-center justify-center w-7 h-7 rounded-md border border-white/[0.07] text-white/25 hover:text-white hover:border-white/20 transition-colors"
-                            >
-                              <ArrowUpRight size={13} />
-                            </Link>
-                          </td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
-
-                <p className="mt-4 text-xs text-white/20">
-                  {currency !== "GBP" && "Currency conversion is approximate and for reference only. Invoices are issued in GBP. "}
-                  All prices exclude VAT.{" "}
-                  <Link href="/contact" className="underline decoration-white/20 hover:text-white/40">Need a custom quote?</Link>
-                </p>
               </div>
             )}
+            <p className="mt-8 text-sm text-bone/40">
+              {currency !== "GBP" && "Currency conversion is approximate and for reference only. Invoices are issued in GBP. "}
+              All prices exclude VAT.{" "}
+              <Link href="/contact" className="link-underline text-bone/70">
+                Need a custom quote?
+              </Link>
+            </p>
           </motion.div>
         </AnimatePresence>
       </div>
-
-      {/* ── CTA ───────────────────────────────────────────────────────────── */}
-      <section className="border-t border-white/[0.06] px-6 py-16 md:py-20">
-        <div className="mx-auto max-w-7xl">
-          <div className="relative overflow-hidden rounded-xl border border-white/[0.07] px-10 py-14 md:px-16 md:py-20"
-            style={{ background: "rgba(255,255,255,0.02)" }}
-          >
-            <div className="pointer-events-none absolute right-0 top-0 h-64 w-64 rounded-full opacity-[0.07] blur-[5rem]" style={{ background: "#7877C6" }} />
-            <div className="relative grid md:grid-cols-[1fr_auto] md:items-center md:gap-12">
-              <div>
-                <h2 className="text-3xl font-bold md:text-4xl">Not sure what you need?</h2>
-                <p className="mt-3 text-sm leading-relaxed text-white/45 md:max-w-lg">
-                  Tell us about your business. We&apos;ll recommend the right plan or build a custom scope — no obligation, no pressure.
-                </p>
-              </div>
-              <div className="mt-8 shrink-0 md:mt-0 flex flex-wrap gap-3">
-                <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-primary-gradient px-6 py-3 text-sm font-semibold text-white transition-[shadow,text-shadow] hover:shadow-primary">
-                  Get a Custom Quote <ArrowUpRight size={14} />
-                </Link>
-                <Link href="/services" className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-6 py-3 text-sm font-medium text-white/60 hover:bg-white/10 hover:text-white transition-colors">
-                  Browse services
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+    </>
   );
 }
 
@@ -397,101 +335,103 @@ function PlansCards({ currency, plans }: { currency: CurrencyCode; plans: Return
 
   return (
     <>
-      {/* Period toggle inside plans section */}
-      <div className="mb-8 flex items-center gap-1 self-start rounded-lg border border-white/[0.08] bg-white/[0.03] p-1 w-fit">
+      <div className="mb-10 flex w-fit items-center gap-1 rounded-full border border-line p-1.5">
         {(["monthly", "annual"] as const).map((p) => (
           <button
             key={p}
             onClick={() => setPeriod(p)}
-            className={`relative rounded-md px-5 py-2 text-sm font-medium transition-all ${
-              period === p ? "bg-white/[0.08] text-white" : "text-white/40 hover:text-white/60"
+            className={`relative rounded-full px-6 py-2.5 text-sm transition-colors ${
+              period === p ? "text-ink" : "text-bone/60 hover:text-bone"
             }`}
           >
-            {p === "monthly" ? "Monthly" : "Annual"}
-            {p === "annual" && (
-              <span className="absolute -right-1 -top-2.5 rounded-full bg-[#7877C6] px-1.5 py-0.5 text-[10px] font-semibold text-white">–20%</span>
+            {period === p && (
+              <motion.span layoutId="period" className="absolute inset-0 rounded-full bg-bone" />
             )}
+            <span className="relative">
+              {p === "monthly" ? "Monthly" : "Annual"}
+              {p === "annual" && <span className="ml-2 font-mono text-xs text-ember">−20%</span>}
+            </span>
           </button>
         ))}
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        {plans.map((plan) => {
+        {plans.map((plan, i) => {
           const price = period === "monthly" ? plan.monthly : plan.annual;
+          const hi = plan.popular;
           return (
-            <div
-              key={plan.name}
-              className={`relative flex flex-col rounded-xl border p-7 ${
-                plan.popular ? "border-white/20 bg-white/[0.05]" : "border-white/[0.07] bg-white/[0.02]"
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute inset-x-0 top-0 h-px rounded-t-xl"
-                  style={{ background: "linear-gradient(to right, transparent, #7877C690, transparent)" }}
-                />
-              )}
-              {plan.popular && (
-                <span className="mb-4 inline-block self-start rounded-md bg-[#7877C6] px-2.5 py-1 text-xs font-semibold text-white">
-                  Most Popular
-                </span>
-              )}
-              <p className="text-xs font-medium uppercase tracking-widest text-white/30">{plan.tagline}</p>
-              <h3 className="mt-1 text-xl font-bold">{plan.name}</h3>
-              <p className="mt-2 text-xs leading-relaxed text-white/40">{plan.description}</p>
-
-              <div className="my-6 border-t border-white/[0.07] pt-6">
-                <AnimatePresence mode="wait">
-                  <motion.div key={`${period}-${currency}`}
-                    initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }}
-                    transition={{ duration: 0.18 }}
-                  >
-                    {price !== null ? (
-                      <div className="flex items-end gap-1.5">
-                        <span className="text-4xl font-bold text-white">
-                          {formatPrice(price, currency)}
-                        </span>
-                        <span className="mb-1.5 text-sm text-white/35">/mo</span>
-                        {period === "annual" && plan.monthly && (
-                          <span className="mb-1.5 text-xs text-white/25 line-through">
-                            {formatPrice(plan.monthly, currency)}
-                          </span>
-                        )}
-                      </div>
-                    ) : (
-                      <span className="text-3xl font-bold text-white">Custom</span>
-                    )}
-                  </motion.div>
-                </AnimatePresence>
-                {period === "annual" && price !== null && plan.monthly !== null && (
-                  <p className="mt-1 text-xs text-white/25">
-                    Billed annually — save {formatPrice((plan.monthly - plan.annual!) * 12, currency)}/yr
-                  </p>
-                )}
-              </div>
-
-              <ul className="mb-7 flex-1 space-y-2.5">
-                {plan.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-xs">
-                    <CheckCircle2 size={14} className="mt-0.5 shrink-0"
-                      strokeWidth={1.5}
-                      style={{ color: plan.popular ? "#7877C6" : "rgba(255,255,255,0.3)" }}
-                    />
-                    <span className="text-white/60 leading-relaxed">{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <Link href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full py-2.5 text-sm font-semibold transition-[shadow,opacity]"
-                style={
-                  plan.popular
-                    ? { background: "linear-gradient(92.88deg, rgb(69,94,181) 9.16%, rgb(86,67,204) 43.89%, rgb(103,63,215) 64.72%)", color: "#fff" }
-                    : { background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.75)", border: "1px solid rgba(255,255,255,0.08)" }
-                }
+            <Reveal key={plan.name} delay={i * 0.08} className="h-full">
+              <div
+                className={`relative flex h-full flex-col rounded-[2rem] border p-8 md:p-10 ${
+                  hi ? "border-transparent bg-ember text-ink" : "border-line bg-ink-50"
+                }`}
               >
-                {plan.cta} <ArrowUpRight size={14} />
-              </Link>
-            </div>
+                <div className="flex items-center justify-between">
+                  <p className={`eyebrow ${hi ? "!text-ink/60" : ""}`}>{plan.tagline}</p>
+                  {hi && (
+                    <span className="rounded-full bg-ink px-3 py-1 font-mono text-xs uppercase tracking-widest text-bone">
+                      Most popular
+                    </span>
+                  )}
+                </div>
+                <h3 className="mt-4 text-4xl font-medium tracking-[-0.03em]">{plan.name}</h3>
+                <p className={`mt-3 text-sm leading-relaxed ${hi ? "text-ink/70" : "text-bone/50"}`}>{plan.description}</p>
+
+                <div className={`my-8 border-y py-8 ${hi ? "border-ink/15" : "border-line"}`}>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={`${period}-${currency}`}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      {price !== null ? (
+                        <div className="flex flex-wrap items-end gap-2">
+                          <span className="text-7xl font-medium tracking-[-0.05em]">{formatPrice(price, currency)}</span>
+                          <span className={`mb-2 text-md ${hi ? "text-ink/60" : "text-bone/40"}`}>/mo</span>
+                          {period === "annual" && plan.monthly && (
+                            <span className={`mb-2 text-sm line-through ${hi ? "text-ink/40" : "text-bone/30"}`}>
+                              {formatPrice(plan.monthly, currency)}
+                            </span>
+                          )}
+                        </div>
+                      ) : (
+                        <span className="text-7xl font-medium tracking-[-0.05em]">Custom</span>
+                      )}
+                    </motion.div>
+                  </AnimatePresence>
+                  {period === "annual" && price !== null && plan.monthly !== null && (
+                    <p className={`mt-2 text-xs ${hi ? "text-ink/60" : "text-bone/40"}`}>
+                      Billed annually — save {formatPrice((plan.monthly - plan.annual!) * 12, currency)}/yr
+                    </p>
+                  )}
+                </div>
+
+                <ul className="mb-10 flex-1 space-y-3">
+                  {plan.features.map((f) => (
+                    <li key={f} className="flex items-start gap-3 text-sm">
+                      <CheckCircle2
+                        size={16}
+                        className="mt-0.5 shrink-0"
+                        strokeWidth={1.5}
+                        style={{ color: hi ? "#0A0A0B" : "#FF5A1F" }}
+                      />
+                      <span className={hi ? "text-ink/80" : "text-bone/70"}>{f}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <Link
+                  href="/contact"
+                  className={`inline-flex items-center justify-center gap-2 rounded-full py-4 text-md font-medium transition-colors ${
+                    hi ? "bg-ink text-bone hover:bg-ink-200" : "border border-line text-bone hover:border-bone/40"
+                  }`}
+                >
+                  {plan.cta} <ArrowUpRight size={16} />
+                </Link>
+              </div>
+            </Reveal>
           );
         })}
       </div>

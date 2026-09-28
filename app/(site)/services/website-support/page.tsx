@@ -16,7 +16,6 @@ export default function WebsiteSupportPage() {
       accentColor="#6366f1"
       title="Your Website, Always in Good Hands"
       subtitle="Monthly care plans that keep your website fast, secure, up to date, and ready for whatever you throw at it — without you having to think about it."
-      heroImage="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&q=80"
       stats={[
         { value: "24/7", label: "uptime monitoring" },
         { value: "Daily", label: "offsite backups" },

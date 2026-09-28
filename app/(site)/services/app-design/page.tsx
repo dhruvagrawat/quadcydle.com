@@ -16,7 +16,6 @@ export default function AppDesignPage() {
       accentColor="#8b5cf6"
       title="Designs Developers Can Actually Build"
       subtitle="We design mobile and web apps in Figma — with complete design systems, interactive prototypes, and handoff files that make your dev team's life easy."
-      heroImage="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1400&q=80"
       stats={[
         { value: "Figma", label: "native design & prototyping" },
         { value: "2 wk", label: "first concept delivery" },

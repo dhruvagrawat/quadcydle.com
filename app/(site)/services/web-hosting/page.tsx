@@ -16,7 +16,6 @@ export default function WebHostingPage() {
       accentColor="#06b6d4"
       title="Hosting That Just Works"
       subtitle="Fast NVMe servers, free SSL, daily backups, CDN, and 24/7 monitoring — without the complexity of managing it yourself."
-      heroImage="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=80"
       stats={[
         { value: "99.9%", label: "uptime SLA" },
         { value: "< 1 min", label: "downtime detection" },

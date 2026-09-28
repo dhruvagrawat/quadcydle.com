@@ -16,7 +16,6 @@ export default function MobileAppPage() {
       accentColor="#ec4899"
       title="Mobile Apps Users Actually Love"
       subtitle="We build iOS and Android apps with React Native — one codebase, native performance, and the polish your users expect. From MVP to production."
-      heroImage="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1400&q=80"
       stats={[
         { value: "iOS + Android", label: "from one codebase" },
         { value: "8–12 wk", label: "MVP delivery time" },

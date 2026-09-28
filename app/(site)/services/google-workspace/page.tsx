@@ -16,7 +16,6 @@ export default function GoogleWorkspacePage() {
       accentColor="#ea4335"
       title="Google Workspace Set Up Properly"
       subtitle="Gmail, Drive, Meet, Calendar, and Admin Console — we configure your entire Google Workspace environment correctly and migrate your existing data without losing a single email."
-      heroImage="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1400&q=80"
       stats={[
         { value: "Zero", label: "email downtime during migration" },
         { value: "< 48h", label: "full setup & go-live" },

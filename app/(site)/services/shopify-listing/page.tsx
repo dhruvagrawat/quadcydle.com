@@ -16,7 +16,6 @@ export default function ShopifyListingPage() {
       accentColor="#96bf48"
       title="Shopify Catalog Setup That Sells"
       subtitle="Product listings that look great, load fast, and rank on Google. From bulk catalog import to ongoing variant management — we handle the work behind your store."
-      heroImage="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=80"
       stats={[
         { value: "48h", label: "bulk upload turnaround" },
         { value: "SEO", label: "optimised product descriptions" },

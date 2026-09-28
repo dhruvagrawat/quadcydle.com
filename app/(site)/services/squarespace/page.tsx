@@ -16,7 +16,6 @@ export default function SquarespacePage() {
       accentColor="#e0e0e0"
       title="Beautiful Squarespace Sites That Rank"
       subtitle="Squarespace looks great out of the box — but with expert design, CSS customisation, and proper SEO setup, it becomes a real business asset."
-      heroImage="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1400&q=80"
       stats={[
         { value: "4M+", label: "live Squarespace websites" },
         { value: "Top 10", label: "website builder worldwide" },

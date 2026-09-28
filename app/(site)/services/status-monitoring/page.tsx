@@ -16,7 +16,6 @@ export default function StatusMonitoringPage() {
       accentColor="#22c55e"
       title="Know the Moment Something Goes Wrong"
       subtitle="24/7 monitoring for your websites and APIs. Get instant alerts when downtime happens, track performance trends, and show your customers a live status page."
-      heroImage="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80"
       stats={[
         { value: "60s", label: "max downtime detection time" },
         { value: "5 regions", label: "global monitoring locations" },

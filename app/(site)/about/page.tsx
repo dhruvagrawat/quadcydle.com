@@ -3,6 +3,7 @@ import { Compare } from "../../../components/home/compare";
 import { Cycle } from "../../../components/home/cycle";
 import { Reveal, SplitReveal } from "../../../components/motion/reveal";
 import { ScrollText } from "../../../components/motion/scroll-text";
+import { PillarArt } from "../../../components/brand/pillar-art";
 import { PageHero } from "../../../components/page-hero";
 import { pillars } from "../../../lib/site";
 import { pageMeta } from "../../../lib/seo";
@@ -65,6 +66,7 @@ export default function About() {
                 <span className="font-mono text-sm" style={{ color: p.color }}>
                   {p.index}
                 </span>
+                <PillarArt id={p.id} color={p.color} className="mx-auto my-6 w-full max-w-[26rem]" />
                 <div>
                   <h3 className="text-6xl font-medium tracking-[-0.05em]">{p.title}</h3>
                   <p className="mt-4 text-md leading-relaxed text-bone/55">{p.summary}</p>

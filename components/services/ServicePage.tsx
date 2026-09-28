@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
@@ -12,6 +11,8 @@ import { Counter } from "../motion/counter";
 import { useIntroDone } from "../motion/intro";
 import { Magnetic } from "../motion/magnetic";
 import { EASE, Reveal, SplitReveal } from "../motion/reveal";
+import { ServiceVisual } from "./service-visual";
+import { ServiceIcon } from "../brand/service-icon";
 import {
   Globe, ShoppingBag, Layout, Code2, Server, Database,
   Smartphone, Figma, Headphones, Mail, Shield, HardDrive,
@@ -19,7 +20,8 @@ import {
   CheckCircle2, Users, Lock, BarChart3, RefreshCw, Wrench,
   Bug, Star, ArrowUpRight, FileText, Layers, Cpu, Cloud,
   Settings, Package, TrendingUp, AlertCircle, Eye, Gauge,
-  CreditCard, Truck,
+  CreditCard, Truck, FolderKanban, Brush, Link2, Palette, FileText as FileText2, Send, MessageSquare,
+  FolderOpen, KeyRound, CalendarCheck, BookOpen, Plug, Laptop,
 } from "lucide-react";
 
 // Map emoji/strings to Lucide icons for clean rendering
@@ -37,6 +39,9 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   "🌍": Globe, "📄": FileText, "⏱️": Clock, "🤝": Users,
   "🤖": Cpu, "🏢": Settings, "🔵": Server, "🧪": Gauge,
   "🌟": Star, "💡": Zap, "✏️": FileText, "🎯": Star,
+  "🗂️": FolderKanban, "🖌️": Brush, "🔗": Link2, "🎭": Palette, "🛍️": ShoppingBag,
+  "📝": FileText2, "📨": Send, "💬": MessageSquare, "📁": FolderOpen, "🔐": KeyRound,
+  "🛠️": Wrench, "📅": CalendarCheck, "⭐": Star, "👥": Users, "🔌": Plug, "💻": Laptop, "📚": BookOpen,
 };
 
 export interface PricingTier {
@@ -84,7 +89,6 @@ export interface ServicePageProps {
   accentColor?: string;
   title: string;
   subtitle: string;
-  heroImage?: string;
   stats?: StatItem[];
   features: Feature[];
   process?: ProcessStep[];
@@ -97,6 +101,11 @@ export interface ServicePageProps {
   ctaSubtitle?: string;
   ctaHref?: string;
   ctaLabel?: string;
+}
+
+function EmojiIcon({ emoji, size = 18 }: { emoji: string; size?: number }) {
+  const Icon = iconMap[emoji] ?? Zap;
+  return <Icon size={size} strokeWidth={1.5} />;
 }
 
 function FeatureCard({ feature, accent, index }: { feature: Feature; accent: string; index: number }) {
@@ -228,7 +237,6 @@ export function ServicePage({
   accentColor = "#FF5A1F",
   title,
   subtitle,
-  heroImage,
   stats,
   features,
   process,
@@ -245,11 +253,11 @@ export function ServicePage({
   const pathname = usePathname();
   const pillar = pillars.find((p) => p.services.some((s) => s.href === pathname));
   const related = pillar?.services.filter((s) => s.href !== pathname) ?? [];
+  const service = pillar?.services.find((s) => s.href === pathname);
 
   const imageRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: imageRef, offset: ["start end", "end start"] });
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.25, 1]);
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
   const clip = useTransform(scrollYProgress, [0, 0.35], ["inset(8% 6% 8% 6% round 32px)", "inset(0% 0% 0% 0% round 24px)"]);
 
   // Structured data describing exactly what's visible on this page.
@@ -358,24 +366,24 @@ export function ServicePage({
         </div>
       </section>
 
-      {/* ─── HERO IMAGE (parallax) ─────────────────────────────────────── */}
-      {heroImage && (
-        <section className="px-6 md:px-10">
-          <motion.div
-            ref={imageRef}
-            style={{ clipPath: clip }}
-            className="relative mx-auto aspect-[4/3] max-w-site overflow-hidden bg-ink-100 md:aspect-[21/9]"
-          >
-            <motion.div className="absolute inset-0" style={{ scale: imageScale, y: imageY }}>
-              <Image src={heroImage} alt="" fill sizes="100vw" className="object-cover" priority />
-            </motion.div>
-            <div
-              className="absolute inset-0 mix-blend-multiply"
-              style={{ background: `linear-gradient(to top, #0A0A0B 0%, transparent 60%), ${accentColor}22` }}
+      {/* ─── HERO VISUAL (parallax) ────────────────────────────────────── */}
+      <section className="px-6 md:px-10">
+        <motion.div
+          ref={imageRef}
+          style={{ clipPath: clip }}
+          className="relative mx-auto aspect-[4/3] max-w-site overflow-hidden rounded-[2.4rem] border border-line sm:aspect-[16/9] md:aspect-[21/9]"
+        >
+          <motion.div className="absolute inset-0" style={{ y: imageY }}>
+            <ServiceVisual
+              service={service}
+              pillar={pillar}
+              accent={accentColor}
+              features={features}
+              renderIcon={(e) => <EmojiIcon emoji={e} size={16} />}
             />
           </motion.div>
-        </section>
-      )}
+        </motion.div>
+      </section>
 
       {/* ─── STATS ────────────────────────────────────────────────────── */}
       {stats && stats.length > 0 && (
@@ -576,6 +584,7 @@ export function ServicePage({
                     href={s.href}
                     className="group inline-flex items-center gap-3 rounded-full border border-line px-6 py-3 text-md text-bone/70 transition-colors hover:border-bone/40 hover:text-bone"
                   >
+                    <ServiceIcon name={s.icon} size={16} className="text-bone/55" />
                     <RollText>{s.title}</RollText>
                     <span aria-hidden style={{ color: pillar.color }}>↗</span>
                   </Link>

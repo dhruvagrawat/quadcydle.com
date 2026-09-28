@@ -92,6 +92,8 @@ export function SplitReveal({
               </span>
             );
           })}
+          {/* Real space between lines so the text reads correctly to search engines and copy/paste. */}
+          {li < lines.length - 1 ? " " : null}
         </span>
       ))}
     </Tag>

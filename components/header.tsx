@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { nav, pillars, site } from "../lib/site";
 import { Logo } from "./brand/logo";
+import { PillarArt } from "./brand/pillar-art";
+import { ServiceIcon } from "./brand/service-icon";
 import { Magnetic } from "./motion/magnetic";
 import { EASE } from "./motion/reveal";
 import { useLenis } from "./motion/smooth-scroll";
@@ -221,9 +223,10 @@ export const Header = () => {
                     exit={{ opacity: 0, y: -12 }}
                     transition={{ duration: 0.35, ease: EASE }}
                   >
-                    <p className="mb-8 max-w-xl text-2xl leading-snug text-bone/80">
-                      {pillars[activePillar].headline}
-                    </p>
+                    <div className="mb-6 flex items-center justify-between gap-8">
+                      <p className="max-w-xl text-2xl leading-snug text-bone/80">{pillars[activePillar].headline}</p>
+                      <PillarArt id={pillars[activePillar].id} color={pillars[activePillar].color} className="h-28 w-auto shrink-0" />
+                    </div>
                     <ul className="grid grid-cols-2 gap-x-10 gap-y-1">
                       {pillars[activePillar].services.map((s) => (
                         <li key={s.href}>
@@ -231,9 +234,14 @@ export const Header = () => {
                             href={s.href}
                             className="group flex items-center justify-between gap-4 border-b border-line py-4"
                           >
-                            <span>
-                              <span className="block text-md text-bone">{s.title}</span>
-                              <span className="block text-sm text-bone/55">{s.desc}</span>
+                            <span className="flex items-center gap-4">
+                              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-bone/70 transition-colors group-hover:border-transparent group-hover:bg-[var(--c)] group-hover:text-ink" style={{ ["--c" as string]: pillars[activePillar].color }}>
+                                <ServiceIcon name={s.icon} size={17} />
+                              </span>
+                              <span>
+                                <span className="block text-md text-bone">{s.title}</span>
+                                <span className="block text-sm text-bone/55">{s.desc}</span>
+                              </span>
                             </span>
                             <span
                               aria-hidden

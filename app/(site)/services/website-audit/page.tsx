@@ -16,7 +16,6 @@ export default function WebsiteAuditPage() {
       accentColor="#eab308"
       title="Find Out What's Really Holding Your Site Back"
       subtitle="A comprehensive audit covering SEO, page speed, UX, accessibility, and security — with a prioritised action plan you can actually use."
-      heroImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&q=80"
       stats={[
         { value: "5 areas", label: "SEO, perf, UX, a11y, security" },
         { value: "5 days", label: "Quick Audit turnaround" },

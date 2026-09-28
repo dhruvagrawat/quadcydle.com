@@ -16,7 +16,6 @@ export default function WixPage() {
       accentColor="#0c6efc"
       title="Professional Wix That Means Business"
       subtitle="Wix can do far more than most people realise. We unlock its full potential with custom design, Velo development, and serious SEO — so your site actually performs."
-      heroImage="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1400&q=80"
       stats={[
         { value: "2%", label: "of all websites use Wix" },
         { value: "200M+", label: "registered Wix users" },

@@ -16,7 +16,6 @@ export default function CustomWebPage() {
       accentColor="#7c3aed"
       title="Custom Web Applications Built to Last"
       subtitle="When off-the-shelf platforms aren't enough, we build bespoke. React frontends, Node.js APIs, PostgreSQL databases — architected properly from day one."
-      heroImage="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1400&q=80"
       stats={[
         { value: "5+", label: "years shipping web apps" },
         { value: "99%", label: "on-time delivery rate" },

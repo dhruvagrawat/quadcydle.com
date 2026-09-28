@@ -37,9 +37,17 @@ export const nav = [
   { title: "Pricing", href: "/pricing" },
   { title: "About", href: "/about" },
   { title: "Journal", href: "/blog" },
+  { title: "Free tools", href: "/tools" },
 ];
 
-export type Service = { title: string; href: string; desc: string };
+export type ServiceIconName =
+  | "code" | "blocks" | "shopping-bag" | "layout-template" | "panels" | "smartphone" | "figma" | "shopping-cart"
+  | "server" | "server-cog" | "boxes" | "activity" | "hard-drive"
+  | "life-buoy" | "wrench" | "search-check" | "mail" | "building"
+  | "rocket" | "package" | "tags" | "utensils" | "bike";
+
+/** `icon` picks the line icon shown in menus and lists (see components/brand/service-icon.tsx). */
+export type Service = { title: string; href: string; desc: string; icon: ServiceIconName };
 
 export type Pillar = {
   id: "build" | "host" | "run" | "grow";
@@ -66,14 +74,14 @@ export const pillars: Pillar[] = [
       "Design and engineering on the platform that fits you — from a WordPress brochure site to a custom Next.js product or a native mobile app.",
     color: "#FF5A1F",
     services: [
-      { title: "Custom Web Development", href: "/services/custom-web", desc: "React, Next.js & full-stack builds" },
-      { title: "WordPress", href: "/services/wordpress", desc: "Themes, plugins & rebuilds" },
-      { title: "Shopify", href: "/services/shopify", desc: "Stores that convert" },
-      { title: "Wix", href: "/services/wix", desc: "Design, SEO & migration" },
-      { title: "Squarespace", href: "/services/squarespace", desc: "Elegant sites, fast" },
-      { title: "Mobile Apps", href: "/services/mobile-app", desc: "iOS & Android in React Native" },
-      { title: "App Design", href: "/services/app-design", desc: "UI/UX in Figma, handoff-ready" },
-      { title: "E-commerce Suite", href: "/services/ecommerce", desc: "Store + custom dashboard" },
+      { title: "Custom Web Development", href: "/services/custom-web", desc: "React, Next.js & full-stack builds", icon: "code" },
+      { title: "WordPress", href: "/services/wordpress", desc: "Themes, plugins & rebuilds", icon: "blocks" },
+      { title: "Shopify", href: "/services/shopify", desc: "Stores that convert", icon: "shopping-bag" },
+      { title: "Wix", href: "/services/wix", desc: "Design, SEO & migration", icon: "layout-template" },
+      { title: "Squarespace", href: "/services/squarespace", desc: "Elegant sites, fast", icon: "panels" },
+      { title: "Mobile Apps", href: "/services/mobile-app", desc: "iOS & Android in React Native", icon: "smartphone" },
+      { title: "App Design", href: "/services/app-design", desc: "UI/UX in Figma, handoff-ready", icon: "figma" },
+      { title: "E-commerce Suite", href: "/services/ecommerce", desc: "Store + custom dashboard", icon: "shopping-cart" },
     ],
   },
   {
@@ -85,11 +93,11 @@ export const pillars: Pillar[] = [
       "Fast, monitored, backed-up hosting for everything we build — and everything you already have.",
     color: "#7C9CFF",
     services: [
-      { title: "Managed Hosting", href: "/services/web-hosting", desc: "Fast, secure & monitored" },
-      { title: "WordPress Hosting", href: "/services/wordpress-hosting", desc: "Tuned WP infrastructure" },
-      { title: "Full-Stack Hosting", href: "/services/fullstack-hosting", desc: "Node, Python, Docker & more" },
-      { title: "Status Monitoring", href: "/services/status-monitoring", desc: "Uptime alerts & status pages" },
-      { title: "Data Recovery", href: "/services/data-recovery", desc: "Files, email & old accounts" },
+      { title: "Managed Hosting", href: "/services/web-hosting", desc: "Fast, secure & monitored", icon: "server" },
+      { title: "WordPress Hosting", href: "/services/wordpress-hosting", desc: "Tuned WP infrastructure", icon: "server-cog" },
+      { title: "Full-Stack Hosting", href: "/services/fullstack-hosting", desc: "Node, Python, Docker & more", icon: "boxes" },
+      { title: "Status Monitoring", href: "/services/status-monitoring", desc: "Uptime alerts & status pages", icon: "activity" },
+      { title: "Data Recovery", href: "/services/data-recovery", desc: "Files, email & old accounts", icon: "hard-drive" },
     ],
   },
   {
@@ -101,11 +109,11 @@ export const pillars: Pillar[] = [
       "Workspace setup, care plans and audits so your team spends its time on the business, not the tooling.",
     color: "#C9F24B",
     services: [
-      { title: "Website Care Plans", href: "/services/website-support", desc: "Updates, fixes & backups" },
-      { title: "App Support", href: "/services/app-support", desc: "Maintenance & releases" },
-      { title: "Website Audit", href: "/services/website-audit", desc: "Speed, SEO & UX review" },
-      { title: "Google Workspace", href: "/services/google-workspace", desc: "Setup, migration & admin" },
-      { title: "Microsoft 365", href: "/services/microsoft-365", desc: "Setup, migration & support" },
+      { title: "Website Care Plans", href: "/services/website-support", desc: "Updates, fixes & backups", icon: "life-buoy" },
+      { title: "App Support", href: "/services/app-support", desc: "Maintenance & releases", icon: "wrench" },
+      { title: "Website Audit", href: "/services/website-audit", desc: "Speed, SEO & UX review", icon: "search-check" },
+      { title: "Google Workspace", href: "/services/google-workspace", desc: "Setup, migration & admin", icon: "mail" },
+      { title: "Microsoft 365", href: "/services/microsoft-365", desc: "Setup, migration & support", icon: "building" },
     ],
   },
   {
@@ -117,11 +125,11 @@ export const pillars: Pillar[] = [
       "Marketplace listings, food-delivery onboarding and launch packages that put you where your buyers already are.",
     color: "#F4C8FF",
     services: [
-      { title: "Startup Builder", href: "/services/startup-builder", desc: "Everything to launch a business" },
-      { title: "Amazon Listings", href: "/services/amazon-listing", desc: "Setup, optimisation & PPC" },
-      { title: "Shopify Listings", href: "/services/shopify-listing", desc: "Catalogue & product ops" },
-      { title: "Restaurant Apps", href: "/services/restaurant-app", desc: "Ordering, menus & bookings" },
-      { title: "Delivery Onboarding", href: "/services/restaurant-onboarding", desc: "Zomato, Swiggy, ONDC & more" },
+      { title: "Startup Builder", href: "/services/startup-builder", desc: "Everything to launch a business", icon: "rocket" },
+      { title: "Amazon Listings", href: "/services/amazon-listing", desc: "Setup, optimisation & PPC", icon: "package" },
+      { title: "Shopify Listings", href: "/services/shopify-listing", desc: "Catalogue & product ops", icon: "tags" },
+      { title: "Restaurant Apps", href: "/services/restaurant-app", desc: "Ordering, menus & bookings", icon: "utensils" },
+      { title: "Delivery Onboarding", href: "/services/restaurant-onboarding", desc: "Zomato, Swiggy, ONDC & more", icon: "bike" },
     ],
   },
 ];

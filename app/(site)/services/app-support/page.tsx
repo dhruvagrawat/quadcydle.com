@@ -16,7 +16,6 @@ export default function AppSupportPage() {
       accentColor="#14b8a6"
       title="Keep Your App Healthy & Up to Date"
       subtitle="Operating systems update, libraries deprecate, and bugs surface. Our app support plans keep your iOS and Android app running smoothly long after launch."
-      heroImage="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1400&q=80"
       stats={[
         { value: "< 48h", label: "bug response time" },
         { value: "2× / year", label: "major OS updates handled" },

@@ -16,7 +16,6 @@ export default function RestaurantAppPage() {
       accentColor="#f97316"
       title="Your Restaurant's Own App — Not Someone Else's Platform"
       subtitle="Stop paying commission to aggregators. We build your own branded iOS and Android app with online ordering, digital menu, table reservations, and loyalty rewards."
-      heroImage="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80"
       stats={[
         { value: "0%", label: "commission — your orders, your revenue" },
         { value: "iOS + Android", label: "from one React Native codebase" },

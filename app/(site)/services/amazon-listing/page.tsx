@@ -16,7 +16,6 @@ export default function AmazonListingPage() {
       accentColor="#FF9900"
       title="Amazon Listings That Actually Rank and Convert"
       subtitle="Seller account setup, keyword-rich listings, A+ content, and PPC campaign management — everything you need to compete on Amazon and win."
-      heroImage="https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?w=1400&q=80"
       stats={[
         { value: "3×", label: "avg organic rank improvement" },
         { value: "A10", label: "Amazon algorithm optimised" },

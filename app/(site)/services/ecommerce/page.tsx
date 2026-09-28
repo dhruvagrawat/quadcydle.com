@@ -16,7 +16,6 @@ export default function EcommercePage() {
       accentColor="#10b981"
       title="An Online Store That Works as Hard as You Do"
       subtitle="Custom storefront design, payment integration, inventory management, and a bespoke analytics dashboard — everything you need to sell online at scale."
-      heroImage="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=80"
       stats={[
         { value: "2×", label: "avg conversion rate improvement" },
         { value: "4–6 wk", label: "store build & launch time" },

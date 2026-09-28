@@ -16,7 +16,6 @@ export default function WordPressHostingPage() {
       accentColor="#2d7fea"
       title="Hosting Built for WordPress"
       subtitle="Not generic hosting with WordPress slapped on — infrastructure specifically configured for how WordPress works, with managed updates, staging, and expert care."
-      heroImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&q=80"
       stats={[
         { value: "10×", label: "faster than shared hosting" },
         { value: "Daily", label: "automated backups" },

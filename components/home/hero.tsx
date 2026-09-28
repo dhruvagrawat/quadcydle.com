@@ -216,10 +216,10 @@ export function Hero() {
           <h1 className="text-display font-medium tracking-[-0.055em]" aria-label="Digital that never stops moving.">
             <motion.span style={desktop ? { x: lineA } : undefined} className="block">
               <SplitReveal as="span" className="block" text="Digital that" play={play} delay={0.15} />
-            </motion.span>
+            </motion.span>{" "}
             <motion.span style={desktop ? { x: lineB } : undefined} className="block pl-[8vw]">
               <SplitReveal as="span" className="block" text="*never* stops" play={play} delay={0.3} />
-            </motion.span>
+            </motion.span>{" "}
             <motion.span style={desktop ? { x: lineC } : undefined} className="block">
               <SplitReveal as="span" className="block" text="moving." play={play} delay={0.45} />
             </motion.span>

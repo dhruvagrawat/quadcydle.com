@@ -16,7 +16,6 @@ export default function WordPressPage() {
       accentColor="#3858e9"
       title="WordPress Done Right"
       subtitle="From a fresh install to a complex multisite — we handle every aspect of your WordPress site so you can focus on your business, not your CMS."
-      heroImage="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=1400&q=80"
       stats={[
         { value: "43%", label: "of all websites run WordPress" },
         { value: "99.9%", label: "uptime guaranteed" },

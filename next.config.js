@@ -13,7 +13,6 @@ const nextConfig = {
   async redirects() {
     return [
       { source: "/blog/blog-details", destination: "/blog", permanent: true },
-      { source: "/tools", destination: "/services", permanent: true },
       { source: "/uicomponents", destination: "/", permanent: true },
     ];
   },

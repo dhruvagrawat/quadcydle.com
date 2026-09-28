@@ -16,7 +16,6 @@ export default function RestaurantOnboardingPage() {
       accentColor="#ef4444"
       title="Get Your Restaurant on Every Major Platform"
       subtitle="We handle the complete onboarding for Zomato, Swiggy, ONDC, Deliveroo, Uber Eats, and more — menu photography brief, listing optimisation, and ongoing account management."
-      heroImage="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&q=80"
       stats={[
         { value: "6+", label: "platforms we onboard to" },
         { value: "48h", label: "go-live after document submission" },

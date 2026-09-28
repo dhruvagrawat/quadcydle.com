@@ -16,7 +16,6 @@ export default function ShopifyPage() {
       accentColor="#96bf48"
       title="Shopify Stores That Actually Sell"
       subtitle="From a brand-new store to enterprise Shopify Plus — we design, build, and optimise Shopify experiences that convert browsers into buyers."
-      heroImage="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=80"
       stats={[
         { value: "4.6M+", label: "stores powered by Shopify" },
         { value: "2×", label: "higher CVR with custom themes" },

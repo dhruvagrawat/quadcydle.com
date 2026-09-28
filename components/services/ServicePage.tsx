@@ -2,8 +2,15 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
+import { pillars } from "../../lib/site";
+import { RollText } from "../header";
+import { Counter } from "../motion/counter";
+import { useIntroDone } from "../motion/intro";
+import { Magnetic } from "../motion/magnetic";
+import { EASE, Reveal, SplitReveal } from "../motion/reveal";
 import {
   Globe, ShoppingBag, Layout, Code2, Server, Database,
   Smartphone, Figma, Headphones, Mail, Shield, HardDrive,
@@ -11,7 +18,7 @@ import {
   CheckCircle2, Users, Lock, BarChart3, RefreshCw, Wrench,
   Bug, Star, ArrowUpRight, FileText, Layers, Cpu, Cloud,
   Settings, Package, TrendingUp, AlertCircle, Eye, Gauge,
-  CreditCard, Truck, PieChart, ChevronDown, ChevronUp,
+  CreditCard, Truck,
 } from "lucide-react";
 
 // Map emoji/strings to Lucide icons for clean rendering
@@ -30,18 +37,6 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   "🤖": Cpu, "🏢": Settings, "🔵": Server, "🧪": Gauge,
   "🌟": Star, "💡": Zap, "✏️": FileText, "🎯": Star,
 };
-
-function ServiceIcon({ icon, accent }: { icon: string; accent: string }) {
-  const IconComponent = iconMap[icon] ?? Zap;
-  return (
-    <div
-      className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-lg border"
-      style={{ borderColor: "rgba(255,255,255,0.1)", background: "rgba(255,255,255,0.04)" }}
-    >
-      <IconComponent size={18} strokeWidth={1.5} />
-    </div>
-  );
-}
 
 export interface PricingTier {
   name: string;
@@ -77,6 +72,12 @@ export interface FAQItem {
   answer: string;
 }
 
+export interface AddOn {
+  title: string;
+  price: string;
+  href: string;
+}
+
 export interface ServicePageProps {
   tag: string;
   accentColor?: string;
@@ -89,418 +90,465 @@ export interface ServicePageProps {
   pricingTitle?: string;
   pricing?: PricingTier[];
   faq?: FAQItem[];
+  /** Optional extras listed under pricing. */
+  addOns?: AddOn[];
   ctaTitle?: string;
   ctaSubtitle?: string;
   ctaHref?: string;
   ctaLabel?: string;
 }
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } },
-};
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.07 } },
-};
-
-function FAQAccordion({ items, accentColor }: { items: FAQItem[]; accentColor: string }) {
-  const [open, setOpen] = useState<number | null>(null);
+function FeatureCard({ feature, accent, index }: { feature: Feature; accent: string; index: number }) {
+  const Icon = iconMap[feature.icon] ?? Zap;
+  const [pos, setPos] = useState({ x: 50, y: 50 });
   return (
-    <div className="space-y-px overflow-hidden rounded-xl border border-white/[0.07]">
-      {items.map((item, i) => (
-        <div key={item.question} className="border-b border-white/[0.07] last:border-0">
-          <button
-            onClick={() => setOpen(open === i ? null : i)}
-            className="flex w-full items-center justify-between gap-4 px-7 py-5 text-left transition-colors hover:bg-white/[0.02]"
+    <Reveal delay={(index % 3) * 0.08} className="h-full">
+      <div
+        onPointerMove={(e) => {
+          const r = e.currentTarget.getBoundingClientRect();
+          setPos({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
+        }}
+        className="group relative h-full overflow-hidden rounded-[2rem] border border-line bg-ink-50 p-8 md:p-10"
+      >
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          style={{ background: `radial-gradient(40rem circle at ${pos.x}% ${pos.y}%, ${accent}22, transparent 60%)` }}
+        />
+        <div className="relative flex items-start justify-between">
+          <span
+            className="relative flex h-14 w-14 items-center justify-center rounded-full border border-line transition-colors duration-500 group-hover:border-transparent group-hover:text-ink"
           >
-            <span className="text-sm font-medium text-white">{item.question}</span>
-            {open === i ? (
-              <ChevronUp size={16} className="shrink-0 text-white/40" />
-            ) : (
-              <ChevronDown size={16} className="shrink-0 text-white/40" />
-            )}
-          </button>
-          <AnimatePresence>
-            {open === i && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.2, ease: "easeInOut" }}
-                className="overflow-hidden"
-              >
-                <p className="px-7 pb-5 text-sm leading-relaxed text-white/50">
-                  {item.answer}
-                </p>
-              </motion.div>
-            )}
-          </AnimatePresence>
+            <span
+              aria-hidden
+              className="absolute h-14 w-14 scale-0 rounded-full transition-transform duration-500 ease-expo group-hover:scale-100"
+              style={{ background: accent }}
+            />
+            <Icon size={20} strokeWidth={1.5} className="relative" />
+          </span>
+          <span className="font-mono text-xs text-bone/30">{String(index + 1).padStart(2, "0")}</span>
         </div>
-      ))}
+        <h3 className="relative mt-10 text-2xl font-medium tracking-[-0.02em]">{feature.title}</h3>
+        <p className="relative mt-3 text-md leading-relaxed text-bone/55">{feature.description}</p>
+      </div>
+    </Reveal>
+  );
+}
+
+function Process({ steps, accent }: { steps: ProcessStep[]; accent: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.8", "end 0.5"] });
+  const fill = useTransform(scrollYProgress, [0, 1], [0, 1]);
+
+  return (
+    <div ref={ref} className="relative mt-16">
+      <div className="absolute left-[1.9rem] top-0 h-full w-px bg-line md:left-0 md:right-0 md:top-[1.9rem] md:h-px md:w-full">
+        <motion.div
+          className="absolute inset-0 origin-top md:origin-left"
+          style={{ background: accent, scaleY: fill }}
+        />
+      </div>
+      <ol
+        className="relative grid gap-12 md:gap-8"
+        style={{ gridTemplateColumns: `repeat(auto-fit, minmax(18rem, 1fr))` }}
+      >
+        {steps.map((step, i) => (
+          <Reveal as="li" key={step.step} delay={i * 0.1} className="relative pl-20 md:pl-0">
+            <span
+              className="absolute left-0 top-0 flex h-[3.8rem] w-[3.8rem] items-center justify-center rounded-full border border-line bg-ink font-mono text-sm md:relative"
+            >
+              {String(step.step).padStart(2, "0")}
+            </span>
+            <h3 className="text-2xl font-medium tracking-[-0.02em] md:mt-8">{step.title}</h3>
+            <p className="mt-3 text-md leading-relaxed text-bone/55">{step.description}</p>
+          </Reveal>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
+function FAQAccordion({ items, accent }: { items: FAQItem[]; accent: string }) {
+  const [open, setOpen] = useState<number | null>(0);
+  return (
+    <ul className="border-t border-line">
+      {items.map((item, i) => {
+        const isOpen = open === i;
+        return (
+          <li key={item.question} className="border-b border-line">
+            <button
+              onClick={() => setOpen(isOpen ? null : i)}
+              aria-expanded={isOpen}
+              className="flex w-full items-center justify-between gap-6 py-7 text-left"
+            >
+              <span className="text-xl font-medium tracking-[-0.01em] md:text-2xl">{item.question}</span>
+              <span
+                className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-line transition-colors duration-500"
+                style={isOpen ? { background: accent, borderColor: accent, color: "#0A0A0B" } : undefined}
+              >
+                <span className="absolute h-px w-4 bg-current" />
+                <span
+                  className="absolute h-4 w-px bg-current transition-transform duration-500 ease-expo"
+                  style={{ transform: isOpen ? "rotate(90deg)" : "none" }}
+                />
+              </span>
+            </button>
+            <AnimatePresence initial={false}>
+              {isOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: EASE }}
+                  className="overflow-hidden"
+                >
+                  <p className="max-w-[72rem] pb-8 text-md leading-relaxed text-bone/60">{item.answer}</p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function SectionTitle({ eyebrow, title }: { eyebrow: string; title: string }) {
+  return (
+    <div>
+      <p className="eyebrow mb-6">{eyebrow}</p>
+      <SplitReveal as="h2" text={title} className="text-6xl font-medium tracking-[-0.045em] md:text-7xl" />
     </div>
   );
 }
 
 export function ServicePage({
   tag,
-  accentColor = "#7877C6",
+  accentColor = "#FF5A1F",
   title,
   subtitle,
   heroImage,
   stats,
   features,
   process,
-  pricingTitle = "Simple, Transparent Pricing",
+  pricingTitle = "Simple, transparent pricing",
   pricing,
   faq,
+  addOns,
   ctaTitle = "Ready to get started?",
   ctaSubtitle = "Let's talk about your project. We'll put together a tailored plan and quote within 48 hours.",
   ctaHref = "/contact",
-  ctaLabel = "Get a Free Quote",
+  ctaLabel = "Get a free quote",
 }: ServicePageProps) {
-  return (
-    <div className="text-white">
+  const play = useIntroDone();
+  const pathname = usePathname();
+  const pillar = pillars.find((p) => p.services.some((s) => s.href === pathname));
+  const related = pillar?.services.filter((s) => s.href !== pathname) ?? [];
 
+  const imageRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: imageRef, offset: ["start end", "end start"] });
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.25, 1]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  const clip = useTransform(scrollYProgress, [0, 0.35], ["inset(8% 6% 8% 6% round 32px)", "inset(0% 0% 0% 0% round 24px)"]);
+
+  return (
+    <div className="text-bone">
       {/* ─── HERO ─────────────────────────────────────────────────────── */}
-      <section className="relative px-6 pb-16 pt-24 md:pt-32 md:pb-24">
-        {/* Very subtle ambient glow — barely there */}
+      <section className="relative overflow-hidden px-6 pb-16 pt-[calc(var(--navigation-height)+6rem)] md:px-10 md:pb-24 md:pt-[calc(var(--navigation-height)+10rem)]">
         <div
-          className="pointer-events-none absolute left-1/2 top-0 h-[50rem] w-[80rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-[0.06] blur-[8rem]"
+          className="pointer-events-none absolute -right-[10%] -top-[25%] h-[70vh] w-[70vh] rounded-full opacity-20 blur-[14rem]"
           style={{ background: accentColor }}
         />
-
-        <div className="relative mx-auto max-w-7xl">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={stagger}
+        <div className="relative mx-auto max-w-site">
+          <motion.nav
+            aria-label="Breadcrumb"
+            className="eyebrow mb-10 flex flex-wrap items-center gap-3"
+            initial={{ opacity: 0, x: -10 }}
+            animate={play ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, ease: EASE }}
           >
-            {/* Tag */}
-            <motion.div variants={fadeUp} className="mb-6">
-              <span className="inline-block rounded-md border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium uppercase tracking-widest text-white/40">
-                {tag}
-              </span>
-            </motion.div>
+            <Link href="/services" className="hover:text-bone">Services</Link>
+            {pillar && (
+              <>
+                <span>/</span>
+                <Link href={`/services#${pillar.id}`} className="hover:text-bone">{pillar.title}</Link>
+              </>
+            )}
+            <span>/</span>
+            <span className="flex items-center gap-2 text-bone/80">
+              <span className="h-2 w-2 rounded-full" style={{ background: accentColor }} />
+              {tag}
+            </span>
+          </motion.nav>
 
-            {/* Title + subtitle side-by-side on large screens */}
-            <div className="grid md:grid-cols-[1fr_380px] md:gap-20 md:items-end">
-              <div>
-                <motion.h1
-                  variants={fadeUp}
-                  className="mb-0 text-5xl font-bold leading-[1.05] tracking-tight text-white md:text-6xl lg:text-[5.6rem]"
+          <SplitReveal
+            as="h1"
+            text={title}
+            play={play}
+            delay={0.1}
+            stagger={0.05}
+            className="max-w-[130rem] text-display-sm font-medium tracking-[-0.05em]"
+          />
+
+          <motion.div
+            className="mt-12 grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-end"
+            initial={{ opacity: 0, y: 20 }}
+            animate={play ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, ease: EASE, delay: 0.5 }}
+          >
+            <p className="max-w-[60rem] text-lg leading-relaxed text-bone/65 md:text-xl">{subtitle}</p>
+            <div className="flex flex-wrap gap-3 md:justify-end">
+              <Magnetic>
+                <Link
+                  href={ctaHref}
+                  className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-8 py-5 text-md font-medium text-ink"
+                  style={{ background: accentColor }}
                 >
-                  {title}
-                </motion.h1>
-              </div>
-              <motion.div variants={fadeUp} className="mt-8 md:mt-0 md:pb-2">
-                <p className="text-sm leading-relaxed text-white/50 md:text-base">
-                  {subtitle}
-                </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Link
-                    href={ctaHref}
-                    className="inline-flex items-center gap-2 rounded-full bg-primary-gradient px-6 py-3 text-sm font-semibold text-white transition-[shadow,text-shadow] hover:shadow-primary"
-                  >
-                    {ctaLabel}
-                    <ArrowUpRight size={14} />
-                  </Link>
-                  <Link
-                    href="/contact"
-                    className="inline-flex items-center rounded-full border border-white/10 bg-white/[0.06] px-6 py-3 text-sm font-medium text-white/70 backdrop-blur-sm transition-colors hover:bg-white/10 hover:text-white"
-                  >
-                    Talk to us first
-                  </Link>
-                </div>
-              </motion.div>
+                  <span className="absolute inset-0 translate-y-full rounded-full bg-bone transition-transform duration-500 ease-expo group-hover:translate-y-0" />
+                  <span className="relative"><RollText>{ctaLabel}</RollText></span>
+                  <ArrowUpRight size={16} className="relative" />
+                </Link>
+              </Magnetic>
+              {pricing && pricing.length > 0 && (
+                <a
+                  href="#pricing"
+                  className="group inline-flex items-center rounded-full border border-line px-8 py-5 text-md text-bone/80 transition-colors hover:border-bone/40 hover:text-bone"
+                >
+                  <RollText>See pricing</RollText>
+                </a>
+              )}
             </div>
           </motion.div>
-
-          {/* Hero image */}
-          {heroImage && (
-            <motion.div
-              initial={{ opacity: 0, y: 32 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-              className="mt-14 overflow-hidden rounded-xl border border-white/[0.07]"
-            >
-              <div className="relative aspect-[21/8] w-full">
-                <Image
-                  src={heroImage}
-                  alt={title}
-                  fill
-                  className="object-cover object-center"
-                  priority
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-              </div>
-            </motion.div>
-          )}
-
-          {/* Stats */}
-          {stats && stats.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: heroImage ? 0.55 : 0.35, duration: 0.5 }}
-              className="mt-10 grid grid-cols-2 divide-x divide-white/[0.07] border border-white/[0.07] rounded-xl md:grid-cols-4"
-            >
-              {stats.map((stat, i) => (
-                <div key={stat.label} className="px-6 py-5 text-center">
-                  <p className="text-2xl font-bold text-white md:text-3xl">{stat.value}</p>
-                  <p className="mt-1 text-xs text-white/40 leading-snug">{stat.label}</p>
-                </div>
-              ))}
-            </motion.div>
-          )}
         </div>
       </section>
 
-      {/* ─── FEATURES ─────────────────────────────────────────────────── */}
-      <section className="border-t border-white/[0.06] px-6 py-16 md:py-24">
-        <div className="mx-auto max-w-7xl">
+      {/* ─── HERO IMAGE (parallax) ─────────────────────────────────────── */}
+      {heroImage && (
+        <section className="px-6 md:px-10">
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={stagger}
-            className="grid gap-px bg-white/[0.06] border border-white/[0.06] rounded-xl overflow-hidden md:grid-cols-2 lg:grid-cols-3"
+            ref={imageRef}
+            style={{ clipPath: clip }}
+            className="relative mx-auto aspect-[4/3] max-w-site overflow-hidden bg-ink-100 md:aspect-[21/9]"
           >
-            {features.map((feature) => (
-              <motion.div
-                key={feature.title}
-                variants={fadeUp}
-                className="group bg-background p-7 transition-colors hover:bg-white/[0.02]"
-              >
-                <ServiceIcon icon={feature.icon} accent={accentColor} />
-                <h3 className="mb-2 text-sm font-semibold text-white">{feature.title}</h3>
-                <p className="text-sm leading-relaxed text-white/45">{feature.description}</p>
-              </motion.div>
-            ))}
+            <motion.div className="absolute inset-0" style={{ scale: imageScale, y: imageY }}>
+              <Image src={heroImage} alt="" fill sizes="100vw" className="object-cover" priority />
+            </motion.div>
+            <div
+              className="absolute inset-0 mix-blend-multiply"
+              style={{ background: `linear-gradient(to top, #0A0A0B 0%, transparent 60%), ${accentColor}22` }}
+            />
           </motion.div>
+        </section>
+      )}
+
+      {/* ─── STATS ────────────────────────────────────────────────────── */}
+      {stats && stats.length > 0 && (
+        <section className="px-6 pt-16 md:px-10 md:pt-24">
+          <div className="mx-auto grid max-w-site grid-cols-2 border-t border-line md:grid-cols-4">
+            {stats.map((stat, i) => (
+              <Reveal
+                key={stat.label}
+                delay={i * 0.08}
+                className="border-b border-line py-10 pr-6 md:border-b-0 md:border-r md:px-8 md:first:pl-0 md:last:border-r-0"
+              >
+                <Counter value={stat.value} className="block text-4xl font-medium tracking-[-0.045em] sm:text-6xl md:text-7xl" />
+                <p className="mt-3 text-sm text-bone/50">{stat.label}</p>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ─── FEATURES ─────────────────────────────────────────────────── */}
+      <section className="px-6 py-24 md:px-10 md:py-40">
+        <div className="mx-auto max-w-site">
+          <SectionTitle eyebrow="What's included" title={"Everything handled,\n*nothing* bolted on."} />
+          <div className="mt-16 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {features.map((f, i) => (
+              <FeatureCard key={f.title} feature={f} accent={accentColor} index={i} />
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ─── PROCESS ──────────────────────────────────────────────────── */}
       {process && process.length > 0 && (
-        <section className="border-t border-white/[0.06] px-6 py-16 md:py-24">
-          <div className="mx-auto max-w-6xl">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
-              variants={stagger}
-            >
-              <motion.div variants={fadeUp} className="mb-12">
-                <p className="mb-2 text-xs font-medium uppercase tracking-widest text-white/30">
-                  How it works
-                </p>
-                <h2 className="text-3xl font-bold text-white md:text-4xl">
-                  Our process, start to finish
-                </h2>
-              </motion.div>
-
-              <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3" style={
-                process.length === 4 ? { gridTemplateColumns: 'repeat(4, 1fr)' } :
-                process.length === 5 ? { gridTemplateColumns: 'repeat(5, 1fr)' } : {}
-              }>
-                {process.map((step, i) => (
-                  <motion.div key={step.step} variants={fadeUp} className="relative">
-                    {/* Step number */}
-                    <div className="mb-4 flex items-center gap-3">
-                      <span
-                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-xs font-semibold text-white/50"
-                      >
-                        {step.step}
-                      </span>
-                      {i < process.length - 1 && (
-                        <div className="hidden h-px flex-1 bg-white/[0.07] lg:block" />
-                      )}
-                    </div>
-                    <h3 className="mb-1.5 text-sm font-semibold text-white">{step.title}</h3>
-                    <p className="text-sm leading-relaxed text-white/45">{step.description}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
+        <section className="border-t border-line px-6 py-24 md:px-10 md:py-40">
+          <div className="mx-auto max-w-site">
+            <SectionTitle eyebrow="How it works" title={"From first call\nto *live.*"} />
+            <Process steps={process} accent={accentColor} />
           </div>
         </section>
       )}
 
       {/* ─── PRICING ──────────────────────────────────────────────────── */}
       {pricing && pricing.length > 0 && (
-        <section className="border-t border-white/[0.06] px-6 py-16 md:py-24">
-          <div className="mx-auto max-w-6xl">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
-              variants={stagger}
+        <section id="pricing" className="scroll-mt-24 border-t border-line px-6 py-24 md:px-10 md:py-40">
+          <div className="mx-auto max-w-site">
+            <SectionTitle eyebrow="Pricing" title={pricingTitle} />
+            <div
+              className={`mt-16 grid gap-4 ${
+                pricing.length === 1 ? "max-w-[64rem]" : pricing.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
+              }`}
             >
-              <motion.div variants={fadeUp} className="mb-12">
-                <p className="mb-2 text-xs font-medium uppercase tracking-widest text-white/30">
-                  Pricing
-                </p>
-                <h2 className="text-3xl font-bold text-white md:text-4xl">{pricingTitle}</h2>
-              </motion.div>
-
-              <div
-                className={`grid gap-4 ${
-                  pricing.length === 2 ? "md:grid-cols-2 md:max-w-2xl" : "md:grid-cols-3"
-                }`}
-              >
-                {pricing.map((tier) => (
-                  <motion.div
-                    key={tier.name}
-                    variants={fadeUp}
-                    className={`relative flex flex-col rounded-xl border p-7 ${
-                      tier.highlighted
-                        ? "border-white/20 bg-white/[0.05]"
-                        : "border-white/[0.07] bg-white/[0.02]"
+              {pricing.map((tier, i) => (
+                <Reveal key={tier.name} delay={i * 0.08} className="h-full">
+                  <div
+                    className={`relative flex h-full flex-col overflow-hidden rounded-[2rem] border p-8 md:p-10 ${
+                      tier.highlighted ? "border-transparent text-ink" : "border-line bg-ink-50"
                     }`}
+                    style={tier.highlighted ? { background: accentColor } : undefined}
                   >
-                    {/* Subtle top line on highlighted card */}
-                    {tier.highlighted && (
-                      <div
-                        className="absolute inset-x-0 top-0 h-px rounded-t-xl"
-                        style={{
-                          background: `linear-gradient(to right, transparent, ${accentColor}80, transparent)`,
-                        }}
-                      />
-                    )}
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xl font-medium">{tier.name}</h3>
+                      {tier.badge && (
+                        <span
+                          className={`rounded-full px-3 py-1 font-mono text-xs uppercase tracking-widest ${
+                            tier.highlighted ? "bg-ink text-bone" : "bg-bone text-ink"
+                          }`}
+                        >
+                          {tier.badge}
+                        </span>
+                      )}
+                    </div>
+                    <p className={`mt-3 text-sm leading-relaxed ${tier.highlighted ? "text-ink/70" : "text-bone/50"}`}>
+                      {tier.description}
+                    </p>
 
-                    {tier.badge && (
-                      <span
-                        className="mb-4 inline-block self-start rounded-md px-2.5 py-1 text-xs font-semibold text-black"
-                        style={{ background: accentColor }}
-                      >
-                        {tier.badge}
-                      </span>
-                    )}
-
-                    <h3 className="mb-1 text-sm font-semibold text-white">{tier.name}</h3>
-                    <p className="mb-4 text-xs leading-relaxed text-white/40">{tier.description}</p>
-
-                    <div className="mb-6 flex items-end gap-1.5 border-b border-white/[0.07] pb-6">
-                      <span className="text-3xl font-bold text-white">
-                        {typeof tier.price === "number" ? `£${tier.price}` : tier.price}
+                    <div className={`my-8 flex items-end gap-2 border-b pb-8 ${tier.highlighted ? "border-ink/15" : "border-line"}`}>
+                      <span className="text-7xl font-medium tracking-[-0.05em]">
+                        {typeof tier.price === "number" ? `£${tier.price.toLocaleString("en-GB")}` : tier.price}
                       </span>
                       {tier.period && (
-                        <span className="mb-1 text-sm text-white/40">/{tier.period}</span>
+                        <span className={`mb-2 text-md ${tier.highlighted ? "text-ink/60" : "text-bone/40"}`}>/{tier.period}</span>
                       )}
                     </div>
 
-                    <ul className="mb-7 flex-1 space-y-2.5">
+                    <ul className="mb-10 flex-1 space-y-3">
                       {tier.features.map((f) => (
-                        <li key={f} className="flex items-start gap-2.5 text-xs">
+                        <li key={f} className="flex items-start gap-3 text-sm">
                           <CheckCircle2
-                            size={14}
+                            size={16}
                             className="mt-0.5 shrink-0"
-                            style={{ color: tier.highlighted ? accentColor : "rgba(255,255,255,0.3)" }}
                             strokeWidth={1.5}
+                            style={{ color: tier.highlighted ? "#0A0A0B" : accentColor }}
                           />
-                          <span className="text-white/60 leading-relaxed">{f}</span>
+                          <span className={tier.highlighted ? "text-ink/80" : "text-bone/70"}>{f}</span>
                         </li>
                       ))}
                     </ul>
 
                     <Link
                       href={tier.href ?? "/contact"}
-                      className="inline-flex items-center justify-center gap-2 rounded-lg py-2.5 text-sm font-semibold transition-opacity hover:opacity-85"
-                      style={
-                        tier.highlighted
-                          ? { background: accentColor, color: "#000" }
-                          : { background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.8)", border: "1px solid rgba(255,255,255,0.08)" }
-                      }
+                      className={`group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full py-4 text-md font-medium ${
+                        tier.highlighted ? "bg-ink text-bone" : "border border-line text-bone"
+                      }`}
                     >
-                      {tier.cta}
+                      <RollText>{tier.cta}</RollText>
+                      <ArrowUpRight size={16} />
                     </Link>
-                  </motion.div>
-                ))}
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+            {addOns && addOns.length > 0 && (
+              <div className="mt-20">
+                <p className="eyebrow mb-6">Optional add-ons</p>
+                <ul className="border-t border-line">
+                  {addOns.map((a) => (
+                    <li key={a.title}>
+                      <Link
+                        href={a.href}
+                        className="group flex items-center justify-between gap-6 border-b border-line py-6"
+                      >
+                        <span className="text-2xl font-medium tracking-[-0.02em] transition-transform duration-500 ease-expo group-hover:translate-x-3">
+                          {a.title}
+                        </span>
+                        <span className="flex items-center gap-4 text-md text-bone/60">
+                          {a.price}
+                          <ArrowUpRight size={18} style={{ color: accentColor }} />
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              <motion.p variants={fadeUp} className="mt-6 text-xs text-white/25">
-                All prices exclude VAT.{" "}
-                <Link href="/contact" className="underline decoration-white/20 hover:text-white/50">
-                  Need something custom? Contact us.
-                </Link>
-              </motion.p>
-            </motion.div>
+            )}
+            <p className="mt-8 text-sm text-bone/40">
+              All prices exclude VAT.{" "}
+              <Link href="/contact" className="link-underline text-bone/70">
+                Need something custom? Talk to us.
+              </Link>
+            </p>
           </div>
         </section>
       )}
 
       {/* ─── FAQ ──────────────────────────────────────────────────────── */}
       {faq && faq.length > 0 && (
-        <section className="border-t border-white/[0.06] px-6 py-16 md:py-24">
-          <div className="mx-auto max-w-6xl">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
-              variants={stagger}
-            >
-              <div className="grid md:grid-cols-[280px_1fr] md:gap-20">
-                <motion.div variants={fadeUp}>
-                  <p className="mb-2 text-xs font-medium uppercase tracking-widest text-white/30">FAQ</p>
-                  <h2 className="text-3xl font-bold text-white md:text-4xl">Common questions</h2>
-                  <p className="mt-3 text-sm leading-relaxed text-white/40">
-                    Not seeing your question? We&apos;re happy to answer anything.{" "}
-                    <Link href="/contact" className="underline decoration-white/20 hover:text-white/70">
-                      Get in touch.
-                    </Link>
-                  </p>
-                </motion.div>
-                <motion.div variants={fadeUp}>
-                  <FAQAccordion items={faq} accentColor={accentColor} />
-                </motion.div>
-              </div>
-            </motion.div>
+        <section className="border-t border-line px-6 py-24 md:px-10 md:py-40">
+          <div className="mx-auto grid max-w-site gap-12 md:grid-cols-[1fr_1.6fr] md:gap-20">
+            <div>
+              <SectionTitle eyebrow="FAQ" title={"Good\n*questions.*"} />
+              <p className="mt-6 max-w-[36rem] text-md leading-relaxed text-bone/50">
+                Not seeing yours?{" "}
+                <Link href="/contact" className="link-underline text-bone">
+                  Ask us anything.
+                </Link>
+              </p>
+            </div>
+            <Reveal>
+              <FAQAccordion items={faq} accent={accentColor} />
+            </Reveal>
           </div>
         </section>
       )}
 
       {/* ─── CTA ──────────────────────────────────────────────────────── */}
-      <section className="border-t border-white/[0.06] px-6 py-16 md:py-24">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={stagger}
-          className="mx-auto max-w-6xl"
-        >
-          <div
-            className="relative overflow-hidden rounded-xl border border-white/[0.07] px-10 py-14 md:px-16 md:py-20"
-            style={{ background: "rgba(255,255,255,0.02)" }}
-          >
-            {/* Very subtle background accent */}
-            <div
-              className="pointer-events-none absolute right-0 top-0 h-64 w-64 rounded-full opacity-[0.08] blur-[5rem]"
-              style={{ background: accentColor }}
-            />
-            <div className="relative grid md:grid-cols-[1fr_auto] md:items-center md:gap-12">
-              <div>
-                <motion.h2 variants={fadeUp} className="text-3xl font-bold text-white md:text-4xl">
-                  {ctaTitle}
-                </motion.h2>
-                <motion.p variants={fadeUp} className="mt-3 text-sm leading-relaxed text-white/45 md:max-w-lg">
-                  {ctaSubtitle}
-                </motion.p>
-              </div>
-              <motion.div variants={fadeUp} className="mt-8 shrink-0 md:mt-0">
+      <section className="px-6 pb-24 md:px-10 md:pb-32">
+        <Reveal className="relative mx-auto max-w-site overflow-hidden rounded-[2.4rem] p-10 text-ink md:p-20">
+          <div className="absolute inset-0" style={{ background: accentColor }} />
+          <div className="relative grid gap-10 md:grid-cols-[1.5fr_1fr] md:items-end">
+            <div>
+              <h2 className="text-6xl font-medium leading-[0.95] tracking-[-0.045em] md:text-7xl">{ctaTitle}</h2>
+              <p className="mt-6 max-w-[56rem] text-lg text-ink/70">{ctaSubtitle}</p>
+            </div>
+            <div className="md:justify-self-end">
+              <Magnetic>
                 <Link
                   href={ctaHref}
-                  className="inline-flex items-center gap-2 rounded-full bg-primary-gradient px-6 py-3 text-sm font-semibold text-white transition-[shadow,text-shadow] hover:shadow-primary"
+                  className="group inline-flex items-center gap-3 rounded-full bg-ink px-10 py-6 text-md font-medium text-bone"
                 >
-                  {ctaLabel}
-                  <ArrowUpRight size={14} />
+                  <RollText>{ctaLabel}</RollText>
+                  <ArrowUpRight size={16} />
                 </Link>
-              </motion.div>
+              </Magnetic>
             </div>
           </div>
-        </motion.div>
+        </Reveal>
       </section>
+
+      {/* ─── RELATED ──────────────────────────────────────────────────── */}
+      {pillar && related.length > 0 && (
+        <section className="border-t border-line px-6 py-20 md:px-10">
+          <div className="mx-auto max-w-site">
+            <p className="eyebrow mb-8">More in {pillar.title}</p>
+            <ul className="flex flex-wrap gap-3">
+              {related.map((s) => (
+                <li key={s.href}>
+                  <Link
+                    href={s.href}
+                    className="group inline-flex items-center gap-3 rounded-full border border-line px-6 py-3 text-md text-bone/70 transition-colors hover:border-bone/40 hover:text-bone"
+                  >
+                    <RollText>{s.title}</RollText>
+                    <span aria-hidden style={{ color: pillar.color }}>↗</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

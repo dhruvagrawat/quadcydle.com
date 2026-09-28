@@ -3,37 +3,72 @@ module.exports = {
   content: ["./components/**/*.{js,ts,jsx,tsx}", "./app/**/*.{ts,tsx}"],
   theme: {
     fontFamily: {
-      sans: '"SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ubuntu, Cantarell,"Open Sans","Helvetica Neue",sans-serif',
+      sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+      serif: ["var(--font-serif)", "ui-serif", "Georgia", "serif"],
+      mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
     },
+    // html font-size is 62.5%, so 1rem = 10px.
     fontSize: {
-      xs: "1.3rem",
+      xs: "1.2rem",
       sm: "1.4rem",
       md: "1.6rem",
+      base: "1.6rem",
       lg: "1.8rem",
       xl: ["2.2rem", "1.3"],
       "2xl": "2.4rem",
-      "3xl": "2.6rem",
-      "4xl": "3.2rem",
-      "5xl": "4rem",
-      "6xl": ["4.4rem", "1.1"],
-      "7xl": ["4.8rem", "1.1"],
-      "8xl": ["8rem", "1.1"],
+      "3xl": "2.8rem",
+      "4xl": ["3.4rem", "1.1"],
+      "5xl": ["4.2rem", "1.05"],
+      "6xl": ["5.2rem", "1"],
+      "7xl": ["6.4rem", "1"],
+      "8xl": ["8rem", "0.95"],
+      "9xl": ["11rem", "0.9"],
+      // Fluid display sizes for hero-scale typography.
+      "display-sm": ["clamp(4rem, 7vw, 8rem)", "0.95"],
+      display: ["clamp(5.2rem, 11vw, 17rem)", "0.88"],
+      "display-xl": ["clamp(6rem, 17vw, 26rem)", "0.85"],
     },
     colors: {
       transparent: "transparent",
+      current: "currentColor",
+      black: "#000",
       white: "#fff",
-      "off-white": "#f7f8f8",
-      "transparent-white": "rgba(255, 255, 255, 0.08)",
-      background: "#000212",
-      grey: "#858699",
-      "grey-dark": "#222326",
-      "primary-text": "#b4bcd0",
+      ink: {
+        DEFAULT: "#0A0A0B",
+        50: "#141416",
+        100: "#1B1B1E",
+        200: "#26262A",
+      },
+      bone: {
+        DEFAULT: "#EDEAE3",
+        dim: "#B9B5AC",
+      },
+      ember: {
+        DEFAULT: "#FF5A1F",
+        soft: "#FF8A5C",
+      },
+      periwinkle: "#7C9CFF",
+      lime: "#C9F24B",
+      orchid: "#F4C8FF",
+      line: "rgba(237, 234, 227, 0.1)",
+      // Legacy token names kept so older pages pick up the new palette.
+      "off-white": "#EDEAE3",
+      "transparent-white": "rgba(237, 234, 227, 0.08)",
+      background: "#0A0A0B",
+      grey: "#8A8780",
+      "grey-dark": "#1B1B1E",
+      "primary-text": "#B9B5AC",
     },
     spacing: {
       0: "0",
+      px: "1px",
+      0.5: "0.2rem",
       1: "0.4rem",
+      1.5: "0.6rem",
       2: "0.8rem",
+      2.5: "1rem",
       3: "1.2rem",
+      3.5: "1.4rem",
       4: "1.6rem",
       5: "2rem",
       6: "2.4rem",
@@ -47,97 +82,49 @@ module.exports = {
       14: "5.6rem",
       15: "6rem",
       16: "6.4rem",
+      20: "8rem",
+      24: "9.6rem",
+      28: "11.2rem",
+      32: "12.8rem",
+      36: "14.4rem",
+      40: "16rem",
+      48: "19.2rem",
       "navigation-height": "var(--navigation-height)",
     },
-    backgroundImage: {
-      "primary-gradient":
-        "linear-gradient(92.88deg, rgb(69, 94, 181) 9.16%, rgb(86, 67, 204) 43.89%, rgb(103, 63, 215) 64.72%)",
-      "page-gradient":
-        "radial-gradient(ellipse 80% 50% at 50% -20%,rgba(120,119,198,0.3), transparent)",
-      "hero-gradient":
-        "radial-gradient(ellipse 50% 80% at 20% 40%,rgba(93,52,221,0.1),transparent), radial-gradient(ellipse 50% 80% at 80% 50%,rgba(120,119,198,0.15),transparent)",
-      "hero-glow":
-        "conic-gradient(from 230.29deg at 51.63% 52.16%, rgb(36, 0, 255) 0deg, rgb(0, 135, 255) 67.5deg, rgb(108, 39, 157) 198.75deg, rgb(24, 38, 163) 251.25deg, rgb(54, 103, 196) 301.88deg, rgb(105, 30, 255) 360deg)",
-      "glow-lines":
-        "linear-gradient(var(--direction),#9d9bf2 0.43%,#7877c6 14.11%,rgba(120,119,198,0) 62.95%)",
-      "radial-faded":
-        "radial-gradient(circle at bottom center,var(--color),transparent 70%)",
-      "glass-gradient":
-        "linear-gradient(rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.05) 100%)",
-    },
-    boxShadow: {
-      primary: "rgb(80 63 205 / 50%) 0px 1px 40px",
-    },
-    transitionDelay: {
-      0: "0ms",
-    },
-    keyframes: {
-      "fade-in": {
-        from: { opacity: 0, transform: "translateY(-10px)" },
-        to: { opacity: 1, transform: "none" },
+    extend: {
+      maxWidth: {
+        site: "144rem",
       },
-      "image-rotate": {
-        "0%": { transform: "rotateX(25deg)" },
-        "25%": { transform: "rotateX(25deg) scale(0.9)" },
-        "60%": { transform: "none" },
-        "100%": { transform: "none" },
+      backgroundImage: {
+        "primary-gradient": "linear-gradient(100deg, #FF5A1F 0%, #FF8A5C 100%)",
+        "page-gradient": "none",
+        "glass-gradient":
+          "linear-gradient(rgba(237,234,227,0.02) 0%, rgba(237,234,227,0.05) 100%)",
       },
-      "image-glow": {
-        "0%": {
-          opacity: 0,
-          "animation-timing-function": "cubic-bezier(0.74,0.25,0.76,1)",
+      boxShadow: {
+        primary: "0 0 40px rgba(255, 90, 31, 0.35)",
+      },
+      transitionTimingFunction: {
+        expo: "cubic-bezier(0.16, 1, 0.3, 1)",
+        quart: "cubic-bezier(0.76, 0, 0.24, 1)",
+      },
+      keyframes: {
+        marquee: {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-50%)" },
         },
-        "10%": {
-          opacity: 1,
-          "animation-timing-function": "cubic-bezier(0.12,0.01,0.08,0.99)",
+        spin: {
+          to: { transform: "rotate(360deg)" },
         },
-        "100%": {
-          opacity: 0.2,
+        pulse: {
+          "0%, 100%": { opacity: 1 },
+          "50%": { opacity: 0.35 },
         },
       },
-      "sketch-lines": {
-        "0%": { "stroke-dashoffset": 1 },
-        "50%": { "stroke-dashoffset": 0 },
-        "99%": { "stroke-dashoffset": 0 },
-        "100%": { visiblity: "hidden" },
+      animation: {
+        "spin-slow": "spin 40s linear infinite",
+        pulse: "pulse 2s ease-in-out infinite",
       },
-      "glow-line-horizontal": {
-        "0%": { opacity: 0, transform: "translateX(0)" },
-        "5%": { opacity: 1, transform: "translateX(0)" },
-        "90%": { opacity: 1 },
-        "100%": { opacity: 0, transform: "translateX(min(60vw, 45rem))" },
-      },
-      "glow-line-vertical": {
-        "0%": { opacity: 0, transform: "translateY(0)" },
-        "5%": { opacity: 1, transform: "translateY(0)" },
-        "90%": { opacity: 1 },
-        "100%": { opacity: 0, transform: "translateY(min(21vw, 45rem))" },
-      },
-      zap: {
-        "0%, 9%, 11%, 100% ": {
-          fill: "transparent",
-        },
-        "10%": {
-          fill: "white",
-        },
-      },
-      bounce: {
-        "50%": {
-          transform: "scale(0.98)",
-        },
-      },
-    },
-    animation: {
-      "fade-in": "fade-in 1000ms var(--animation-delay, 0ms) ease forwards",
-      "image-rotate": "image-rotate 1400ms ease forwards",
-      "image-glow": "image-glow 4100ms 600ms ease-out forwards",
-      "sketch-lines": "sketch-lines 1200ms ease-out forwards",
-      "glow-line-horizontal":
-        "glow-line-horizontal var(--animation-duration) ease-in forwards",
-      "glow-line-vertical":
-        "glow-line-vertical var(--animation-duration) ease-in forwards",
-      zap: "zap 2250ms calc(var(--index) * 20ms) linear infinite",
-      bounce: "240ms ease 0s 1 running bounce",
     },
   },
   plugins: [],

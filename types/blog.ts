@@ -17,14 +17,3 @@ export type BlogPost = {
   readTime: string;
   featured?: boolean;
 };
-
-export type Blog = {
-  _id: number;
-  title: string;
-  slug?: string;
-  metadata?: string;
-  mainImage?: string;
-  author?: Author;
-  tags?: string[];
-  publishedAt?: string;
-};

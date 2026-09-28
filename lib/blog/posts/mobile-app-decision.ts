@@ -15,6 +15,7 @@ const post: BlogPost = {
   mainImage: "/blog/blog-01.png",
   publishedAt: "2025-04-15",
   readTime: "6 min read",
+  services: ["/services/mobile-app", "/services/app-design"],
   featured: false,
   content: `
 <p>Every few months, a business owner asks us: "Should we build an app?" Sometimes the answer is a clear yes. Often, the honest answer is "not yet." Here's how we think through it.</p>

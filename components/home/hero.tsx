@@ -15,6 +15,7 @@ import { LogoMark } from "../brand/logo";
 import { RollText } from "../header";
 import { useIntroDone } from "../motion/intro";
 import { Magnetic } from "../motion/magnetic";
+import { useDesktopMotion } from "../motion/use-media";
 import { EASE, SplitReveal } from "../motion/reveal";
 
 /** One orbiting pillar "planet". depth controls how much it reacts to the mouse. */
@@ -174,6 +175,7 @@ function Orbit({ progress, play }: { progress: MotionValue<number>; play: boolea
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const play = useIntroDone();
+  const desktop = useDesktopMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
 
   const lineA = useTransform(scrollYProgress, [0, 1], ["0%", "-18%"]);
@@ -184,14 +186,14 @@ export function Hero() {
   const fade = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className="relative h-[160svh] bg-ink-50">
+    <section ref={ref} className="relative bg-ink-50 md:h-[160svh]">
       <motion.div
-        style={{ scale, borderBottomLeftRadius: radius, borderBottomRightRadius: radius }}
-        className="sticky top-0 flex h-[100svh] min-h-[64rem] flex-col overflow-hidden bg-ink"
+        style={desktop ? { scale, borderBottomLeftRadius: radius, borderBottomRightRadius: radius } : undefined}
+        className="relative flex min-h-[100svh] flex-col overflow-hidden bg-ink md:sticky md:top-0 md:h-[100svh] md:min-h-[64rem]"
       >
         {/* Ambient glow */}
-        <div className="pointer-events-none absolute -right-[20%] top-[10%] h-[70vh] w-[70vh] rounded-full bg-ember/20 blur-[14rem]" />
-        <div className="pointer-events-none absolute -left-[10%] bottom-[-20%] h-[60vh] w-[60vh] rounded-full bg-periwinkle/10 blur-[14rem]" />
+        <div className="pointer-events-none absolute -right-[20%] top-[10%] h-[70vh] w-[70vh] rounded-full bg-ember/20 blur-[8rem] md:blur-[14rem]" />
+        <div className="pointer-events-none absolute -left-[10%] bottom-[-20%] hidden h-[60vh] w-[60vh] rounded-full bg-periwinkle/10 blur-[14rem] md:block" />
 
         {/* Orbit visual */}
         <div className="absolute inset-0 scale-75 opacity-25 md:left-[38%] md:scale-100 md:opacity-100">
@@ -199,7 +201,7 @@ export function Hero() {
         </div>
 
         <motion.div
-          style={{ opacity: fade }}
+          style={desktop ? { opacity: fade } : undefined}
           className="relative z-10 mx-auto flex w-full max-w-site flex-1 flex-col justify-end px-6 pb-12 pt-[calc(var(--navigation-height)+4rem)] md:px-10 md:pb-16"
         >
           <motion.p
@@ -212,13 +214,13 @@ export function Hero() {
           </motion.p>
 
           <h1 className="text-display font-medium tracking-[-0.055em]" aria-label="Digital that never stops moving.">
-            <motion.span style={{ x: lineA }} className="block">
+            <motion.span style={desktop ? { x: lineA } : undefined} className="block">
               <SplitReveal as="span" className="block" text="Digital that" play={play} delay={0.15} />
             </motion.span>
-            <motion.span style={{ x: lineB }} className="block pl-[8vw]">
+            <motion.span style={desktop ? { x: lineB } : undefined} className="block pl-[8vw]">
               <SplitReveal as="span" className="block" text="*never* stops" play={play} delay={0.3} />
             </motion.span>
-            <motion.span style={{ x: lineC }} className="block">
+            <motion.span style={desktop ? { x: lineC } : undefined} className="block">
               <SplitReveal as="span" className="block" text="moving." play={play} delay={0.45} />
             </motion.span>
           </h1>

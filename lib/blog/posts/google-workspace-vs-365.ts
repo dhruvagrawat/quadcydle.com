@@ -15,6 +15,7 @@ const post: BlogPost = {
   mainImage: "/blog/blog-04.png",
   publishedAt: "2025-04-28",
   readTime: "7 min read",
+  services: ["/services/google-workspace", "/services/microsoft-365"],
   featured: false,
   content: `
 <p>Every growing business eventually needs to move away from free personal email accounts to a proper business email solution. The two dominant options are Google Workspace and Microsoft 365 — and the right choice depends on how your team works.</p>

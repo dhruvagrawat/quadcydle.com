@@ -18,7 +18,7 @@ function PillarPanel({ pillar, progress, i }: { pillar: Pillar; progress: Motion
       <motion.div
         aria-hidden
         style={{ x: glowX, background: pillar.color }}
-        className="pointer-events-none absolute -bottom-60 -left-20 h-[46rem] w-[46rem] rounded-full opacity-20 blur-[12rem]"
+        className="pointer-events-none absolute -bottom-60 -left-20 hidden h-[46rem] w-[46rem] rounded-full opacity-20 blur-[12rem] md:block"
       />
 
       <div className="relative flex flex-col justify-between gap-10">

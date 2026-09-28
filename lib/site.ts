@@ -20,12 +20,15 @@ export const site = {
   /** Response promises — reused in the contact page, CTA and stats. */
   replyTime: "1 business day",
   quoteTime: "48 hours",
+  /** Replace the "#" with your real profile URLs. `icon` picks the footer icon. */
   socials: [
-    { label: "Twitter / X", href: "#" },
-    { label: "LinkedIn", href: "#" },
-    { label: "Instagram", href: "#" },
-    { label: "GitHub", href: "#" },
-  ],
+    { label: "Twitter / X", href: "#", icon: "x" },
+    { label: "LinkedIn", href: "#", icon: "linkedin" },
+    { label: "Instagram", href: "#", icon: "instagram" },
+    { label: "GitHub", href: "#", icon: "github" },
+  ] as { label: string; href: string; icon: "x" | "linkedin" | "instagram" | "github" }[],
+  /** Google Analytics 4 measurement ID. Set to "" to disable tracking. */
+  gaId: "G-9QT35D31X9",
 };
 
 export const nav = [

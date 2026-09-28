@@ -1,6 +1,7 @@
 import { Analytics } from "@vercel/analytics/react";
 import type { Metadata, Viewport } from "next";
 import { Instrument_Serif, Inter_Tight, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import { Footer } from "../../components/footer";
 import { Header } from "../../components/header";
 import { Cursor } from "../../components/motion/cursor";
@@ -57,6 +58,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Cursor />
         <div className="grain" aria-hidden />
         <Analytics />
+        {site.gaId && (
+          <>
+            <Script src={`https://www.googletagmanager.com/gtag/js?id=${site.gaId}`} strategy="afterInteractive" />
+            <Script id="gtag-init" strategy="afterInteractive">
+              {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${site.gaId}');`}
+            </Script>
+          </>
+        )}
       </body>
     </html>
   );

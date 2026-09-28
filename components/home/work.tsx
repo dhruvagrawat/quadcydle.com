@@ -7,6 +7,7 @@ import { caseStudies, type CaseStudy } from "../../lib/site";
 import { RollText } from "../header";
 import { Counter } from "../motion/counter";
 import { SplitReveal } from "../motion/reveal";
+import { useDesktopMotion } from "../motion/use-media";
 
 /** Generative cover art — no stock photos, just the project's colour in motion. */
 function Artwork({ color, seed }: { color: string; seed: number }) {
@@ -47,7 +48,9 @@ function Card({
   i,
   total,
   progress,
+  desktop,
 }: {
+  desktop: boolean;
   study: CaseStudy;
   i: number;
   total: number;
@@ -58,13 +61,16 @@ function Card({
   const dim = useTransform(progress, [start, Math.min(1, start + 1 / total)], [0, i === total - 1 ? 0 : 0.5]);
 
   return (
-    <div className="sticky flex h-[100svh] items-start justify-center" style={{ top: `calc(12vh + ${i * 2.4}rem)` }}>
+    <div
+      className="mb-4 flex items-start justify-center md:sticky md:mb-0 md:h-[100svh]"
+      style={desktop ? { top: `calc(12vh + ${i * 2.4}rem)` } : undefined}
+    >
       <motion.article
-        style={{ scale }}
-        className="relative grid h-[76svh] w-full origin-top overflow-hidden rounded-[2.4rem] border border-line bg-ink-50 md:grid-cols-[1fr_1.15fr]"
+        style={desktop ? { scale } : undefined}
+        className="relative grid w-full md:h-[76svh] origin-top overflow-hidden rounded-[2.4rem] border border-line bg-ink-50 md:grid-cols-[1fr_1.15fr]"
         data-cursor="Read"
       >
-        <div className="relative z-10 flex flex-col justify-between p-8 md:p-12">
+        <div className="relative z-10 flex flex-col justify-between gap-10 p-8 md:p-12">
           <div>
             <div className="mb-8 flex items-center justify-between">
               <span className="font-mono text-xs text-bone/40">
@@ -91,7 +97,7 @@ function Card({
             {study.client.split(" ")[0]}
           </span>
         </div>
-        <motion.div className="pointer-events-none absolute inset-0 bg-ink" style={{ opacity: dim }} />
+        {desktop && <motion.div className="pointer-events-none absolute inset-0 bg-ink" style={{ opacity: dim }} />}
       </motion.article>
     </div>
   );
@@ -101,6 +107,7 @@ const featured = caseStudies.slice(0, 4);
 
 export function Work() {
   const ref = useRef<HTMLDivElement>(null);
+  const desktop = useDesktopMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
   return (
@@ -120,9 +127,9 @@ export function Work() {
           </Link>
         </div>
 
-        <div ref={ref} className="relative mt-8">
+        <div ref={ref} className="relative mt-12 md:mt-8">
           {featured.map((s, i) => (
-            <Card key={s.client} study={s} i={i} total={featured.length} progress={scrollYProgress} />
+            <Card key={s.client} study={s} i={i} total={featured.length} progress={scrollYProgress} desktop={desktop} />
           ))}
         </div>
       </div>

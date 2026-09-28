@@ -256,7 +256,7 @@ export function ServicePage({
       {/* ─── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden px-6 pb-16 pt-[calc(var(--navigation-height)+6rem)] md:px-10 md:pb-24 md:pt-[calc(var(--navigation-height)+10rem)]">
         <div
-          className="pointer-events-none absolute -right-[10%] -top-[25%] h-[70vh] w-[70vh] rounded-full opacity-20 blur-[14rem]"
+          className="pointer-events-none absolute -right-[10%] -top-[25%] h-[70vh] w-[70vh] rounded-full opacity-20 blur-[7rem] md:blur-[14rem]"
           style={{ background: accentColor }}
         />
         <div className="relative mx-auto max-w-site">

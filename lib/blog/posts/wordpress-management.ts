@@ -15,6 +15,7 @@ const post: BlogPost = {
   mainImage: "/blog/blog-02.png",
   publishedAt: "2025-04-05",
   readTime: "5 min read",
+  services: ["/services/wordpress", "/services/website-support", "/services/wordpress-hosting"],
   featured: false,
   content: `
 <p>WordPress powers 43% of all websites — which makes it the world's most popular CMS and the world's most targeted CMS. Unmanaged WordPress sites are being scanned for vulnerabilities constantly, and the consequences of getting hacked are far more expensive than the cost of preventing it.</p>

@@ -41,8 +41,12 @@ export const Header = () => {
 
   useMotionValueEvent(scrollY, "change", (y) => {
     const prev = scrollY.getPrevious() ?? 0;
-    setScrolled(y > 40);
-    setHidden(y > 300 && y > prev && !megaOpen);
+    const nextScrolled = y > 40;
+    // Ignore tiny jitters (e.g. mobile toolbar resize) so the bar doesn't flicker.
+    if (Math.abs(y - prev) < 4) return;
+    const nextHidden = y > 300 && y > prev && !megaOpen;
+    setScrolled((v) => (v === nextScrolled ? v : nextScrolled));
+    setHidden((v) => (v === nextHidden ? v : nextHidden));
   });
 
   useEffect(() => {

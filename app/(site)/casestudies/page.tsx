@@ -27,7 +27,7 @@ export default function CaseStudies() {
               <article className="group relative overflow-hidden rounded-[2.4rem] border border-line bg-ink-50">
                 <Parallax speed={0.15} className="pointer-events-none absolute -right-40 -top-20 h-[60rem] w-[60rem]">
                   <div
-                    className="h-full w-full rounded-full opacity-25 blur-[12rem] transition-opacity duration-700 group-hover:opacity-50"
+                    className="h-full w-full rounded-full opacity-25 blur-[6rem] transition-opacity md:blur-[12rem] duration-700 group-hover:opacity-50"
                     style={{ background: study.color }}
                   />
                 </Parallax>

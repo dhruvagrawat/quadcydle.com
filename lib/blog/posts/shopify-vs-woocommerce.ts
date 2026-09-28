@@ -15,6 +15,7 @@ const post: BlogPost = {
   mainImage: "/blog/blog-03.png",
   publishedAt: "2025-05-10",
   readTime: "8 min read",
+  services: ["/services/shopify", "/services/wordpress", "/services/ecommerce"],
   featured: false,
   content: `
 <p>When it comes to selling products online, Shopify and WooCommerce dominate the conversation. Both are excellent platforms — but they're built on completely different philosophies, and choosing the wrong one for your situation can cost you significantly in time, money, and headaches.</p>

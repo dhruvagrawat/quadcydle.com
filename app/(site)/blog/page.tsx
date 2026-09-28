@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { PostList } from "../../../components/blog/post-list";
 import { PageHero } from "../../../components/page-hero";
-import { allPosts } from "../../../lib/blog";
+import { allPosts, categories } from "../../../lib/blog";
 
 export const metadata: Metadata = {
   title: "Journal — Quadcydle",
@@ -13,11 +13,11 @@ export default function BlogPage() {
   return (
     <>
       <PageHero
-        eyebrow="Journal"
+        eyebrow={`Journal — ${allPosts.length} articles`}
         title={"Notes from\nthe *studio.*"}
-        intro="Practical advice on websites, SEO, hosting, apps and the tools that run a business — written by the people who do the work."
+        intro="Straight answers on what websites cost, how to pick an agency, hosting, SEO, e-commerce and the tools that run a business — written by the people who do the work."
       />
-      <PostList posts={allPosts} />
+      <PostList posts={allPosts} categories={categories} />
     </>
   );
 }

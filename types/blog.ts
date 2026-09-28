@@ -16,4 +16,6 @@ export type BlogPost = {
   publishedAt: string;
   readTime: string;
   featured?: boolean;
+  /** Service pages this article relates to (hrefs from lib/site.ts). Shown as a box on the article. */
+  services?: string[];
 };

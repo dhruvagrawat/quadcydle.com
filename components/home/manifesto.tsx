@@ -34,7 +34,7 @@ export function Manifesto() {
       <div className="mx-auto max-w-site">
         <div className="grid gap-12 md:grid-cols-[1fr_3fr]">
           <Reveal>
-            <p className="eyebrow sticky top-32">(01) — Why we exist</p>
+            <p className="eyebrow md:sticky md:top-32">(01) — Why we exist</p>
           </Reveal>
           <ScrollText
             text={manifesto}

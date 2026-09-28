@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { BlogPost } from "../../types/blog";
 import { EASE, Reveal } from "../motion/reveal";
+import { PostCover } from "./post-cover";
 
 const date = (d: string) =>
   new Date(d).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
@@ -50,11 +51,7 @@ export function PostList({ posts, categories }: { posts: BlogPost[]; categories:
               className="group mb-24 grid gap-10 md:grid-cols-[1.3fr_1fr] md:items-end"
             >
               <div className="relative aspect-[16/10] overflow-hidden rounded-[2.4rem] bg-ink-100">
-                <img
-                  src={lead.mainImage}
-                  alt=""
-                  className="h-full w-full object-cover transition-transform duration-[1.4s] ease-expo group-hover:scale-105"
-                />
+                <PostCover post={lead} size="lg" className="transition-transform duration-[1.4s] ease-expo group-hover:scale-105" />
                 <span className="absolute left-6 top-6 rounded-full bg-ember px-4 py-2 font-mono text-xs uppercase tracking-widest text-ink">
                   Latest
                 </span>
@@ -100,7 +97,7 @@ export function PostList({ posts, categories }: { posts: BlogPost[]; categories:
           </div>
           <label className="flex items-center gap-3 border-b border-line pb-2 focus-within:border-ember md:w-[32rem]">
             <span className="sr-only">Search articles</span>
-            <svg viewBox="0 0 24 24" className="h-5 w-5 text-bone/40" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+            <svg viewBox="0 0 24 24" className="h-5 w-5 text-bone/55" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
               <circle cx="11" cy="11" r="7" />
               <path d="m20 20-3.5-3.5" />
             </svg>
@@ -131,7 +128,7 @@ export function PostList({ posts, categories }: { posts: BlogPost[]; categories:
                   onPointerLeave={() => setHovered(null)}
                   className="group grid gap-3 border-b border-line py-8 md:grid-cols-[16rem_1fr_auto] md:items-baseline md:gap-10"
                 >
-                  <span className="font-mono text-xs uppercase tracking-widest text-bone/40">{post.category}</span>
+                  <span className="font-mono text-xs uppercase tracking-widest text-bone/55">{post.category}</span>
                   <span>
                     <span className="block text-3xl font-medium tracking-[-0.03em] transition-[transform,color] duration-700 ease-expo group-hover:translate-x-3 group-hover:text-ember md:text-5xl">
                       {post.title}
@@ -140,7 +137,7 @@ export function PostList({ posts, categories }: { posts: BlogPost[]; categories:
                       {post.excerpt}
                     </span>
                   </span>
-                  <span className="text-sm text-bone/40">
+                  <span className="text-sm text-bone/55">
                     {date(post.publishedAt)} · {post.readTime}
                   </span>
                 </Link>
@@ -167,16 +164,16 @@ export function PostList({ posts, categories }: { posts: BlogPost[]; categories:
       <motion.div aria-hidden className="pointer-events-none fixed left-0 top-0 z-40 hidden lg:block" style={{ x, y }}>
         <AnimatePresence>
           {hovered && (
-            <motion.img
+            <motion.div
               key={hovered.slug}
-              src={hovered.mainImage}
-              alt=""
               initial={{ opacity: 0, scale: 0.7, rotate: -6 }}
               animate={{ opacity: 1, scale: 1, rotate: 3 }}
               exit={{ opacity: 0, scale: 0.7 }}
               transition={{ type: "spring", stiffness: 260, damping: 24 }}
-              className="-ml-40 -mt-72 h-64 w-96 rounded-[1.6rem] object-cover shadow-2xl"
-            />
+              className="-ml-40 -mt-72 h-64 w-96 overflow-hidden rounded-[1.6rem] shadow-2xl"
+            >
+              <PostCover post={hovered} size="sm" />
+            </motion.div>
           )}
         </AnimatePresence>
       </motion.div>

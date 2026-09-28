@@ -3,6 +3,9 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "10-seo-quick-wins",
   title: "10 SEO Quick Wins Any Business Can Implement This Week",
+  seoTitle: "10 SEO Quick Wins for Small Businesses",
+  seoDescription:
+    "Ten practical SEO fixes you can make this week — titles, meta descriptions, image compression, internal links and more. Most take under an hour.",
   excerpt:
     "You don't need a massive budget to improve your search rankings. Here are ten actionable changes that make a real difference to your organic traffic — most take under an hour.",
   category: "SEO",

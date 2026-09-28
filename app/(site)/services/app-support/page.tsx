@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "App Support & Maintenance Plans — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "App Support & Maintenance Plans | Quadcydle",
   description:
     "Ongoing mobile app support: OS updates, bug fixes, performance monitoring, and new feature development. Keep your app healthy.",
-};
+  path: "/services/app-support",
+});
 
 export default function AppSupportPage() {
   return (

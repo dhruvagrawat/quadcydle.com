@@ -194,7 +194,7 @@ export const Header = () => {
                               activePillar === i ? "text-bone" : "text-bone/20"
                             )}
                           >
-                            <span className="font-mono text-xs text-bone/40">{p.index}</span>
+                            <span className="font-mono text-xs text-bone/55">{p.index}</span>
                             {p.title}
                             {activePillar === i && (
                               <motion.span
@@ -233,7 +233,7 @@ export const Header = () => {
                           >
                             <span>
                               <span className="block text-md text-bone">{s.title}</span>
-                              <span className="block text-sm text-bone/40">{s.desc}</span>
+                              <span className="block text-sm text-bone/55">{s.desc}</span>
                             </span>
                             <span
                               aria-hidden
@@ -280,7 +280,7 @@ export const Header = () => {
                         className="flex items-baseline justify-between py-4 text-5xl font-medium tracking-[-0.03em]"
                       >
                         {item.title}
-                        <span className="font-mono text-xs text-bone/40">0{i + 1}</span>
+                        <span className="font-mono text-xs text-bone/55">0{i + 1}</span>
                       </Link>
                     </motion.div>
                   </li>

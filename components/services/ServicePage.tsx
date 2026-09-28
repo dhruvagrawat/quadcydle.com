@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
+import { SITE_URL } from "../../lib/seo";
 import { pillars } from "../../lib/site";
 import { RollText } from "../header";
 import { Counter } from "../motion/counter";
@@ -251,8 +252,43 @@ export function ServicePage({
   const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
   const clip = useTransform(scrollYProgress, [0, 0.35], ["inset(8% 6% 8% 6% round 32px)", "inset(0% 0% 0% 0% round 24px)"]);
 
+  // Structured data describing exactly what's visible on this page.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        name: tag,
+        serviceType: tag,
+        description: subtitle,
+        url: `${SITE_URL}${pathname}`,
+        provider: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "Quadcydle", url: SITE_URL },
+        ...(pricing?.some((t) => typeof t.price === "number") && {
+          offers: pricing
+            .filter((t) => typeof t.price === "number")
+            .map((t) => ({
+              "@type": "Offer",
+              name: t.name,
+              description: t.description,
+              price: t.price,
+              priceCurrency: "GBP",
+              ...(t.period && { priceSpecification: { "@type": "UnitPriceSpecification", price: t.price, priceCurrency: "GBP", unitText: t.period === "mo" ? "MONTH" : t.period } }),
+            })),
+        }),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Services", item: `${SITE_URL}/services` },
+          { "@type": "ListItem", position: 2, name: tag, item: `${SITE_URL}${pathname}` },
+        ],
+      },
+    ],
+  };
+
   return (
     <div className="text-bone">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* ─── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden px-6 pb-16 pt-[calc(var(--navigation-height)+6rem)] md:px-10 md:pb-24 md:pt-[calc(var(--navigation-height)+10rem)]">
         <div
@@ -420,7 +456,7 @@ export function ServicePage({
                         {typeof tier.price === "number" ? `£${tier.price.toLocaleString("en-GB")}` : tier.price}
                       </span>
                       {tier.period && (
-                        <span className={`mb-2 text-md ${tier.highlighted ? "text-ink/60" : "text-bone/40"}`}>/{tier.period}</span>
+                        <span className={`mb-2 text-md ${tier.highlighted ? "text-ink/60" : "text-bone/55"}`}>/{tier.period}</span>
                       )}
                     </div>
 
@@ -474,7 +510,7 @@ export function ServicePage({
                 </ul>
               </div>
             )}
-            <p className="mt-8 text-sm text-bone/40">
+            <p className="mt-8 text-sm text-bone/55">
               All prices exclude VAT.{" "}
               <Link href="/contact" className="link-underline text-bone/70">
                 Need something custom? Talk to us.

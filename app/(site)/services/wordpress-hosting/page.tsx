@@ -1,10 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Managed WordPress Hosting — Optimised WP Infrastructure | Quadcydle",
-  description: "WordPress hosting optimised for speed and reliability. Managed updates, staging, daily backups, and expert support.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Managed WordPress Hosting | Quadcydle",
+  description:
+    "WordPress hosting optimised for speed and reliability. Managed updates, staging, daily backups, and expert support.",
+  path: "/services/wordpress-hosting",
+});
 
 export default function WordPressHostingPage() {
   return (

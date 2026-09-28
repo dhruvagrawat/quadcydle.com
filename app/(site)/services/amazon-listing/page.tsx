@@ -1,10 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Amazon Listing Optimisation & Management | Quadcydle",
-  description: "Amazon seller setup, product listing optimisation, A+ content, PPC ads management, and ongoing account management. Rank higher, sell more.",
-};
+  description:
+    "Amazon seller setup, product listing optimisation, A+ content, PPC ads management, and ongoing account management. Rank higher, sell more.",
+  path: "/services/amazon-listing",
+});
 
 export default function AmazonListingPage() {
   return (

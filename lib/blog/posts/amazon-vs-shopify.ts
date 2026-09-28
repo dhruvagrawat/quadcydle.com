@@ -3,6 +3,9 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "amazon-vs-your-own-shopify-store",
   title: "Selling on Amazon vs Your Own Shopify Store: Where Should You Start?",
+  seoTitle: "Amazon vs Your Own Shopify Store: Where to Sell?",
+  seoDescription:
+    "Amazon brings traffic; your own Shopify store keeps the margin and the customer. Fees, control and growth compared — and why most brands do both.",
   excerpt:
     "Amazon brings the customers; your own store keeps the margin and the relationship. How the fees, control and growth compare — and why most brands end up doing both.",
   category: "E-commerce",

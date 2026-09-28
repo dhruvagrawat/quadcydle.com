@@ -1,10 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Custom Web Development — React, Next.js & Full-Stack | Quadcydle",
-  description: "Custom web application development with React, Next.js, Node.js, and more.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Custom Web Development — React & Next.js | Quadcydle",
+  description:
+    "Custom websites and web applications built with React and Next.js — fast, secure, SEO-ready and designed around your business. Brochure sites from £1,499.",
+  path: "/services/custom-web",
+});
 
 export default function CustomWebPage() {
   return (

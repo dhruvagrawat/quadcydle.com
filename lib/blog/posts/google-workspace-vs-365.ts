@@ -3,6 +3,7 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "google-workspace-vs-microsoft-365",
   title: "Google Workspace vs Microsoft 365: Which is Better for Small Businesses?",
+  seoTitle: "Google Workspace vs Microsoft 365: Which to Choose",
   excerpt:
     "Both offer professional email, cloud storage, and collaboration tools — but they're very different products. Here's how to choose the right one for your team.",
   category: "Business Tools",

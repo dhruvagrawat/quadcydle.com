@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Shopify Development & Store Setup — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Shopify Development & Store Setup | Quadcydle",
   description:
     "Custom Shopify store development, theme builds, app integration, and ongoing optimisation. We build Shopify stores that convert.",
-};
+  path: "/services/shopify",
+});
 
 export default function ShopifyPage() {
   return (

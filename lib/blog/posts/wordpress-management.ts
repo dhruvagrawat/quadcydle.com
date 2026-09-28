@@ -3,6 +3,7 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "why-wordpress-management-saves-money",
   title: "Why Professional WordPress Management Actually Saves You Money",
+  seoTitle: "Why WordPress Maintenance Saves You Money",
   excerpt:
     "Unmanaged WordPress sites get hacked, break after updates, and load slowly. Here's the true cost of DIY WordPress — and when to hand it over.",
   category: "WordPress",

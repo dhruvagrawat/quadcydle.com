@@ -3,6 +3,7 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "website-speed-costing-customers",
   title: "Why Your Website's Load Speed Is Costing You Customers",
+  seoTitle: "How a Slow Website Costs You Customers",
   excerpt:
     "53% of mobile users abandon a site that takes more than 3 seconds to load. Here's what's slowing your site down — and exactly how to fix it.",
   category: "Web Performance",

@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Startup Builder Package — Everything to Launch Your Business | Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Startup Builder: Website, Brand, Email & Hosting | Quadcydle",
   description:
     "The all-in-one package for new businesses: website, branding, business email, hosting, app setup, company registration guidance, and AWS credits.",
-};
+  path: "/services/startup-builder",
+});
 
 const included = [
   {

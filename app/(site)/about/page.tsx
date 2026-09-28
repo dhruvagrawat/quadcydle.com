@@ -5,12 +5,14 @@ import { Reveal, SplitReveal } from "../../../components/motion/reveal";
 import { ScrollText } from "../../../components/motion/scroll-text";
 import { PageHero } from "../../../components/page-hero";
 import { pillars } from "../../../lib/site";
+import { pageMeta } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "About — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "About Quadcydle | One Team to Build, Host, Run & Grow",
   description:
-    "Quadcydle is a digital studio that builds, hosts, runs and grows websites, stores and apps — one team for the whole cycle.",
-};
+    "Quadcydle is a digital studio that builds, hosts, runs and grows websites, stores and apps — one accountable team instead of four separate vendors.",
+  path: "/about",
+});
 
 const values = [
   {
@@ -81,7 +83,7 @@ export default function About() {
           <ul className="border-t border-line">
             {values.map((v, i) => (
               <Reveal as="li" key={v.title} delay={i * 0.05} className="grid gap-4 border-b border-line py-10 md:grid-cols-[auto_1fr_1.2fr] md:items-baseline md:gap-16">
-                <span className="font-mono text-sm text-bone/40">0{i + 1}</span>
+                <span className="font-mono text-sm text-bone/55">0{i + 1}</span>
                 <h3 className="text-5xl font-medium tracking-[-0.04em] md:text-6xl">{v.title}</h3>
                 <p className="text-lg leading-relaxed text-bone/60">{v.body}</p>
               </Reveal>

@@ -268,7 +268,7 @@ export function Hero() {
           style={{ opacity: fade }}
         >
           <motion.div
-            className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-bone/40"
+            className="flex items-center gap-3 font-mono text-xs uppercase tracking-widest text-bone/55"
             initial={{ opacity: 0 }}
             animate={play ? { opacity: 1 } : {}}
             transition={{ delay: 1.4 }}

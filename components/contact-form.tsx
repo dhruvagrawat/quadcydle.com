@@ -220,7 +220,7 @@ export function ContactForm() {
           </fieldset>
 
           <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
-            <p className="max-w-[44rem] text-sm text-bone/40">
+            <p className="max-w-[44rem] text-sm text-bone/55">
               Sending opens your email app with this brief filled in. We reply within {site.replyTime}.
             </p>
             <button

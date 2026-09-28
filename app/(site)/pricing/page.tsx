@@ -297,13 +297,13 @@ export default function PricingPage() {
                           {row.cells.map((cell, ci) => (
                             <td key={ci} className="py-6 text-right">
                               {cell.gbp === null ? (
-                                <span className="text-md text-bone/40">Let&apos;s talk</span>
+                                <span className="text-md text-bone/55">Let&apos;s talk</span>
                               ) : (
                                 <div>
                                   <span className="text-xl font-medium tabular-nums">
                                     {formatPrice(cell.gbp, currency, cell.period, cell.from)}
                                   </span>
-                                  {cell.note && <span className="block text-xs text-bone/40">{cell.note}</span>}
+                                  {cell.note && <span className="block text-xs text-bone/55">{cell.note}</span>}
                                 </div>
                               )}
                             </td>
@@ -315,7 +315,7 @@ export default function PricingPage() {
                 </div>
               </div>
             )}
-            <p className="mt-8 text-sm text-bone/40">
+            <p className="mt-8 text-sm text-bone/55">
               {currency !== "GBP" && "Currency conversion is approximate and for reference only. Invoices are issued in GBP. "}
               All prices exclude VAT.{" "}
               <Link href="/contact" className="link-underline text-bone/70">
@@ -389,7 +389,7 @@ function PlansCards({ currency, plans }: { currency: CurrencyCode; plans: Return
                       {price !== null ? (
                         <div className="flex flex-wrap items-end gap-2">
                           <span className="text-7xl font-medium tracking-[-0.05em]">{formatPrice(price, currency)}</span>
-                          <span className={`mb-2 text-md ${hi ? "text-ink/60" : "text-bone/40"}`}>/mo</span>
+                          <span className={`mb-2 text-md ${hi ? "text-ink/60" : "text-bone/55"}`}>/mo</span>
                           {period === "annual" && plan.monthly && (
                             <span className={`mb-2 text-sm line-through ${hi ? "text-ink/40" : "text-bone/30"}`}>
                               {formatPrice(plan.monthly, currency)}
@@ -402,7 +402,7 @@ function PlansCards({ currency, plans }: { currency: CurrencyCode; plans: Return
                     </motion.div>
                   </AnimatePresence>
                   {period === "annual" && price !== null && plan.monthly !== null && (
-                    <p className={`mt-2 text-xs ${hi ? "text-ink/60" : "text-bone/40"}`}>
+                    <p className={`mt-2 text-xs ${hi ? "text-ink/60" : "text-bone/55"}`}>
                       Billed annually — save {formatPrice((plan.monthly - plan.annual!) * 12, currency)}/yr
                     </p>
                   )}

@@ -1,10 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Restaurant Platform Onboarding — Zomato, Swiggy, ONDC, Deliveroo | Quadcydle",
-  description: "Get your restaurant listed and optimised on Zomato, Swiggy, ONDC, Deliveroo, Uber Eats, and more. Menu setup, photos, and ongoing management.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Zomato, Swiggy & ONDC Restaurant Onboarding | Quadcydle",
+  description:
+    "Get your restaurant listed and optimised on Zomato, Swiggy, ONDC, Deliveroo, Uber Eats, and more. Menu setup, photos, and ongoing management.",
+  path: "/services/restaurant-onboarding",
+});
 
 export default function RestaurantOnboardingPage() {
   return (

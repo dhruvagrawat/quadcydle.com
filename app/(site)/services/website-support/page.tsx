@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Website Support & Care Plans — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Website Support & Care Plans | Quadcydle",
   description:
     "Monthly website care plans covering updates, backups, security, content changes, and priority technical support.",
-};
+  path: "/services/website-support",
+});
 
 export default function WebsiteSupportPage() {
   return (

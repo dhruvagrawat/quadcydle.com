@@ -4,12 +4,14 @@ import { Parallax } from "../../../components/motion/parallax";
 import { Reveal } from "../../../components/motion/reveal";
 import { PageHero } from "../../../components/page-hero";
 import { caseStudies } from "../../../lib/site";
+import { pageMeta } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Work — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Case Studies & Client Results | Quadcydle",
   description:
-    "Real results for real businesses. How Quadcydle has helped companies grow their traffic, bookings and revenue.",
-};
+    "How Quadcydle has helped businesses grow organic traffic, bookings and revenue — the challenge, what we did and the results, project by project.",
+  path: "/casestudies",
+});
 
 export default function CaseStudies() {
   return (
@@ -35,7 +37,7 @@ export default function CaseStudies() {
                 <div className="relative grid gap-12 p-8 md:grid-cols-[1.1fr_1fr] md:gap-20 md:p-14">
                   <div>
                     <div className="mb-10 flex flex-wrap items-center gap-4">
-                      <span className="font-mono text-xs text-bone/40">
+                      <span className="font-mono text-xs text-bone/55">
                         {String(i + 1).padStart(2, "0")} / {String(caseStudies.length).padStart(2, "0")}
                       </span>
                       <span className="rounded-full border border-line px-3 py-1 text-xs text-bone/70">{study.tag}</span>

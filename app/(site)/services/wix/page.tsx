@@ -1,10 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Wix Design, Management & Migration — Quadcydle",
-  description: "Professional Wix website design, Velo development, SEO setup, and migration services.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Wix Design, Management & Migration | Quadcydle",
+  description:
+    "Professional Wix website design, SEO setup, ongoing management and migration to or from Wix. Design and launch packages from £499.",
+  path: "/services/wix",
+});
 
 export default function WixPage() {
   return (

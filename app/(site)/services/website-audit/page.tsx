@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Website Audit & Redesign Consultation — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Website Audit — Speed, SEO & UX Review | Quadcydle",
   description:
     "Comprehensive website audit covering SEO, performance, UX, accessibility, and security. Actionable recommendations to improve your site.",
-};
+  path: "/services/website-audit",
+});
 
 export default function WebsiteAuditPage() {
   return (

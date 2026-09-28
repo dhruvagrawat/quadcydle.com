@@ -1,10 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Restaurant App Development — Ordering, Menu & Reservations | Quadcydle",
-  description: "Custom restaurant app with online ordering, digital menu, table reservations, loyalty programs, and kitchen management — built for iOS & Android.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Restaurant Ordering App Development | Quadcydle",
+  description:
+    "Custom restaurant app with online ordering, digital menu, table reservations, loyalty programs, and kitchen management — built for iOS & Android.",
+  path: "/services/restaurant-app",
+});
 
 export default function RestaurantAppPage() {
   return (

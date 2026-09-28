@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Google Workspace Setup & Migration — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Google Workspace Setup & Migration | Quadcydle",
   description:
     "Professional Google Workspace setup, email migration, domain configuration, and ongoing admin support for your business.",
-};
+  path: "/services/google-workspace",
+});
 
 export default function GoogleWorkspacePage() {
   return (

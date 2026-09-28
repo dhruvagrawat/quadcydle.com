@@ -3,6 +3,9 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "how-much-does-a-website-cost",
   title: "How Much Does a Website Cost in 2026? An Honest Breakdown",
+  seoTitle: "How Much Does a Website Cost in 2026?",
+  seoDescription:
+    "Website costs from £499 to £5,000+ explained: what you get at each budget, where the money goes and the running costs to plan for after launch.",
   excerpt:
     "From a £499 Wix site to a £5,000+ custom build — what you actually get at each price point, the hidden costs nobody mentions, and how to pick the right budget for your business.",
   category: "Web Design",

@@ -3,6 +3,9 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "uptime-monitoring-for-small-business",
   title: "Uptime Monitoring: Why Small Businesses Should Know Their Site Is Down Before Customers Do",
+  seoTitle: "Uptime Monitoring for Small Businesses Explained",
+  seoDescription:
+    "What uptime monitoring and status pages are, why small businesses need them, and what it costs to find out your site is down before customers do.",
   excerpt:
     "Most small businesses find out their website is down from a customer. Uptime monitoring and a public status page fix that for less than the cost of a coffee a week.",
   category: "Hosting",

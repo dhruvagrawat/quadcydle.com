@@ -3,6 +3,7 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "website-launch-checklist",
   title: "The Website Launch Checklist: 30 Things to Check Before You Go Live",
+  seoTitle: "Website Launch Checklist: 30 Checks Before Go-Live",
   excerpt:
     "The exact list we run through before every launch — content, SEO, speed, forms, security, analytics and the redirects that protect your Google rankings.",
   category: "Web Design",

@@ -3,6 +3,9 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "restaurant-delivery-apps-guide",
   title: "Getting Your Restaurant on Zomato, Swiggy and ONDC — and When to Build Your Own App",
+  seoTitle: "Zomato, Swiggy & ONDC: A Restaurant Onboarding Guide",
+  seoDescription:
+    "How to get your restaurant on Zomato, Swiggy and ONDC — documents, menus and photos that sell — and when your own ordering app pays off.",
   excerpt:
     "Delivery platforms bring orders but take a big cut. A practical guide to onboarding, menus and photos that sell, and the point where your own ordering app starts paying off.",
   category: "Food & Hospitality",

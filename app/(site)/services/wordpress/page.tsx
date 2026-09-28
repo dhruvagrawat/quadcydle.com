@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "WordPress Development, Hosting & Support — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "WordPress Development & Support | Quadcydle",
   description:
-    "Expert WordPress services: custom theme development, plugin management, WP hosting, speed optimisation, and ongoing support.",
-};
+    "Custom WordPress themes, plugins, rebuilds and ongoing support — fast, secure sites your team can edit. Plans from £49/month.",
+  path: "/services/wordpress",
+});
 
 export default function WordPressPage() {
   return (

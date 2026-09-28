@@ -73,7 +73,7 @@ function Card({
         <div className="relative z-10 flex flex-col justify-between gap-10 p-8 md:p-12">
           <div>
             <div className="mb-8 flex items-center justify-between">
-              <span className="font-mono text-xs text-bone/40">
+              <span className="font-mono text-xs text-bone/55">
                 0{i + 1} / 0{total}
               </span>
               <span className="rounded-full border border-line px-3 py-1 text-xs text-bone/70">{study.tag}</span>

@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Data Recovery — Emails, Files & Old Accounts | Quadcydle",
   description:
     "We recover lost emails, files, and data from old accounts, deactivated services, and failed systems. Business data recovery specialists.",
-};
+  path: "/services/data-recovery",
+});
 
 export default function DataRecoveryPage() {
   return (

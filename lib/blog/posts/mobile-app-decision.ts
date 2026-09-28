@@ -3,6 +3,7 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "does-your-business-need-a-mobile-app",
   title: "Does Your Business Actually Need a Mobile App? Here's How to Decide",
+  seoTitle: "Does Your Business Need a Mobile App?",
   excerpt:
     "A mobile app can be a game-changer — or an expensive distraction. Here's a practical framework for deciding if now is the right time to build one.",
   category: "Mobile",

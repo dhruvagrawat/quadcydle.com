@@ -1,10 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Full-Stack App Hosting — Node, Python, Docker & More | Quadcydle",
-  description: "Managed cloud hosting for full-stack web applications. Node.js, Python, Docker, Go — deployed and managed on AWS or GCP.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Full-Stack App Hosting — Node, Python & Docker | Quadcydle",
+  description:
+    "Managed cloud hosting for full-stack web applications. Node.js, Python, Docker, Go — deployed and managed on AWS or GCP.",
+  path: "/services/fullstack-hosting",
+});
 
 export default function FullStackHostingPage() {
   return (

@@ -1,10 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Managed Web Hosting — Fast, Secure & Monitored | Quadcydle",
-  description: "Managed web hosting with 99.9% uptime, daily backups, SSL, CDN, and 24/7 monitoring.",
-};
+  description:
+    "Managed web hosting from £9/month: fast servers, SSL, daily backups, malware scanning and 24/7 uptime monitoring, with support from people who know your site.",
+  path: "/services/web-hosting",
+});
 
 export default function WebHostingPage() {
   return (

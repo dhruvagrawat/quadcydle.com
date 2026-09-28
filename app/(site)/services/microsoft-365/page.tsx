@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Microsoft 365 Setup & Migration — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Microsoft 365 Setup & Migration | Quadcydle",
   description:
     "Microsoft 365 setup, email migration, Exchange configuration, Teams setup, and ongoing admin support for your business.",
-};
+  path: "/services/microsoft-365",
+});
 
 export default function Microsoft365Page() {
   return (

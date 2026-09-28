@@ -3,6 +3,9 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "website-care-plans-explained",
   title: "Website Care Plans Explained: What's Included and Do You Need One?",
+  seoTitle: "Website Care Plans: What's Included & Do You Need One?",
+  seoDescription:
+    "What a website care plan covers — updates, backups, security, uptime checks and edits — what it should cost, and when to do it yourself.",
   excerpt:
     "Updates, backups, security, uptime checks and small edits — what a good website care plan covers, what it should cost, and how to tell if you're better off doing it yourself.",
   category: "Maintenance",

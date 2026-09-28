@@ -3,6 +3,9 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "how-to-choose-a-web-agency",
   title: "How to Choose a Web Agency: 12 Questions to Ask Before You Sign",
+  seoTitle: "How to Choose a Web Agency: 12 Questions to Ask",
+  seoDescription:
+    "Twelve questions to ask a web agency before you sign — ownership, process, pricing, support after launch and the red flags to watch for.",
   excerpt:
     "Portfolios all look good. These twelve questions reveal how an agency actually works — who owns what, what happens after launch, and whether they'll still answer the phone in a year.",
   category: "Agency",

@@ -1,10 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Mobile App Development — iOS & Android | Quadcydle",
-  description: "Cross-platform mobile app development with React Native. One codebase, two platforms, App Store and Google Play ready.",
-};
+  description:
+    "Cross-platform mobile app development with React Native. One codebase, two platforms, App Store and Google Play ready.",
+  path: "/services/mobile-app",
+});
 
 export default function MobileAppPage() {
   return (

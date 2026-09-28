@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "E-commerce Suite — Store + Custom Dashboard | Quadcydle",
   description:
     "Complete e-commerce solution: platform setup, custom storefront, payment integration, and a bespoke analytics dashboard for your business.",
-};
+  path: "/services/ecommerce",
+});
 
 export default function EcommercePage() {
   return (

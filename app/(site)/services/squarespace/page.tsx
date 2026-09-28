@@ -1,10 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Squarespace Design, SEO & Management — Quadcydle",
-  description: "Professional Squarespace website design, SEO configuration, CSS customisation, and ongoing management.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Squarespace Design, SEO & Management | Quadcydle",
+  description:
+    "Professional Squarespace website design, SEO configuration, CSS customisation, and ongoing management.",
+  path: "/services/squarespace",
+});
 
 export default function SquarespacePage() {
   return (

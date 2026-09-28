@@ -91,7 +91,7 @@ export const Footer = () => {
             </span>
             <div>
               <p className="text-md font-medium">{site.name}</p>
-              <p className="text-sm text-bone/40">{site.tagline}</p>
+              <p className="text-sm text-bone/55">{site.tagline}</p>
             </div>
           </div>
 
@@ -113,7 +113,7 @@ export const Footer = () => {
           </ul>
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-line py-6 text-xs text-bone/40 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-4 border-t border-line py-6 text-xs text-bone/55 md:flex-row md:items-center md:justify-between">
           <p>
             © {new Date().getFullYear()} {site.name}. All rights reserved.
           </p>

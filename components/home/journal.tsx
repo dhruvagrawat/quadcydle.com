@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { allPosts } from "../../lib/blog";
 import { RollText } from "../header";
+import { PostCover } from "../blog/post-cover";
 import { Reveal, SplitReveal } from "../motion/reveal";
 
 /** The three newest articles, linked from the homepage. */
@@ -31,15 +32,10 @@ export function JournalTeaser() {
                 className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-line bg-ink-50 transition-colors hover:border-bone/30"
               >
                 <div className="aspect-[16/10] overflow-hidden bg-ink-100">
-                  <img
-                    src={p.mainImage}
-                    alt=""
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-[1.2s] ease-expo group-hover:scale-105"
-                  />
+                  <PostCover post={p} size="sm" className="transition-transform duration-[1.2s] ease-expo group-hover:scale-105" />
                 </div>
                 <div className="flex flex-1 flex-col justify-between gap-6 p-8">
-                  <span className="font-mono text-xs uppercase tracking-widest text-bone/40">
+                  <span className="font-mono text-xs uppercase tracking-widest text-bone/55">
                     {p.category} · {p.readTime}
                   </span>
                   <span className="text-2xl font-medium leading-tight tracking-[-0.02em] transition-colors group-hover:text-ember md:text-3xl">

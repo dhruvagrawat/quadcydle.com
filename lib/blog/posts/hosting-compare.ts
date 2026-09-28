@@ -3,6 +3,9 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "managed-hosting-vs-shared-hosting",
   title: "Managed Hosting vs Cheap Shared Hosting: What £3 a Month Really Costs You",
+  seoTitle: "Managed vs Shared Hosting: What's the Difference?",
+  seoDescription:
+    "Shared hosting is cheap; managed hosting adds speed, backups, security and real support. What the difference costs you and which one you need.",
   excerpt:
     "Bargain hosting looks like a saving until your site goes down on a Saturday. Here's what the difference actually is — speed, security, support — and when each makes sense.",
   category: "Hosting",

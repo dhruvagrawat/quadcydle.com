@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Website Status Monitoring & Uptime Alerts — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Website Status Monitoring & Uptime Alerts | Quadcydle",
   description:
     "24/7 uptime monitoring, real-time alerts, performance tracking, and public status pages for your websites and applications.",
-};
+  path: "/services/status-monitoring",
+});
 
 export default function StatusMonitoringPage() {
   return (

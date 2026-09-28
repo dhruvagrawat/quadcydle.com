@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "App Design with Figma — UI/UX Design & Prototyping | Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "App Design in Figma — UI/UX & Prototyping | Quadcydle",
   description:
     "Professional UI/UX app design with Figma. Design systems, interactive prototypes, and developer-ready handoff.",
-};
+  path: "/services/app-design",
+});
 
 export default function AppDesignPage() {
   return (

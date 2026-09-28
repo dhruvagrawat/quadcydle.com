@@ -53,7 +53,7 @@ export function ArticleAside({ headings, url, title }: { headings: Heading[]; ur
                   onClick={go(h.id)}
                   className={classNames(
                     "-ml-px block border-l py-1.5 pl-4 text-sm leading-snug transition-colors",
-                    active === h.id ? "border-ember text-bone" : "border-transparent text-bone/45 hover:text-bone"
+                    active === h.id ? "border-ember text-bone" : "border-transparent text-bone/55 hover:text-bone"
                   )}
                 >
                   {h.text}

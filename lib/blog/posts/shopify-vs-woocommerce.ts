@@ -3,6 +3,7 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "shopify-vs-woocommerce",
   title: "Shopify vs WooCommerce: Which Platform is Right for Your Business?",
+  seoTitle: "Shopify vs WooCommerce: Which Is Right for You?",
   excerpt:
     "Two dominant e-commerce platforms, two very different approaches. Here's an honest comparison to help you pick the right one for your business.",
   category: "E-commerce",

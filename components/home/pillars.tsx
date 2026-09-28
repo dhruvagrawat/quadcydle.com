@@ -61,7 +61,7 @@ function PillarPanel({ pillar, progress, i }: { pillar: Pillar; progress: Motion
                 <span className="font-mono text-xs opacity-50">{String(n + 1).padStart(2, "0")}</span>
                 <span className="text-lg md:text-xl">{s.title}</span>
               </span>
-              <span className="relative hidden text-sm text-bone/40 transition-colors duration-500 group-hover:text-ink/70 xl:block">
+              <span className="relative hidden text-sm text-bone/55 transition-colors duration-500 group-hover:text-ink/70 xl:block">
                 {s.desc}
               </span>
             </Link>
@@ -138,11 +138,11 @@ export function Pillars() {
 
         {horizontal && (
           <div className="absolute inset-x-10 bottom-10 flex items-center gap-6">
-            <span className="font-mono text-xs text-bone/40">01</span>
+            <span className="font-mono text-xs text-bone/55">01</span>
             <div className="relative h-px flex-1 bg-line">
               <motion.div className="absolute inset-0 origin-left bg-ember" style={{ scaleX: bar }} />
             </div>
-            <span className="font-mono text-xs text-bone/40">04</span>
+            <span className="font-mono text-xs text-bone/55">04</span>
           </div>
         )}
       </div>

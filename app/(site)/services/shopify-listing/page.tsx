@@ -1,10 +1,13 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Shopify Product Listing & Catalog Management | Quadcydle",
-  description: "Shopify product setup, bulk catalog upload, SEO-optimised descriptions, collections management, and ongoing listing maintenance.",
-};
+  description:
+    "Shopify product setup, bulk catalog upload, SEO-optimised descriptions, collections management, and ongoing listing maintenance.",
+  path: "/services/shopify-listing",
+});
 
 export default function ShopifyListingPage() {
   return (

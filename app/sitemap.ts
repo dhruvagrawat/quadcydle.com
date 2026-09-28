@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 import { allPosts } from "../lib/blog";
 import { allServices } from "../lib/site";
-
-const SITE_URL = "https://quadcydle.com";
+import { SITE_URL } from "../lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages = ["", "/services", "/casestudies", "/pricing", "/about", "/blog", "/contact", "/support"];

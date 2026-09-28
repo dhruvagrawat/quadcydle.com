@@ -1,14 +1,15 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PostCover } from "../../../../components/blog/post-cover";
 import { ArticleAside } from "../../../../components/blog/toc";
 import { Parallax } from "../../../../components/motion/parallax";
 import { Reveal, SplitReveal } from "../../../../components/motion/reveal";
 import { allPosts, getPostBySlug, getRelatedPosts } from "../../../../lib/blog";
 import { prepareArticle } from "../../../../lib/blog/links";
+import { pageMeta, SITE_URL } from "../../../../lib/seo";
 import { pillars, site } from "../../../../lib/site";
 
-const SITE_URL = "https://quadcydle.com";
 
 export async function generateStaticParams() {
   return allPosts.map((post) => ({ slug: post.slug }));
@@ -17,18 +18,16 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const post = getPostBySlug(params.slug);
   if (!post) return {};
+  const meta = pageMeta({
+    title: `${post.seoTitle ?? post.title} | Quadcydle`,
+    description: post.seoDescription ?? post.excerpt,
+    path: `/blog/${post.slug}`,
+    type: "article",
+    image: `/blog/${post.slug}/og`,
+  });
   return {
-    title: `${post.title} — Quadcydle Journal`,
-    description: post.excerpt,
-    alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: {
-      type: "article",
-      title: post.title,
-      description: post.excerpt,
-      publishedTime: post.publishedAt,
-      images: [post.mainImage],
-      tags: post.tags,
-    },
+    ...meta,
+    openGraph: { ...meta.openGraph, type: "article", publishedTime: post.publishedAt, tags: post.tags },
   };
 }
 
@@ -65,9 +64,12 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         headline: post.title,
         description: post.excerpt,
         datePublished: post.publishedAt,
-        image: `${SITE_URL}${post.mainImage}`,
-        author: { "@type": "Organization", name: post.author.name },
-        publisher: { "@type": "Organization", name: site.name, url: SITE_URL },
+        dateModified: post.publishedAt,
+        image: `${url}/og`,
+        inLanguage: "en-GB",
+        articleSection: post.category,
+        author: { "@type": "Organization", name: post.author.name, url: `${SITE_URL}/about` },
+        publisher: { "@id": `${SITE_URL}/#organization`, "@type": "Organization", name: site.name, url: SITE_URL },
         mainEntityOfPage: url,
         keywords: post.tags.join(", "),
       },
@@ -111,7 +113,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       <div className="px-6 pb-16 md:px-10 md:pb-24">
         <Reveal className="mx-auto aspect-[16/9] max-w-site overflow-hidden rounded-[2.4rem] bg-ink-100 md:aspect-[2/1]">
           <Parallax speed={0.08} className="h-[116%] -translate-y-[8%]">
-            <img src={post.mainImage} alt="" className="h-full w-full object-cover" />
+            <PostCover post={post} size="lg" />
           </Parallax>
         </Reveal>
       </div>
@@ -145,7 +147,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                           <span className="h-2.5 w-2.5 rounded-full" style={{ background: s.pillar.color }} />
                           <span>
                             <span className="block text-lg transition-colors group-hover:text-ember">{s.title}</span>
-                            <span className="block text-sm text-bone/45">{s.desc}</span>
+                            <span className="block text-sm text-bone/55">{s.desc}</span>
                           </span>
                         </span>
                         <span className="transition-transform duration-500 ease-expo group-hover:translate-x-1" aria-hidden>
@@ -197,19 +199,14 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                   className="group flex flex-col overflow-hidden rounded-[2rem] border border-line bg-ink-50 transition-colors hover:border-bone/30"
                 >
                   <div className="aspect-[16/9] overflow-hidden bg-ink-100">
-                    <img
-                      src={r.mainImage}
-                      alt=""
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-[1.2s] ease-expo group-hover:scale-105"
-                    />
+                    <PostCover post={r} size="sm" className="transition-transform duration-[1.2s] ease-expo group-hover:scale-105" />
                   </div>
                   <div className="flex flex-1 flex-col justify-between gap-8 p-8">
-                    <span className="font-mono text-xs uppercase tracking-widest text-bone/40">{r.category}</span>
+                    <span className="font-mono text-xs uppercase tracking-widest text-bone/55">{r.category}</span>
                     <span className="text-2xl font-medium leading-tight tracking-[-0.02em] transition-colors group-hover:text-ember">
                       {r.title}
                     </span>
-                    <span className="text-sm text-bone/40">{r.readTime} →</span>
+                    <span className="text-sm text-bone/55">{r.readTime} →</span>
                   </div>
                 </Link>
               ))}

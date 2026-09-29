@@ -13,6 +13,15 @@ import carePlans from "./posts/care-plans";
 import amazonVsShopify from "./posts/amazon-vs-shopify";
 import restaurantOnboarding from "./posts/restaurant-onboarding";
 import uptimeMonitoring from "./posts/uptime-monitoring";
+import aiSeo from "./posts/ai-seo";
+import aiCrawlers from "./posts/ai-crawlers";
+import llmsTxt from "./posts/llms-txt";
+import aiReadable from "./posts/ai-readable";
+import redesignSeo from "./posts/redesign-seo";
+import buildersCompare from "./posts/builders-compare";
+import hackedSite from "./posts/hacked-site";
+import emailAuth from "./posts/email-auth";
+import gbpGuide from "./posts/gbp-guide";
 
 export const allPosts: BlogPost[] = [
   seoQuickWins,
@@ -29,6 +38,15 @@ export const allPosts: BlogPost[] = [
   amazonVsShopify,
   restaurantOnboarding,
   uptimeMonitoring,
+  aiSeo,
+  aiCrawlers,
+  llmsTxt,
+  aiReadable,
+  redesignSeo,
+  buildersCompare,
+  hackedSite,
+  emailAuth,
+  gbpGuide,
 ].sort(
   (a, b) =>
     new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()

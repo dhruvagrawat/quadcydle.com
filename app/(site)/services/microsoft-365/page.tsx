@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
 import { pageMeta } from "../../../../lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -12,6 +13,7 @@ export const metadata: Metadata = pageMeta({
 export default function Microsoft365Page() {
   return (
     <ServicePage
+      guides={guidesFor("/services/microsoft-365")}
       tag="Microsoft 365"
       accentColor="#0078d4"
       title="Microsoft 365 Configured for Your Business"

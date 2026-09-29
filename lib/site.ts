@@ -44,7 +44,8 @@ export type ServiceIconName =
   | "code" | "blocks" | "shopping-bag" | "layout-template" | "panels" | "smartphone" | "figma" | "shopping-cart"
   | "server" | "server-cog" | "boxes" | "activity" | "hard-drive"
   | "life-buoy" | "wrench" | "search-check" | "mail" | "building"
-  | "rocket" | "package" | "tags" | "utensils" | "bike";
+  | "rocket" | "package" | "tags" | "utensils" | "bike"
+  | "trending-up" | "sparkles" | "bot";
 
 /** `icon` picks the line icon shown in menus and lists (see components/brand/service-icon.tsx). */
 export type Service = { title: string; href: string; desc: string; icon: ServiceIconName };
@@ -112,6 +113,7 @@ export const pillars: Pillar[] = [
       { title: "Website Care Plans", href: "/services/website-support", desc: "Updates, fixes & backups", icon: "life-buoy" },
       { title: "App Support", href: "/services/app-support", desc: "Maintenance & releases", icon: "wrench" },
       { title: "Website Audit", href: "/services/website-audit", desc: "Speed, SEO & UX review", icon: "search-check" },
+      { title: "AI Readiness Audit", href: "/services/ai-readiness", desc: "How well AI can read your site", icon: "bot" },
       { title: "Google Workspace", href: "/services/google-workspace", desc: "Setup, migration & admin", icon: "mail" },
       { title: "Microsoft 365", href: "/services/microsoft-365", desc: "Setup, migration & support", icon: "building" },
     ],
@@ -122,9 +124,11 @@ export const pillars: Pillar[] = [
     title: "Grow",
     headline: "More customers, on every channel they use.",
     summary:
-      "Marketplace listings, food-delivery onboarding and launch packages that put you where your buyers already are.",
+      "SEO, AI search visibility, marketplace listings and launch packages that put you where your buyers already look — Google, ChatGPT, Amazon and the apps in between.",
     color: "#F4C8FF",
     services: [
+      { title: "SEO", href: "/services/seo", desc: "Technical, on-page & content SEO", icon: "trending-up" },
+      { title: "AI Search Optimisation", href: "/services/ai-seo", desc: "Get cited by ChatGPT & AI Overviews", icon: "sparkles" },
       { title: "Startup Builder", href: "/services/startup-builder", desc: "Everything to launch a business", icon: "rocket" },
       { title: "Amazon Listings", href: "/services/amazon-listing", desc: "Setup, optimisation & PPC", icon: "package" },
       { title: "Shopify Listings", href: "/services/shopify-listing", desc: "Catalogue & product ops", icon: "tags" },

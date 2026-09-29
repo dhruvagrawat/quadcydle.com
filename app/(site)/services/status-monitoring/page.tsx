@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
 import { pageMeta } from "../../../../lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -12,6 +13,7 @@ export const metadata: Metadata = pageMeta({
 export default function StatusMonitoringPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/status-monitoring")}
       tag="Status Monitoring"
       accentColor="#22c55e"
       title="Know the Moment Something Goes Wrong"

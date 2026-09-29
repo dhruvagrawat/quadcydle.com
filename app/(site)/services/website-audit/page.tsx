@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
 import { pageMeta } from "../../../../lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -12,6 +13,7 @@ export const metadata: Metadata = pageMeta({
 export default function WebsiteAuditPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/website-audit")}
       tag="Website Audit"
       accentColor="#eab308"
       title="Find Out What's Really Holding Your Site Back"

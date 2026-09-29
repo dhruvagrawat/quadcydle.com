@@ -21,7 +21,7 @@ import {
   Bug, Star, ArrowUpRight, FileText, Layers, Cpu, Cloud,
   Settings, Package, TrendingUp, AlertCircle, Eye, Gauge,
   CreditCard, Truck, FolderKanban, Brush, Link2, Palette, FileText as FileText2, Send, MessageSquare,
-  FolderOpen, KeyRound, CalendarCheck, BookOpen, Plug, Laptop,
+  FolderOpen, KeyRound, CalendarCheck, BookOpen, Plug, Laptop, Bot, Sparkles, BrainCircuit, FileCode2, MapPin, Quote,
 } from "lucide-react";
 
 // Map emoji/strings to Lucide icons for clean rendering
@@ -37,10 +37,11 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   "🐛": Bug, "🔔": AlertCircle, "💳": CreditCard, "🚚": Truck,
   "📦": Package, "🔭": Eye, "🗺️": Globe, "🔓": Lock,
   "🌍": Globe, "📄": FileText, "⏱️": Clock, "🤝": Users,
-  "🤖": Cpu, "🏢": Settings, "🔵": Server, "🧪": Gauge,
+  "🏢": Settings, "🔵": Server, "🧪": Gauge,
   "🌟": Star, "💡": Zap, "✏️": FileText, "🎯": Star,
   "🗂️": FolderKanban, "🖌️": Brush, "🔗": Link2, "🎭": Palette, "🛍️": ShoppingBag,
   "📝": FileText2, "📨": Send, "💬": MessageSquare, "📁": FolderOpen, "🔐": KeyRound,
+  "🤖": Bot, "🪄": Sparkles, "🧠": BrainCircuit, "🧾": FileCode2, "📍": MapPin, "💭": Quote,
   "🛠️": Wrench, "📅": CalendarCheck, "⭐": Star, "👥": Users, "🔌": Plug, "💻": Laptop, "📚": BookOpen,
 };
 
@@ -97,6 +98,8 @@ export interface ServicePageProps {
   faq?: FAQItem[];
   /** Optional extras listed under pricing. */
   addOns?: AddOn[];
+  /** Related journal articles (from guidesFor() in lib/blog/guides.ts). */
+  guides?: { title: string; href: string; category: string; readTime: string }[];
   ctaTitle?: string;
   ctaSubtitle?: string;
   ctaHref?: string;
@@ -244,6 +247,7 @@ export function ServicePage({
   pricing,
   faq,
   addOns,
+  guides,
   ctaTitle = "Ready to get started?",
   ctaSubtitle = "Let's talk about your project. We'll put together a tailored plan and quote within 48 hours.",
   ctaHref = "/contact",
@@ -544,6 +548,39 @@ export function ServicePage({
             <Reveal>
               <FAQAccordion items={faq} accent={accentColor} />
             </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* ─── GUIDES ───────────────────────────────────────────────────── */}
+      {guides && guides.length > 0 && (
+        <section className="border-t border-line px-6 py-24 md:px-10 md:py-32">
+          <div className="mx-auto max-w-site">
+            <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+              <SectionTitle eyebrow="Guides" title={"Read before\nyou *decide.*"} />
+              <Link href="/blog" className="group inline-flex items-center gap-3 text-md text-bone/70 hover:text-bone">
+                <RollText>All articles</RollText> <span aria-hidden>→</span>
+              </Link>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {guides.map((g, i) => (
+                <Reveal key={g.href} delay={i * 0.06} className="h-full">
+                  <Link
+                    href={g.href}
+                    className="group flex h-full flex-col justify-between gap-10 rounded-[2rem] border border-line bg-ink-50 p-8 transition-colors hover:border-bone/30"
+                  >
+                    <span className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-bone/55">
+                      {g.category}
+                      <span>{g.readTime}</span>
+                    </span>
+                    <span className="text-2xl font-medium leading-tight tracking-[-0.02em] transition-colors group-hover:text-ember">
+                      {g.title}
+                    </span>
+                    <span className="text-sm" style={{ color: accentColor }}>Read the guide →</span>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
       )}

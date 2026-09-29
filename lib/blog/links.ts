@@ -8,6 +8,9 @@
  */
 export const autoLinks: { phrase: string; href: string }[] = [
   // Services
+  { phrase: "AI search optimisation", href: "/services/ai-seo" },
+  { phrase: "AI SEO", href: "/services/ai-seo" },
+  { phrase: "AI readiness", href: "/services/ai-readiness" },
   { phrase: "WordPress hosting", href: "/services/wordpress-hosting" },
   { phrase: "managed hosting", href: "/services/web-hosting" },
   { phrase: "uptime monitoring", href: "/services/status-monitoring" },
@@ -21,6 +24,7 @@ export const autoLinks: { phrase: string; href: string }[] = [
   { phrase: "Next.js", href: "/services/custom-web" },
   { phrase: "custom web application", href: "/services/custom-web" },
   { phrase: "Squarespace", href: "/services/squarespace" },
+  { phrase: "Wix vs", href: "/blog/wix-vs-squarespace-vs-wordpress" },
   { phrase: "Wix", href: "/services/wix" },
   { phrase: "Shopify", href: "/services/shopify" },
   { phrase: "WordPress", href: "/services/wordpress" },
@@ -32,6 +36,17 @@ export const autoLinks: { phrase: string; href: string }[] = [
   { phrase: "data recovery", href: "/services/data-recovery" },
   { phrase: "backups", href: "/services/web-hosting" },
   // Articles
+  { phrase: "AI Overviews", href: "/blog/what-is-ai-seo" },
+  { phrase: "llms.txt", href: "/blog/llms-txt-explained" },
+  { phrase: "AI crawlers", href: "/blog/should-you-block-ai-crawlers" },
+  { phrase: "GPTBot", href: "/blog/should-you-block-ai-crawlers" },
+  { phrase: "301 redirect", href: "/blog/website-redesign-without-losing-seo" },
+  { phrase: "redesign", href: "/blog/website-redesign-without-losing-seo" },
+  { phrase: "DMARC", href: "/blog/spf-dkim-dmarc-explained" },
+  { phrase: "spam folder", href: "/blog/spf-dkim-dmarc-explained" },
+  { phrase: "Google Business Profile", href: "/blog/google-business-profile-guide" },
+  { phrase: "hacked", href: "/blog/hacked-website-what-to-do" },
+  { phrase: "malware", href: "/blog/hacked-website-what-to-do" },
   { phrase: "page speed", href: "/blog/website-speed-costing-customers" },
   { phrase: "Core Web Vitals", href: "/blog/website-speed-costing-customers" },
   { phrase: "WooCommerce", href: "/blog/shopify-vs-woocommerce" },
@@ -51,6 +66,7 @@ export const autoLinks: { phrase: string; href: string }[] = [
   { phrase: "Amazon", href: "/blog/amazon-vs-your-own-shopify-store" },
   { phrase: "budget", href: "/blog/how-much-does-a-website-cost" },
   { phrase: "agency", href: "/blog/how-to-choose-a-web-agency" },
+  { phrase: "SEO", href: "/services/seo" },
 ];
 
 /** Never add more than this many automatic links to one article. */
@@ -91,7 +107,7 @@ export function prepareArticle(html: string, selfHref: string) {
     if (added >= MAX_AUTO_LINKS) break;
     if (linked.has(rule.href)) continue;
     const re = new RegExp(`\\b(${escape(rule.phrase)})\\b`, "i");
-    // Walk the HTML as alternating tags / text, tracking whether we're inside a link or heading.
+    // Walk the HTML as alternating tags / text, tracking whether we're inside a link, heading or code.
     const parts = out.split(/(<[^>]+>)/);
     let depthA = 0;
     let depthH = 0;
@@ -101,8 +117,8 @@ export function prepareArticle(html: string, selfHref: string) {
       if (part.startsWith("<")) {
         if (/^<a[\s>]/i.test(part)) depthA++;
         else if (/^<\/a>/i.test(part)) depthA--;
-        else if (/^<h[1-6][\s>]/i.test(part)) depthH++;
-        else if (/^<\/h[1-6]>/i.test(part)) depthH--;
+        else if (/^<(h[1-6]|pre|code)[\s>]/i.test(part)) depthH++;
+        else if (/^<\/(h[1-6]|pre|code)>/i.test(part)) depthH--;
         continue;
       }
       if (depthA || depthH || !re.test(part)) continue;

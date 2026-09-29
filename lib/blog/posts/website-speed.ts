@@ -16,7 +16,7 @@ const post: BlogPost = {
   mainImage: "/blog/blog-02.png",
   publishedAt: "2025-05-20",
   readTime: "7 min read",
-  services: ["/services/website-audit", "/services/web-hosting"],
+  services: ["/services/seo", "/services/website-audit", "/services/web-hosting"],
   featured: true,
   content: `
 <p>Google's own research shows that 53% of mobile site visits are abandoned when pages take more than 3 seconds to load. For an e-commerce site doing £10,000/month in revenue, even a 1-second delay in load time can cost you hundreds of pounds every month in lost conversions.</p>

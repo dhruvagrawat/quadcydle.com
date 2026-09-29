@@ -1,7 +1,7 @@
-import { Calculator, Eye, Gauge, SearchCheck } from "lucide-react";
+import { Bot, Calculator, Eye, Gauge, SearchCheck } from "lucide-react";
 import type { Tool } from "../../lib/tools/list";
 
-const icons = { gauge: Gauge, search: SearchCheck, eye: Eye, calculator: Calculator };
+const icons = { gauge: Gauge, search: SearchCheck, eye: Eye, calculator: Calculator, bot: Bot };
 
 export function ToolIcon({ name, size = 22, className }: { name: Tool["icon"]; size?: number; className?: string }) {
   const Icon = icons[name];

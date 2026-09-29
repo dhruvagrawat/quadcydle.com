@@ -11,6 +11,8 @@ const colors: Record<string, string> = {
   "Business Tools": "#F4C8FF",
   Mobile: "#7C9CFF",
   WordPress: "#C9F24B",
+  "AI Search": "#F4C8FF",
+  Security: "#FF5A1F",
 };
 
 export const categoryColor = (category: string) => colors[category] ?? "#FF5A1F";

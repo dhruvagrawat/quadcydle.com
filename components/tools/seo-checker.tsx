@@ -1,19 +1,12 @@
 "use client";
 
-import classNames from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
 import type { Check, SeoReport } from "../../lib/tools/seo-analyze";
+import { CheckList, StatusCounts } from "./check-list";
 import { ScoreRing } from "./score-ring";
 import { UrlForm } from "./url-form";
-
-const badge: Record<Check["status"], { label: string; cls: string; dot: string }> = {
-  pass: { label: "Good", cls: "text-lime", dot: "#C9F24B" },
-  warn: { label: "Improve", cls: "text-[#FFB020]", dot: "#FFB020" },
-  fail: { label: "Fix", cls: "text-ember", dot: "#FF5A1F" },
-  info: { label: "Info", cls: "text-bone/60", dot: "rgba(237,234,227,0.4)" },
-};
 
 const GROUPS: Check["group"][] = ["Content", "Technical", "Social", "Performance"];
 
@@ -21,7 +14,6 @@ export function SeoChecker() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [report, setReport] = useState<SeoReport | null>(null);
-  const [onlyIssues, setOnlyIssues] = useState(false);
 
   const run = async (url: string) => {
     setLoading(true);
@@ -37,10 +29,6 @@ export function SeoChecker() {
     }
     setLoading(false);
   };
-
-  const counts = report
-    ? (["fail", "warn", "pass"] as const).map((s) => ({ s, n: report.checks.filter((c) => c.status === s).length }))
-    : [];
 
   return (
     <div>
@@ -67,49 +55,11 @@ export function SeoChecker() {
                 <p className="mt-2 text-sm text-bone/55">
                   HTTP {report.status} · {report.ms.toLocaleString("en-GB")} ms · {report.kb} KB HTML
                 </p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  {counts.map(({ s, n }) => (
-                    <span key={s} className="flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm">
-                      <span className="h-2 w-2 rounded-full" style={{ background: badge[s].dot }} />
-                      {n} {s === "fail" ? "to fix" : s === "warn" ? "to improve" : "passed"}
-                    </span>
-                  ))}
-                </div>
+                <StatusCounts checks={report.checks} />
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <h2 className="text-4xl font-medium tracking-[-0.03em]">Checks</h2>
-              <label className="flex cursor-pointer items-center gap-3 text-sm text-bone/70">
-                <input type="checkbox" checked={onlyIssues} onChange={(e) => setOnlyIssues(e.target.checked)} className="h-4 w-4 accent-[#FF5A1F]" />
-                Show issues only
-              </label>
-            </div>
-
-            {GROUPS.map((g) => {
-              const items = report.checks.filter((c) => c.group === g && (!onlyIssues || c.status === "fail" || c.status === "warn"));
-              if (!items.length) return null;
-              return (
-                <section key={g}>
-                  <p className="eyebrow mb-4">{g}</p>
-                  <ul className="border-t border-line">
-                    {items.map((c) => (
-                      <li key={c.id} className="grid gap-2 border-b border-line py-5 md:grid-cols-[16rem_1fr_auto] md:items-baseline md:gap-8">
-                        <span className="flex items-center gap-3 text-lg">
-                          <span className="h-2.5 w-2.5 shrink-0 rounded-full" style={{ background: badge[c.status].dot }} />
-                          {c.label}
-                        </span>
-                        <span>
-                          <span className="block break-words text-md text-bone/85">{c.value}</span>
-                          {c.advice && <span className="mt-1 block text-sm leading-relaxed text-bone/55">{c.advice}</span>}
-                        </span>
-                        <span className={classNames("font-mono text-xs uppercase tracking-widest", badge[c.status].cls)}>{badge[c.status].label}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              );
-            })}
+            <CheckList checks={report.checks} groups={GROUPS} />
 
             <section className="grid gap-10 md:grid-cols-2">
               <div>

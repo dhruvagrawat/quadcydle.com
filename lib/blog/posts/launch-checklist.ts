@@ -12,7 +12,7 @@ const post: BlogPost = {
   mainImage: "/blog/blog-small-01.png",
   publishedAt: "2026-08-21",
   readTime: "9 min read",
-  services: ["/services/website-audit", "/services/web-hosting", "/services/status-monitoring"],
+  services: ["/services/seo", "/services/website-audit", "/services/web-hosting", "/services/status-monitoring"],
   content: `
 <p>Launch day problems are almost always preventable. A broken contact form, a missing redirect, a staging site that Google indexed — each one is a five-minute fix beforehand and a painful week afterwards. Here's the checklist we use on every project. Copy it, adapt it, and tick it off.</p>
 

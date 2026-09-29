@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
 import { pageMeta } from "../../../../lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -12,6 +13,7 @@ export const metadata: Metadata = pageMeta({
 export default function WebsiteSupportPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/website-support")}
       tag="Website Support"
       accentColor="#6366f1"
       title="Your Website, Always in Good Hands"

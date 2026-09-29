@@ -20,7 +20,7 @@ export function ToolsStrip() {
             <RollText>All tools</RollText> <span aria-hidden>→</span>
           </Link>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {tools.map((t, i) => (
             <Reveal key={t.slug} delay={i * 0.06} className="h-full">
               <Link

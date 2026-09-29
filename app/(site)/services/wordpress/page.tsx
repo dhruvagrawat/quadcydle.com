@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
 import { pageMeta } from "../../../../lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -12,6 +13,7 @@ export const metadata: Metadata = pageMeta({
 export default function WordPressPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/wordpress")}
       tag="WordPress Services"
       accentColor="#3858e9"
       title="WordPress Done Right"

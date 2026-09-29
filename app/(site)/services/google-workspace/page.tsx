@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
 import { pageMeta } from "../../../../lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -12,6 +13,7 @@ export const metadata: Metadata = pageMeta({
 export default function GoogleWorkspacePage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/google-workspace")}
       tag="Google Workspace"
       accentColor="#ea4335"
       title="Google Workspace Set Up Properly"

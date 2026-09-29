@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
 import { pageMeta } from "../../../../lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -12,6 +13,7 @@ export const metadata: Metadata = pageMeta({
 export default function ShopifyListingPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/shopify-listing")}
       tag="Shopify Listing"
       accentColor="#96bf48"
       title="Shopify Catalog Setup That Sells"

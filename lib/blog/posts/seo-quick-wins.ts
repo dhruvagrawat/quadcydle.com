@@ -18,7 +18,7 @@ const post: BlogPost = {
   mainImage: "/blog/blog-01.png",
   publishedAt: "2025-06-01",
   readTime: "6 min read",
-  services: ["/services/website-audit", "/services/wordpress"],
+  services: ["/services/seo", "/services/website-audit", "/services/wordpress"],
   featured: true,
   content: `
 <p>Search engine optimisation doesn't have to mean months of work and a big budget. Many of the highest-impact SEO improvements are things you can do yourself, in a single afternoon. Here are ten that work.</p>

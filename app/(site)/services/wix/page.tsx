@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
 import { pageMeta } from "../../../../lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -12,6 +13,7 @@ export const metadata: Metadata = pageMeta({
 export default function WixPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/wix")}
       tag="Wix Services"
       accentColor="#0c6efc"
       title="Professional Wix That Means Business"

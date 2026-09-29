@@ -1,5 +1,5 @@
 import {
-  Activity, Bike, Blocks, Boxes, Building2, Code2, Figma, HardDriveDownload, LayoutTemplate, LifeBuoy, Mail,
+  Activity, Bike, Blocks, Bot, Sparkles, TrendingUp, Boxes, Building2, Code2, Figma, HardDriveDownload, LayoutTemplate, LifeBuoy, Mail,
   Package, PanelsTopLeft, Rocket, SearchCheck, Server, ServerCog, ShoppingBag, ShoppingCart, Smartphone, Tags,
   UtensilsCrossed, Wrench,
 } from "lucide-react";
@@ -29,6 +29,9 @@ const icons: Record<ServiceIconName, typeof Code2> = {
   tags: Tags,
   utensils: UtensilsCrossed,
   bike: Bike,
+  "trending-up": TrendingUp,
+  sparkles: Sparkles,
+  bot: Bot,
 };
 
 export function ServiceIcon({ name, size = 18, className }: { name: ServiceIconName; size?: number; className?: string }) {

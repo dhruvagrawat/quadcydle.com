@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
 import { pageMeta } from "../../../../lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -74,6 +75,7 @@ const addOns = [
 export default function StartupBuilderPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/startup-builder")}
       tag="Startup Builder Package"
       accentColor="#F4C8FF"
       title="Everything to launch your startup"

@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
 import { pageMeta } from "../../../../lib/seo";
 
 export const metadata: Metadata = pageMeta({
@@ -12,6 +13,7 @@ export const metadata: Metadata = pageMeta({
 export default function RestaurantAppPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/restaurant-app")}
       tag="Restaurant Technology"
       accentColor="#f97316"
       title="Your Restaurant's Own App — Not Someone Else's Platform"

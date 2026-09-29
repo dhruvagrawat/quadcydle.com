@@ -4,6 +4,12 @@ import { site } from "./site";
 export const SITE_URL = "https://quadcydle.com";
 
 /**
+ * Date the site's pages last changed meaningfully. Shown as <lastmod> in the
+ * sitemap so Google knows to recrawl — bump it when you make real content changes.
+ */
+export const SITE_UPDATED = "2026-09-29";
+
+/**
  * Standard metadata for a page: title, description, canonical URL and
  * matching Open Graph / Twitter tags, so shared links preview the right page.
  */

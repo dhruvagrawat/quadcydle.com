@@ -53,16 +53,20 @@ export const organizationJsonLd = {
       "@id": `${SITE_URL}/#organization`,
       name: site.name,
       url: SITE_URL,
-      logo: `${SITE_URL}/icon.png`,
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/icon.png`, width: 512, height: 512 },
+      image: `${SITE_URL}/icon.png`,
       email: site.email,
       description: site.description,
       sameAs: site.socials.map((s) => s.href).filter((h) => h.startsWith("http")),
     },
     {
+      // Google reads the site name shown above search results from this
+      // WebSite entry on the homepage (name + alternateName).
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
-      url: SITE_URL,
+      url: `${SITE_URL}/`,
       name: site.name,
+      alternateName: [`${site.name} Digital Studio`, "quadcydle.com"],
       publisher: { "@id": `${SITE_URL}/#organization` },
       inLanguage: "en-GB",
     },

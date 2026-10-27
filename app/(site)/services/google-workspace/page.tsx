@@ -1,20 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Google Workspace Setup & Migration — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Google Workspace Setup & Migration | Quadcydle",
   description:
     "Professional Google Workspace setup, email migration, domain configuration, and ongoing admin support for your business.",
-};
+  path: "/services/google-workspace",
+});
 
 export default function GoogleWorkspacePage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/google-workspace")}
       tag="Google Workspace"
       accentColor="#ea4335"
       title="Google Workspace Set Up Properly"
       subtitle="Gmail, Drive, Meet, Calendar, and Admin Console — we configure your entire Google Workspace environment correctly and migrate your existing data without losing a single email."
-      heroImage="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1400&q=80"
       stats={[
         { value: "Zero", label: "email downtime during migration" },
         { value: "< 48h", label: "full setup & go-live" },

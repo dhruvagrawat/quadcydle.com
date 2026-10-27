@@ -3,6 +3,9 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "10-seo-quick-wins",
   title: "10 SEO Quick Wins Any Business Can Implement This Week",
+  seoTitle: "10 SEO Quick Wins for Small Businesses",
+  seoDescription:
+    "Ten practical SEO fixes you can make this week — titles, meta descriptions, image compression, internal links and more. Most take under an hour.",
   excerpt:
     "You don't need a massive budget to improve your search rankings. Here are ten actionable changes that make a real difference to your organic traffic — most take under an hour.",
   category: "SEO",
@@ -15,6 +18,7 @@ const post: BlogPost = {
   mainImage: "/blog/blog-01.png",
   publishedAt: "2025-06-01",
   readTime: "6 min read",
+  services: ["/services/seo", "/services/website-audit", "/services/wordpress"],
   featured: true,
   content: `
 <p>Search engine optimisation doesn't have to mean months of work and a big budget. Many of the highest-impact SEO improvements are things you can do yourself, in a single afternoon. Here are ten that work.</p>

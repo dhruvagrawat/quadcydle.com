@@ -3,6 +3,7 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "shopify-vs-woocommerce",
   title: "Shopify vs WooCommerce: Which Platform is Right for Your Business?",
+  seoTitle: "Shopify vs WooCommerce: Which Is Right for You?",
   excerpt:
     "Two dominant e-commerce platforms, two very different approaches. Here's an honest comparison to help you pick the right one for your business.",
   category: "E-commerce",
@@ -15,6 +16,7 @@ const post: BlogPost = {
   mainImage: "/blog/blog-03.png",
   publishedAt: "2025-05-10",
   readTime: "8 min read",
+  services: ["/services/shopify", "/services/wordpress", "/services/ecommerce"],
   featured: false,
   content: `
 <p>When it comes to selling products online, Shopify and WooCommerce dominate the conversation. Both are excellent platforms — but they're built on completely different philosophies, and choosing the wrong one for your situation can cost you significantly in time, money, and headaches.</p>

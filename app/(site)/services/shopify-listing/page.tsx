@@ -1,19 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Shopify Product Listing & Catalog Management | Quadcydle",
-  description: "Shopify product setup, bulk catalog upload, SEO-optimised descriptions, collections management, and ongoing listing maintenance.",
-};
+  description:
+    "Shopify product setup, bulk catalog upload, SEO-optimised descriptions, collections management, and ongoing listing maintenance.",
+  path: "/services/shopify-listing",
+});
 
 export default function ShopifyListingPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/shopify-listing")}
       tag="Shopify Listing"
       accentColor="#96bf48"
       title="Shopify Catalog Setup That Sells"
       subtitle="Product listings that look great, load fast, and rank on Google. From bulk catalog import to ongoing variant management — we handle the work behind your store."
-      heroImage="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=80"
       stats={[
         { value: "48h", label: "bulk upload turnaround" },
         { value: "SEO", label: "optimised product descriptions" },

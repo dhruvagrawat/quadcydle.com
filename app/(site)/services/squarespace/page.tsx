@@ -1,19 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Squarespace Design, SEO & Management — Quadcydle",
-  description: "Professional Squarespace website design, SEO configuration, CSS customisation, and ongoing management.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Squarespace Design, SEO & Management | Quadcydle",
+  description:
+    "Professional Squarespace website design, SEO configuration, CSS customisation, and ongoing management.",
+  path: "/services/squarespace",
+});
 
 export default function SquarespacePage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/squarespace")}
       tag="Squarespace Services"
       accentColor="#e0e0e0"
       title="Beautiful Squarespace Sites That Rank"
       subtitle="Squarespace looks great out of the box — but with expert design, CSS customisation, and proper SEO setup, it becomes a real business asset."
-      heroImage="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=1400&q=80"
       stats={[
         { value: "4M+", label: "live Squarespace websites" },
         { value: "Top 10", label: "website builder worldwide" },

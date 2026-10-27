@@ -1,20 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "WordPress Development, Hosting & Support — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "WordPress Development & Support | Quadcydle",
   description:
-    "Expert WordPress services: custom theme development, plugin management, WP hosting, speed optimisation, and ongoing support.",
-};
+    "Custom WordPress themes, plugins, rebuilds and ongoing support — fast, secure sites your team can edit. Plans from £49/month.",
+  path: "/services/wordpress",
+});
 
 export default function WordPressPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/wordpress")}
       tag="WordPress Services"
       accentColor="#3858e9"
       title="WordPress Done Right"
       subtitle="From a fresh install to a complex multisite — we handle every aspect of your WordPress site so you can focus on your business, not your CMS."
-      heroImage="https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=1400&q=80"
       stats={[
         { value: "43%", label: "of all websites run WordPress" },
         { value: "99.9%", label: "uptime guaranteed" },

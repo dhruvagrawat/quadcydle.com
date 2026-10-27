@@ -1,19 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Wix Design, Management & Migration — Quadcydle",
-  description: "Professional Wix website design, Velo development, SEO setup, and migration services.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Wix Design, Management & Migration | Quadcydle",
+  description:
+    "Professional Wix website design, SEO setup, ongoing management and migration to or from Wix. Design and launch packages from £499.",
+  path: "/services/wix",
+});
 
 export default function WixPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/wix")}
       tag="Wix Services"
       accentColor="#0c6efc"
       title="Professional Wix That Means Business"
       subtitle="Wix can do far more than most people realise. We unlock its full potential with custom design, Velo development, and serious SEO — so your site actually performs."
-      heroImage="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=1400&q=80"
       stats={[
         { value: "2%", label: "of all websites use Wix" },
         { value: "200M+", label: "registered Wix users" },

@@ -1,16 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
+import { SITE_URL } from "../../lib/seo";
 import { pillars } from "../../lib/site";
 import { RollText } from "../header";
 import { Counter } from "../motion/counter";
 import { useIntroDone } from "../motion/intro";
 import { Magnetic } from "../motion/magnetic";
 import { EASE, Reveal, SplitReveal } from "../motion/reveal";
+import { ServiceVisual } from "./service-visual";
+import { ServiceIcon } from "../brand/service-icon";
 import {
   Globe, ShoppingBag, Layout, Code2, Server, Database,
   Smartphone, Figma, Headphones, Mail, Shield, HardDrive,
@@ -18,7 +20,8 @@ import {
   CheckCircle2, Users, Lock, BarChart3, RefreshCw, Wrench,
   Bug, Star, ArrowUpRight, FileText, Layers, Cpu, Cloud,
   Settings, Package, TrendingUp, AlertCircle, Eye, Gauge,
-  CreditCard, Truck,
+  CreditCard, Truck, FolderKanban, Brush, Link2, Palette, FileText as FileText2, Send, MessageSquare,
+  FolderOpen, KeyRound, CalendarCheck, BookOpen, Plug, Laptop, Bot, Sparkles, BrainCircuit, FileCode2, MapPin, Quote,
 } from "lucide-react";
 
 // Map emoji/strings to Lucide icons for clean rendering
@@ -34,8 +37,12 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   "🐛": Bug, "🔔": AlertCircle, "💳": CreditCard, "🚚": Truck,
   "📦": Package, "🔭": Eye, "🗺️": Globe, "🔓": Lock,
   "🌍": Globe, "📄": FileText, "⏱️": Clock, "🤝": Users,
-  "🤖": Cpu, "🏢": Settings, "🔵": Server, "🧪": Gauge,
+  "🏢": Settings, "🔵": Server, "🧪": Gauge,
   "🌟": Star, "💡": Zap, "✏️": FileText, "🎯": Star,
+  "🗂️": FolderKanban, "🖌️": Brush, "🔗": Link2, "🎭": Palette, "🛍️": ShoppingBag,
+  "📝": FileText2, "📨": Send, "💬": MessageSquare, "📁": FolderOpen, "🔐": KeyRound,
+  "🤖": Bot, "🪄": Sparkles, "🧠": BrainCircuit, "🧾": FileCode2, "📍": MapPin, "💭": Quote,
+  "🛠️": Wrench, "📅": CalendarCheck, "⭐": Star, "👥": Users, "🔌": Plug, "💻": Laptop, "📚": BookOpen,
 };
 
 export interface PricingTier {
@@ -83,7 +90,6 @@ export interface ServicePageProps {
   accentColor?: string;
   title: string;
   subtitle: string;
-  heroImage?: string;
   stats?: StatItem[];
   features: Feature[];
   process?: ProcessStep[];
@@ -92,10 +98,17 @@ export interface ServicePageProps {
   faq?: FAQItem[];
   /** Optional extras listed under pricing. */
   addOns?: AddOn[];
+  /** Related journal articles (from guidesFor() in lib/blog/guides.ts). */
+  guides?: { title: string; href: string; category: string; readTime: string }[];
   ctaTitle?: string;
   ctaSubtitle?: string;
   ctaHref?: string;
   ctaLabel?: string;
+}
+
+function EmojiIcon({ emoji, size = 18 }: { emoji: string; size?: number }) {
+  const Icon = iconMap[emoji] ?? Zap;
+  return <Icon size={size} strokeWidth={1.5} />;
 }
 
 function FeatureCard({ feature, accent, index }: { feature: Feature; accent: string; index: number }) {
@@ -227,7 +240,6 @@ export function ServicePage({
   accentColor = "#FF5A1F",
   title,
   subtitle,
-  heroImage,
   stats,
   features,
   process,
@@ -235,6 +247,7 @@ export function ServicePage({
   pricing,
   faq,
   addOns,
+  guides,
   ctaTitle = "Ready to get started?",
   ctaSubtitle = "Let's talk about your project. We'll put together a tailored plan and quote within 48 hours.",
   ctaHref = "/contact",
@@ -244,19 +257,54 @@ export function ServicePage({
   const pathname = usePathname();
   const pillar = pillars.find((p) => p.services.some((s) => s.href === pathname));
   const related = pillar?.services.filter((s) => s.href !== pathname) ?? [];
+  const service = pillar?.services.find((s) => s.href === pathname);
 
   const imageRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: imageRef, offset: ["start end", "end start"] });
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.25, 1]);
-  const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
   const clip = useTransform(scrollYProgress, [0, 0.35], ["inset(8% 6% 8% 6% round 32px)", "inset(0% 0% 0% 0% round 24px)"]);
+
+  // Structured data describing exactly what's visible on this page.
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        name: tag,
+        serviceType: tag,
+        description: subtitle,
+        url: `${SITE_URL}${pathname}`,
+        provider: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "Quadcydle", url: SITE_URL },
+        ...(pricing?.some((t) => typeof t.price === "number") && {
+          offers: pricing
+            .filter((t) => typeof t.price === "number")
+            .map((t) => ({
+              "@type": "Offer",
+              name: t.name,
+              description: t.description,
+              price: t.price,
+              priceCurrency: "GBP",
+              ...(t.period && { priceSpecification: { "@type": "UnitPriceSpecification", price: t.price, priceCurrency: "GBP", unitText: t.period === "mo" ? "MONTH" : t.period } }),
+            })),
+        }),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Services", item: `${SITE_URL}/services` },
+          { "@type": "ListItem", position: 2, name: tag, item: `${SITE_URL}${pathname}` },
+        ],
+      },
+    ],
+  };
 
   return (
     <div className="text-bone">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* ─── HERO ─────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden px-6 pb-16 pt-[calc(var(--navigation-height)+6rem)] md:px-10 md:pb-24 md:pt-[calc(var(--navigation-height)+10rem)]">
         <div
-          className="pointer-events-none absolute -right-[10%] -top-[25%] h-[70vh] w-[70vh] rounded-full opacity-20 blur-[14rem]"
+          className="pointer-events-none absolute -right-[10%] -top-[25%] h-[70vh] w-[70vh] rounded-full opacity-20 blur-[7rem] md:blur-[14rem]"
           style={{ background: accentColor }}
         />
         <div className="relative mx-auto max-w-site">
@@ -322,24 +370,24 @@ export function ServicePage({
         </div>
       </section>
 
-      {/* ─── HERO IMAGE (parallax) ─────────────────────────────────────── */}
-      {heroImage && (
-        <section className="px-6 md:px-10">
-          <motion.div
-            ref={imageRef}
-            style={{ clipPath: clip }}
-            className="relative mx-auto aspect-[4/3] max-w-site overflow-hidden bg-ink-100 md:aspect-[21/9]"
-          >
-            <motion.div className="absolute inset-0" style={{ scale: imageScale, y: imageY }}>
-              <Image src={heroImage} alt="" fill sizes="100vw" className="object-cover" priority />
-            </motion.div>
-            <div
-              className="absolute inset-0 mix-blend-multiply"
-              style={{ background: `linear-gradient(to top, #0A0A0B 0%, transparent 60%), ${accentColor}22` }}
+      {/* ─── HERO VISUAL (parallax) ────────────────────────────────────── */}
+      <section className="px-6 md:px-10">
+        <motion.div
+          ref={imageRef}
+          style={{ clipPath: clip }}
+          className="relative mx-auto aspect-[4/3] max-w-site overflow-hidden rounded-[2.4rem] border border-line sm:aspect-[16/9] md:aspect-[21/9]"
+        >
+          <motion.div className="absolute inset-0" style={{ y: imageY }}>
+            <ServiceVisual
+              service={service}
+              pillar={pillar}
+              accent={accentColor}
+              features={features}
+              renderIcon={(e) => <EmojiIcon emoji={e} size={16} />}
             />
           </motion.div>
-        </section>
-      )}
+        </motion.div>
+      </section>
 
       {/* ─── STATS ────────────────────────────────────────────────────── */}
       {stats && stats.length > 0 && (
@@ -420,7 +468,7 @@ export function ServicePage({
                         {typeof tier.price === "number" ? `£${tier.price.toLocaleString("en-GB")}` : tier.price}
                       </span>
                       {tier.period && (
-                        <span className={`mb-2 text-md ${tier.highlighted ? "text-ink/60" : "text-bone/40"}`}>/{tier.period}</span>
+                        <span className={`mb-2 text-md ${tier.highlighted ? "text-ink/60" : "text-bone/55"}`}>/{tier.period}</span>
                       )}
                     </div>
 
@@ -474,7 +522,7 @@ export function ServicePage({
                 </ul>
               </div>
             )}
-            <p className="mt-8 text-sm text-bone/40">
+            <p className="mt-8 text-sm text-bone/55">
               All prices exclude VAT.{" "}
               <Link href="/contact" className="link-underline text-bone/70">
                 Need something custom? Talk to us.
@@ -500,6 +548,39 @@ export function ServicePage({
             <Reveal>
               <FAQAccordion items={faq} accent={accentColor} />
             </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* ─── GUIDES ───────────────────────────────────────────────────── */}
+      {guides && guides.length > 0 && (
+        <section className="border-t border-line px-6 py-24 md:px-10 md:py-32">
+          <div className="mx-auto max-w-site">
+            <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+              <SectionTitle eyebrow="Guides" title={"Read before\nyou *decide.*"} />
+              <Link href="/blog" className="group inline-flex items-center gap-3 text-md text-bone/70 hover:text-bone">
+                <RollText>All articles</RollText> <span aria-hidden>→</span>
+              </Link>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {guides.map((g, i) => (
+                <Reveal key={g.href} delay={i * 0.06} className="h-full">
+                  <Link
+                    href={g.href}
+                    className="group flex h-full flex-col justify-between gap-10 rounded-[2rem] border border-line bg-ink-50 p-8 transition-colors hover:border-bone/30"
+                  >
+                    <span className="flex items-center justify-between font-mono text-xs uppercase tracking-widest text-bone/55">
+                      {g.category}
+                      <span>{g.readTime}</span>
+                    </span>
+                    <span className="text-2xl font-medium leading-tight tracking-[-0.02em] transition-colors group-hover:text-ember">
+                      {g.title}
+                    </span>
+                    <span className="text-sm" style={{ color: accentColor }}>Read the guide →</span>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
       )}
@@ -540,6 +621,7 @@ export function ServicePage({
                     href={s.href}
                     className="group inline-flex items-center gap-3 rounded-full border border-line px-6 py-3 text-md text-bone/70 transition-colors hover:border-bone/40 hover:text-bone"
                   >
+                    <ServiceIcon name={s.icon} size={16} className="text-bone/55" />
                     <RollText>{s.title}</RollText>
                     <span aria-hidden style={{ color: pillar.color }}>↗</span>
                   </Link>

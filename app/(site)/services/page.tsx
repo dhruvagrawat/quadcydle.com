@@ -3,12 +3,14 @@ import Link from "next/link";
 import { PageHero } from "../../../components/page-hero";
 import { ServicesExplorer } from "../../../components/services/explorer";
 import { allServices, pillars } from "../../../lib/site";
+import { pageMeta } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Services — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Services: Web Design, Hosting, Support & Growth | Quadcydle",
   description:
-    "Websites, stores and apps; hosting and monitoring; workspace and care plans; marketplaces and launch packages. Every service Quadcydle offers, in four pillars.",
-};
+    "Websites, stores and apps; managed hosting and monitoring; care plans and workspace setup; marketplaces and launch packages — every Quadcydle service.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

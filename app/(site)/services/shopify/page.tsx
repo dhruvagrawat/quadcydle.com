@@ -1,20 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Shopify Development & Store Setup — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Shopify Development & Store Setup | Quadcydle",
   description:
     "Custom Shopify store development, theme builds, app integration, and ongoing optimisation. We build Shopify stores that convert.",
-};
+  path: "/services/shopify",
+});
 
 export default function ShopifyPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/shopify")}
       tag="Shopify Development"
       accentColor="#96bf48"
       title="Shopify Stores That Actually Sell"
       subtitle="From a brand-new store to enterprise Shopify Plus — we design, build, and optimise Shopify experiences that convert browsers into buyers."
-      heroImage="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=80"
       stats={[
         { value: "4.6M+", label: "stores powered by Shopify" },
         { value: "2×", label: "higher CVR with custom themes" },

@@ -5,6 +5,8 @@ import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motio
 import Link from "next/link";
 import { useState } from "react";
 import { pillars, type Pillar } from "../../lib/site";
+import { PillarArt } from "../brand/pillar-art";
+import { ServiceIcon } from "../brand/service-icon";
 import { Reveal } from "../motion/reveal";
 
 type Hovered = { title: string; desc: string; pillar: Pillar } | null;
@@ -65,7 +67,8 @@ export function ServicesExplorer() {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="scroll-mt-32"
             >
-              <Reveal className="mb-10 grid gap-6 border-b border-line pb-10 md:grid-cols-[1fr_1.4fr] md:items-end">
+              <Reveal className="mb-10 grid gap-6 border-b border-line pb-10 md:grid-cols-[auto_1fr_1.4fr] md:items-end md:gap-10">
+                <PillarArt id={pillar.id} color={pillar.color} className="hidden h-40 w-auto md:block" />
                 <div className="flex items-baseline gap-5">
                   <span className="font-mono text-sm" style={{ color: pillar.color }}>
                     {pillar.index}
@@ -92,9 +95,9 @@ export function ServicesExplorer() {
                         className="absolute inset-0 origin-bottom scale-y-0 transition-transform duration-700 ease-expo group-hover:scale-y-100"
                         style={{ background: pillar.color }}
                       />
-                      <span className="relative flex items-baseline gap-6 transition-[transform,color] duration-700 ease-expo group-hover:translate-x-6 group-hover:text-ink">
-                        <span className="hidden font-mono text-xs opacity-40 md:inline">
-                          {String(i + 1).padStart(2, "0")}
+                      <span className="relative flex items-center gap-6 transition-[transform,color] duration-700 ease-expo group-hover:translate-x-6 group-hover:text-ink">
+                        <span className="hidden h-14 w-14 shrink-0 translate-y-[-0.4rem] items-center justify-center self-center rounded-full border border-bone/20 opacity-80 group-hover:border-ink/30 md:flex">
+                          <ServiceIcon name={s.icon} size={22} />
                         </span>
                         <span className="text-4xl font-medium tracking-[-0.03em] md:text-6xl">{s.title}</span>
                       </span>

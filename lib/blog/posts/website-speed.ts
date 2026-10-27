@@ -3,6 +3,7 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "website-speed-costing-customers",
   title: "Why Your Website's Load Speed Is Costing You Customers",
+  seoTitle: "How a Slow Website Costs You Customers",
   excerpt:
     "53% of mobile users abandon a site that takes more than 3 seconds to load. Here's what's slowing your site down — and exactly how to fix it.",
   category: "Web Performance",
@@ -15,6 +16,7 @@ const post: BlogPost = {
   mainImage: "/blog/blog-02.png",
   publishedAt: "2025-05-20",
   readTime: "7 min read",
+  services: ["/services/seo", "/services/website-audit", "/services/web-hosting"],
   featured: true,
   content: `
 <p>Google's own research shows that 53% of mobile site visits are abandoned when pages take more than 3 seconds to load. For an e-commerce site doing £10,000/month in revenue, even a 1-second delay in load time can cost you hundreds of pounds every month in lost conversions.</p>

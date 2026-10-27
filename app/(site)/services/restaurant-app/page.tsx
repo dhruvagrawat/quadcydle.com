@@ -1,19 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Restaurant App Development — Ordering, Menu & Reservations | Quadcydle",
-  description: "Custom restaurant app with online ordering, digital menu, table reservations, loyalty programs, and kitchen management — built for iOS & Android.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Restaurant Ordering App Development | Quadcydle",
+  description:
+    "Custom restaurant app with online ordering, digital menu, table reservations, loyalty programs, and kitchen management — built for iOS & Android.",
+  path: "/services/restaurant-app",
+});
 
 export default function RestaurantAppPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/restaurant-app")}
       tag="Restaurant Technology"
       accentColor="#f97316"
       title="Your Restaurant's Own App — Not Someone Else's Platform"
       subtitle="Stop paying commission to aggregators. We build your own branded iOS and Android app with online ordering, digital menu, table reservations, and loyalty rewards."
-      heroImage="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80"
       stats={[
         { value: "0%", label: "commission — your orders, your revenue" },
         { value: "iOS + Android", label: "from one React Native codebase" },

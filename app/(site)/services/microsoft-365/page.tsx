@@ -1,20 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Microsoft 365 Setup & Migration — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Microsoft 365 Setup & Migration | Quadcydle",
   description:
     "Microsoft 365 setup, email migration, Exchange configuration, Teams setup, and ongoing admin support for your business.",
-};
+  path: "/services/microsoft-365",
+});
 
 export default function Microsoft365Page() {
   return (
     <ServicePage
+      guides={guidesFor("/services/microsoft-365")}
       tag="Microsoft 365"
       accentColor="#0078d4"
       title="Microsoft 365 Configured for Your Business"
       subtitle="Outlook, Teams, SharePoint, OneDrive, Exchange — we set up and migrate your entire Microsoft 365 environment so your team is productive from day one."
-      heroImage="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1400&q=80"
       stats={[
         { value: "Zero", label: "email downtime during cutover" },
         { value: "< 48h", label: "full tenant setup time" },

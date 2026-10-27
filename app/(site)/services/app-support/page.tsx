@@ -1,20 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "App Support & Maintenance Plans — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "App Support & Maintenance Plans | Quadcydle",
   description:
     "Ongoing mobile app support: OS updates, bug fixes, performance monitoring, and new feature development. Keep your app healthy.",
-};
+  path: "/services/app-support",
+});
 
 export default function AppSupportPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/app-support")}
       tag="App Support"
       accentColor="#14b8a6"
       title="Keep Your App Healthy & Up to Date"
       subtitle="Operating systems update, libraries deprecate, and bugs surface. Our app support plans keep your iOS and Android app running smoothly long after launch."
-      heroImage="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1400&q=80"
       stats={[
         { value: "< 48h", label: "bug response time" },
         { value: "2× / year", label: "major OS updates handled" },

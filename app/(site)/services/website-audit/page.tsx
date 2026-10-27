@@ -1,20 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Website Audit & Redesign Consultation — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Website Audit — Speed, SEO & UX Review | Quadcydle",
   description:
     "Comprehensive website audit covering SEO, performance, UX, accessibility, and security. Actionable recommendations to improve your site.",
-};
+  path: "/services/website-audit",
+});
 
 export default function WebsiteAuditPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/website-audit")}
       tag="Website Audit"
       accentColor="#eab308"
       title="Find Out What's Really Holding Your Site Back"
       subtitle="A comprehensive audit covering SEO, page speed, UX, accessibility, and security — with a prioritised action plan you can actually use."
-      heroImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&q=80"
       stats={[
         { value: "5 areas", label: "SEO, perf, UX, a11y, security" },
         { value: "5 days", label: "Quick Audit turnaround" },

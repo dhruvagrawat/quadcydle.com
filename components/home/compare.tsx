@@ -35,7 +35,7 @@ export function Compare() {
                 <Strike key={w.role} i={i} progress={scrollYProgress} role={w.role} pain={w.pain} />
               ))}
             </ul>
-            <p className="mt-8 text-sm text-bone/40">4 invoices · 4 logins · 4 people blaming each other</p>
+            <p className="mt-8 text-sm text-bone/55">4 invoices · 4 logins · 4 people blaming each other</p>
           </div>
 
           <Reveal className="relative overflow-hidden rounded-[2.4rem] bg-ember p-8 text-ink md:p-12">

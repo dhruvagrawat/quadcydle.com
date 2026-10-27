@@ -1,19 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Amazon Listing Optimisation & Management | Quadcydle",
-  description: "Amazon seller setup, product listing optimisation, A+ content, PPC ads management, and ongoing account management. Rank higher, sell more.",
-};
+  description:
+    "Amazon seller setup, product listing optimisation, A+ content, PPC ads management, and ongoing account management. Rank higher, sell more.",
+  path: "/services/amazon-listing",
+});
 
 export default function AmazonListingPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/amazon-listing")}
       tag="Amazon Listing"
       accentColor="#FF9900"
       title="Amazon Listings That Actually Rank and Convert"
       subtitle="Seller account setup, keyword-rich listings, A+ content, and PPC campaign management — everything you need to compete on Amazon and win."
-      heroImage="https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?w=1400&q=80"
       stats={[
         { value: "3×", label: "avg organic rank improvement" },
         { value: "A10", label: "Amazon algorithm optimised" },

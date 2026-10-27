@@ -22,7 +22,7 @@ export function Preloader() {
     }
     document.documentElement.style.overflow = "hidden";
     const controls = animate(0, 100, {
-      duration: 2.2,
+      duration: 1.1,
       ease: [0.65, 0, 0.35, 1],
       onUpdate: (v) => {
         if (countRef.current) countRef.current.textContent = String(Math.round(v)).padStart(3, "0");
@@ -36,7 +36,7 @@ export function Preloader() {
           setVisible(false);
           document.documentElement.style.overflow = "";
           markIntroDone();
-        }, 250);
+        }, 100);
       },
     });
     return () => {

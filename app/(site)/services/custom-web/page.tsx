@@ -1,19 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Custom Web Development — React, Next.js & Full-Stack | Quadcydle",
-  description: "Custom web application development with React, Next.js, Node.js, and more.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Custom Web Development — React & Next.js | Quadcydle",
+  description:
+    "Custom websites and web applications built with React and Next.js — fast, secure, SEO-ready and designed around your business. Brochure sites from £1,499.",
+  path: "/services/custom-web",
+});
 
 export default function CustomWebPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/custom-web")}
       tag="Custom Development"
       accentColor="#7c3aed"
       title="Custom Web Applications Built to Last"
       subtitle="When off-the-shelf platforms aren't enough, we build bespoke. React frontends, Node.js APIs, PostgreSQL databases — architected properly from day one."
-      heroImage="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1400&q=80"
       stats={[
         { value: "5+", label: "years shipping web apps" },
         { value: "99%", label: "on-time delivery rate" },

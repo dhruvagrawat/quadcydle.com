@@ -22,7 +22,7 @@ export function PageHero({
   const play = useIntroDone();
   return (
     <section className="relative overflow-hidden px-6 pb-20 pt-[calc(var(--navigation-height)+8rem)] md:px-10 md:pb-28 md:pt-[calc(var(--navigation-height)+12rem)]">
-      <div className="pointer-events-none absolute -right-[15%] -top-[30%] h-[70vh] w-[70vh] rounded-full bg-ember/15 blur-[14rem]" />
+      <div className="pointer-events-none absolute -right-[15%] -top-[30%] h-[70vh] w-[70vh] rounded-full bg-ember/15 blur-[7rem] md:blur-[14rem]" />
       <div className="relative mx-auto max-w-site">
         <motion.p
           className="eyebrow mb-10 flex items-center gap-3"

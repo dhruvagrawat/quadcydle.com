@@ -33,6 +33,17 @@ Each service's detail page is `app/(site)/services/<slug>/page.tsx`, which passe
 - **Motion** — reusable pieces in `components/motion/`: `SplitReveal`, `Reveal`, `ScrollText`, `Parallax`, `Marquee`, `Magnetic`, `Counter`, the custom `Cursor` (add `data-cursor="Label"` to any element), `Preloader` (first visit per session) and `SmoothScroll`.
 - Everything respects `prefers-reduced-motion`.
 
+## Free tools (`/tools`)
+
+| Tool | How it works |
+| --- | --- |
+| Website Speed Test | Calls Google PageSpeed Insights from the visitor's browser (`components/tools/speed-test.tsx`) |
+| SEO Checker | Our API route `app/api/seo-check` fetches the page server-side (with SSRF protection in `lib/server/safe-fetch.ts`) and analyses it (`lib/tools/seo-analyze.ts`) |
+| Google & Social Preview | Runs entirely in the browser |
+| Website Cost Calculator | Runs in the browser; prices live at the top of `components/tools/cost-calculator.tsx` — keep them in line with the service pages |
+
+**Recommended:** create a free PageSpeed Insights API key (Google Cloud Console → APIs & Services → enable "PageSpeed Insights API" → Credentials → API key, restricted to HTTP referrer `quadcydle.com/*`) and set it as the environment variable `NEXT_PUBLIC_PAGESPEED_API_KEY` in your hosting project. Without it the speed test uses Google's shared anonymous quota, which is often exhausted.
+
 ## Forms
 
 The contact and support forms have no backend yet: submitting opens the visitor's email app with a pre-filled brief addressed to `site.email`. To collect submissions server-side, swap the `submit` handler in `components/contact-form.tsx` / `components/support-form.tsx` for a POST to your form service or an API route.

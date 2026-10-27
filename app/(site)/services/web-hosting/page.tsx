@@ -1,19 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Managed Web Hosting — Fast, Secure & Monitored | Quadcydle",
-  description: "Managed web hosting with 99.9% uptime, daily backups, SSL, CDN, and 24/7 monitoring.",
-};
+  description:
+    "Managed web hosting from £9/month: fast servers, SSL, daily backups, malware scanning and 24/7 uptime monitoring, with support from people who know your site.",
+  path: "/services/web-hosting",
+});
 
 export default function WebHostingPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/web-hosting")}
       tag="Managed Hosting"
       accentColor="#06b6d4"
       title="Hosting That Just Works"
       subtitle="Fast NVMe servers, free SSL, daily backups, CDN, and 24/7 monitoring — without the complexity of managing it yourself."
-      heroImage="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=80"
       stats={[
         { value: "99.9%", label: "uptime SLA" },
         { value: "< 1 min", label: "downtime detection" },

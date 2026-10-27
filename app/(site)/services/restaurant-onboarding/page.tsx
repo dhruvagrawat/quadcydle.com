@@ -1,19 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Restaurant Platform Onboarding — Zomato, Swiggy, ONDC, Deliveroo | Quadcydle",
-  description: "Get your restaurant listed and optimised on Zomato, Swiggy, ONDC, Deliveroo, Uber Eats, and more. Menu setup, photos, and ongoing management.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Zomato, Swiggy & ONDC Restaurant Onboarding | Quadcydle",
+  description:
+    "Get your restaurant listed and optimised on Zomato, Swiggy, ONDC, Deliveroo, Uber Eats, and more. Menu setup, photos, and ongoing management.",
+  path: "/services/restaurant-onboarding",
+});
 
 export default function RestaurantOnboardingPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/restaurant-onboarding")}
       tag="Platform Onboarding"
       accentColor="#ef4444"
       title="Get Your Restaurant on Every Major Platform"
       subtitle="We handle the complete onboarding for Zomato, Swiggy, ONDC, Deliveroo, Uber Eats, and more — menu photography brief, listing optimisation, and ongoing account management."
-      heroImage="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&q=80"
       stats={[
         { value: "6+", label: "platforms we onboard to" },
         { value: "48h", label: "go-live after document submission" },

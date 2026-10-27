@@ -3,6 +3,7 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "does-your-business-need-a-mobile-app",
   title: "Does Your Business Actually Need a Mobile App? Here's How to Decide",
+  seoTitle: "Does Your Business Need a Mobile App?",
   excerpt:
     "A mobile app can be a game-changer — or an expensive distraction. Here's a practical framework for deciding if now is the right time to build one.",
   category: "Mobile",
@@ -15,6 +16,7 @@ const post: BlogPost = {
   mainImage: "/blog/blog-01.png",
   publishedAt: "2025-04-15",
   readTime: "6 min read",
+  services: ["/services/mobile-app", "/services/app-design"],
   featured: false,
   content: `
 <p>Every few months, a business owner asks us: "Should we build an app?" Sometimes the answer is a clear yes. Often, the honest answer is "not yet." Here's how we think through it.</p>

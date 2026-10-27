@@ -1,20 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Data Recovery — Emails, Files & Old Accounts | Quadcydle",
   description:
     "We recover lost emails, files, and data from old accounts, deactivated services, and failed systems. Business data recovery specialists.",
-};
+  path: "/services/data-recovery",
+});
 
 export default function DataRecoveryPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/data-recovery")}
       tag="Data Recovery"
       accentColor="#d97706"
       title="Get Your Data Back"
       subtitle="Lost access to an old email account? Files deleted from hosting? Business data locked in a deactivated service? We specialise in recovering what others say is gone."
-      heroImage="https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1400&q=80"
       stats={[
         { value: "90%+", label: "data recovery success rate" },
         { value: "30–90", label: "days providers retain data after closure" },

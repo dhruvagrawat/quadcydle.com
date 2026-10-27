@@ -3,6 +3,7 @@ import { BlogPost } from "../../../types/blog";
 const post: BlogPost = {
   slug: "google-workspace-vs-microsoft-365",
   title: "Google Workspace vs Microsoft 365: Which is Better for Small Businesses?",
+  seoTitle: "Google Workspace vs Microsoft 365: Which to Choose",
   excerpt:
     "Both offer professional email, cloud storage, and collaboration tools — but they're very different products. Here's how to choose the right one for your team.",
   category: "Business Tools",
@@ -15,6 +16,7 @@ const post: BlogPost = {
   mainImage: "/blog/blog-04.png",
   publishedAt: "2025-04-28",
   readTime: "7 min read",
+  services: ["/services/google-workspace", "/services/microsoft-365"],
   featured: false,
   content: `
 <p>Every growing business eventually needs to move away from free personal email accounts to a proper business email solution. The two dominant options are Google Workspace and Microsoft 365 — and the right choice depends on how your team works.</p>

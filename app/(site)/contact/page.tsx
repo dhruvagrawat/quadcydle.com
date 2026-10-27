@@ -3,11 +3,14 @@ import { Suspense } from "react";
 import { ContactForm } from "../../../components/contact-form";
 import { PageHero } from "../../../components/page-hero";
 import { site } from "../../../lib/site";
+import { pageMeta } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Start a project — Quadcydle",
-  description: `Tell us about your project. We reply within ${site.replyTime} with ideas and a no-obligation quote.`,
-};
+export const metadata: Metadata = pageMeta({
+  title: "Contact Quadcydle | Get a Website or App Quote",
+  description:
+    "Tell us about your website, store or app project. We reply within 1 business day and send a written quote within 48 hours.",
+  path: "/contact",
+});
 
 export default function Contact() {
   return (

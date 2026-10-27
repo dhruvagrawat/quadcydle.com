@@ -4,6 +4,8 @@ import { motion, useScroll, useSpring, useTransform, type MotionValue } from "fr
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { pillars, type Pillar } from "../../lib/site";
+import { PillarArt } from "../brand/pillar-art";
+import { ServiceIcon } from "../brand/service-icon";
 import { SplitReveal } from "../motion/reveal";
 
 function PillarPanel({ pillar, progress, i }: { pillar: Pillar; progress: MotionValue<number>; i: number }) {
@@ -18,7 +20,7 @@ function PillarPanel({ pillar, progress, i }: { pillar: Pillar; progress: Motion
       <motion.div
         aria-hidden
         style={{ x: glowX, background: pillar.color }}
-        className="pointer-events-none absolute -bottom-60 -left-20 h-[46rem] w-[46rem] rounded-full opacity-20 blur-[12rem]"
+        className="pointer-events-none absolute -bottom-60 -left-20 hidden h-[46rem] w-[46rem] rounded-full opacity-20 blur-[12rem] md:block"
       />
 
       <div className="relative flex flex-col justify-between gap-10">
@@ -29,6 +31,7 @@ function PillarPanel({ pillar, progress, i }: { pillar: Pillar; progress: Motion
           </p>
           <h3 className="text-display font-medium tracking-[-0.06em]">{pillar.title}</h3>
         </div>
+        <PillarArt id={pillar.id} color={pillar.color} className="-my-6 hidden max-h-[24vh] w-auto self-start lg:block" />
         <div>
           <p className="max-w-[48rem] text-3xl font-medium leading-tight tracking-[-0.02em] md:text-4xl">
             {pillar.headline}
@@ -58,10 +61,10 @@ function PillarPanel({ pillar, progress, i }: { pillar: Pillar; progress: Motion
                 style={{ background: pillar.color }}
               />
               <span className="relative flex items-baseline gap-4 transition-[color,transform] duration-500 ease-expo group-hover:translate-x-3 group-hover:text-ink">
-                <span className="font-mono text-xs opacity-50">{String(n + 1).padStart(2, "0")}</span>
+                <ServiceIcon name={s.icon} size={18} className="translate-y-0.5 opacity-70" />
                 <span className="text-lg md:text-xl">{s.title}</span>
               </span>
-              <span className="relative hidden text-sm text-bone/40 transition-colors duration-500 group-hover:text-ink/70 xl:block">
+              <span className="relative hidden text-sm text-bone/55 transition-colors duration-500 group-hover:text-ink/70 xl:block">
                 {s.desc}
               </span>
             </Link>
@@ -138,11 +141,11 @@ export function Pillars() {
 
         {horizontal && (
           <div className="absolute inset-x-10 bottom-10 flex items-center gap-6">
-            <span className="font-mono text-xs text-bone/40">01</span>
+            <span className="font-mono text-xs text-bone/55">01</span>
             <div className="relative h-px flex-1 bg-line">
               <motion.div className="absolute inset-0 origin-left bg-ember" style={{ scaleX: bar }} />
             </div>
-            <span className="font-mono text-xs text-bone/40">04</span>
+            <span className="font-mono text-xs text-bone/55">04</span>
           </div>
         )}
       </div>

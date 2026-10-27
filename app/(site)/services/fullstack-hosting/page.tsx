@@ -1,19 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Full-Stack App Hosting — Node, Python, Docker & More | Quadcydle",
-  description: "Managed cloud hosting for full-stack web applications. Node.js, Python, Docker, Go — deployed and managed on AWS or GCP.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Full-Stack App Hosting — Node, Python & Docker | Quadcydle",
+  description:
+    "Managed cloud hosting for full-stack web applications. Node.js, Python, Docker, Go — deployed and managed on AWS or GCP.",
+  path: "/services/fullstack-hosting",
+});
 
 export default function FullStackHostingPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/fullstack-hosting")}
       tag="Full-Stack Hosting"
       accentColor="#f59e0b"
       title="Cloud Hosting for Real Applications"
       subtitle="Node.js, Python, Docker, Go, Ruby — we deploy and manage your full-stack application on AWS or GCP with proper CI/CD, monitoring, and scaling."
-      heroImage="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=1400&q=80"
       stats={[
         { value: "AWS", label: "& GCP certified engineers" },
         { value: "< 30s", label: "deployment time with CI/CD" },

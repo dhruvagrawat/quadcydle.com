@@ -1,20 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Website Support & Care Plans — Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "Website Support & Care Plans | Quadcydle",
   description:
     "Monthly website care plans covering updates, backups, security, content changes, and priority technical support.",
-};
+  path: "/services/website-support",
+});
 
 export default function WebsiteSupportPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/website-support")}
       tag="Website Support"
       accentColor="#6366f1"
       title="Your Website, Always in Good Hands"
       subtitle="Monthly care plans that keep your website fast, secure, up to date, and ready for whatever you throw at it — without you having to think about it."
-      heroImage="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&q=80"
       stats={[
         { value: "24/7", label: "uptime monitoring" },
         { value: "Daily", label: "offsite backups" },

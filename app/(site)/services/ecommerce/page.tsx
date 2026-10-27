@@ -1,20 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "E-commerce Suite — Store + Custom Dashboard | Quadcydle",
   description:
     "Complete e-commerce solution: platform setup, custom storefront, payment integration, and a bespoke analytics dashboard for your business.",
-};
+  path: "/services/ecommerce",
+});
 
 export default function EcommercePage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/ecommerce")}
       tag="E-commerce Suite"
       accentColor="#10b981"
       title="An Online Store That Works as Hard as You Do"
       subtitle="Custom storefront design, payment integration, inventory management, and a bespoke analytics dashboard — everything you need to sell online at scale."
-      heroImage="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1400&q=80"
       stats={[
         { value: "2×", label: "avg conversion rate improvement" },
         { value: "4–6 wk", label: "store build & launch time" },

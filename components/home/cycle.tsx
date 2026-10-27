@@ -3,7 +3,7 @@
 import { motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useRef, useState } from "react";
 import { process } from "../../lib/site";
-import { EASE } from "../motion/reveal";
+import { EASE, Reveal } from "../motion/reveal";
 
 const COLORS = ["#FF5A1F", "#7C9CFF", "#C9F24B", "#F4C8FF"];
 
@@ -35,7 +35,7 @@ function Segment({ i, progress }: { i: number; progress: MotionValue<number> }) 
 
 /** The engagement process as a ring that completes itself as you scroll. */
 export function Cycle() {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
   const spin = useTransform(scrollYProgress, [0, 1], [0, 90]);
@@ -45,7 +45,33 @@ export function Cycle() {
   });
 
   return (
-    <section ref={ref} className="relative bg-bone text-ink" style={{ height: `${process.length * 80 + 40}vh` }}>
+    <section className="relative bg-bone text-ink">
+      {/* Phones: a plain list — no pinning, so scrolling never feels stuck. */}
+      <div className="px-6 py-24 md:hidden">
+        <p className="eyebrow mb-8 !text-ink/50">(03) — How we work</p>
+        <h2 className="text-display-sm font-medium tracking-[-0.045em]">
+          The <span className="font-serif font-normal italic">quad</span> cycle.
+        </h2>
+        <ol className="mt-12 border-t border-ink/10">
+          {process.map((step, i) => (
+            <Reveal as="li" key={step.title} className="flex gap-6 border-b border-ink/10 py-8">
+              <span
+                className="mt-2 h-4 w-4 shrink-0 rounded-full"
+                style={{ background: COLORS[i] }}
+                aria-hidden
+              />
+              <div>
+                <p className="font-mono text-xs text-ink/50">Step 0{i + 1}</p>
+                <h3 className="mt-1 text-5xl font-medium tracking-[-0.04em]">{step.title}</h3>
+                <p className="mt-3 text-md leading-relaxed text-ink/70">{step.body}</p>
+              </div>
+            </Reveal>
+          ))}
+        </ol>
+      </div>
+
+      {/* Tablets and up: the pinned ring that completes as you scroll. */}
+      <div ref={ref} className="relative hidden md:block" style={{ height: `${process.length * 80 + 40}vh` }}>
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <div className="mx-auto grid w-full max-w-site gap-10 px-6 md:grid-cols-2 md:items-center md:px-10">
           <div>
@@ -99,6 +125,7 @@ export function Cycle() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

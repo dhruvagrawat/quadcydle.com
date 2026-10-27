@@ -1,19 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Managed WordPress Hosting — Optimised WP Infrastructure | Quadcydle",
-  description: "WordPress hosting optimised for speed and reliability. Managed updates, staging, daily backups, and expert support.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Managed WordPress Hosting | Quadcydle",
+  description:
+    "WordPress hosting optimised for speed and reliability. Managed updates, staging, daily backups, and expert support.",
+  path: "/services/wordpress-hosting",
+});
 
 export default function WordPressHostingPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/wordpress-hosting")}
       tag="WordPress Hosting"
       accentColor="#2d7fea"
       title="Hosting Built for WordPress"
       subtitle="Not generic hosting with WordPress slapped on — infrastructure specifically configured for how WordPress works, with managed updates, staging, and expert care."
-      heroImage="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&q=80"
       stats={[
         { value: "10×", label: "faster than shared hosting" },
         { value: "Daily", label: "automated backups" },

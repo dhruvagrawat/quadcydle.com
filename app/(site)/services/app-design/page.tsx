@@ -1,20 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "App Design with Figma — UI/UX Design & Prototyping | Quadcydle",
+export const metadata: Metadata = pageMeta({
+  title: "App Design in Figma — UI/UX & Prototyping | Quadcydle",
   description:
     "Professional UI/UX app design with Figma. Design systems, interactive prototypes, and developer-ready handoff.",
-};
+  path: "/services/app-design",
+});
 
 export default function AppDesignPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/app-design")}
       tag="App Design"
       accentColor="#8b5cf6"
       title="Designs Developers Can Actually Build"
       subtitle="We design mobile and web apps in Figma — with complete design systems, interactive prototypes, and handoff files that make your dev team's life easy."
-      heroImage="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1400&q=80"
       stats={[
         { value: "Figma", label: "native design & prototyping" },
         { value: "2 wk", label: "first concept delivery" },

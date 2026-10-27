@@ -1,19 +1,23 @@
 import { Metadata } from "next";
 import { ServicePage } from "../../../../components/services/ServicePage";
+import { guidesFor } from "../../../../lib/blog/guides";
+import { pageMeta } from "../../../../lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMeta({
   title: "Mobile App Development — iOS & Android | Quadcydle",
-  description: "Cross-platform mobile app development with React Native. One codebase, two platforms, App Store and Google Play ready.",
-};
+  description:
+    "Cross-platform mobile app development with React Native. One codebase, two platforms, App Store and Google Play ready.",
+  path: "/services/mobile-app",
+});
 
 export default function MobileAppPage() {
   return (
     <ServicePage
+      guides={guidesFor("/services/mobile-app")}
       tag="Mobile App Development"
       accentColor="#ec4899"
       title="Mobile Apps Users Actually Love"
       subtitle="We build iOS and Android apps with React Native — one codebase, native performance, and the polish your users expect. From MVP to production."
-      heroImage="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1400&q=80"
       stats={[
         { value: "iOS + Android", label: "from one codebase" },
         { value: "8–12 wk", label: "MVP delivery time" },

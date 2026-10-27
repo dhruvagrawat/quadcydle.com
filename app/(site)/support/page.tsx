@@ -2,11 +2,14 @@ import { Metadata } from "next";
 import { PageHero } from "../../../components/page-hero";
 import { SupportForm } from "../../../components/support-form";
 import { site, urgencyLevels } from "../../../lib/site";
+import { pageMeta } from "../../../lib/seo";
 
-export const metadata: Metadata = {
-  title: "Support — Quadcydle",
-  description: "Existing Quadcydle clients: open a support ticket and see our response times.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Client Support | Quadcydle",
+  description:
+    "Existing Quadcydle clients: open a support ticket and check our response times for critical, high, medium and low priority issues.",
+  path: "/support",
+});
 
 export default function SupportPage() {
   return (
@@ -32,7 +35,7 @@ export default function SupportPage() {
               </div>
             ))}
           </div>
-          <p className="mt-6 text-sm text-bone/40">
+          <p className="mt-6 text-sm text-bone/55">
             Response times apply to clients on an active care or support plan, during business hours (Mon–Fri
             9am–6pm UK). Critical issues are monitored 24/7.
           </p>
